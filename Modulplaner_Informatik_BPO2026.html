@@ -457,7 +457,7 @@ body {
   <div class="page-header">
     <div class="fk-tag">Fakultät II · Informatik, Wirtschafts- und Rechtswissenschaften</div>
     <h1>Modulplaner — Neue Prüfungsordnung ab WS 2026/27</h1>
-    <p>Markiere deine bereits absolvierten Module. Das Tool zeigt dir, wie du sie in die neue Ordnung einbringst, welche Module angerechnet werden können — und welche leider überzählig sind.</p>
+    <p>Markiere deine bereits absolvierten Module. Das Tool zeigt dir, wie du sie in die neue Ordnung einbringst, welche Module angerechnet werden können — und welche umgebucht werden können.</p>
   </div>
 
   <!-- STEP INDICATOR -->
@@ -534,7 +534,7 @@ body {
       <div class="legend-item"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--uol-green);"></span> Abgehakt = absolviert</div>
       <div class="legend-item"><span class="mod-tag tag-alt" style="font-size:10px">Alt → prüfen</span> Alte Ordnung, Anrechnung möglich</div>
       <div class="legend-item"><span class="mod-tag tag-neu" style="font-size:10px">Neu 26/27</span> Neues Modul ab WS 2026/27</div>
-      <div class="legend-item"><span class="mod-tag tag-surplus" style="font-size:10px">Überzählig</span> Absolviert, aber nicht verrechenbar</div>
+      <div class="legend-item"><span class="mod-tag tag-surplus" style="font-size:10px">Zur Beratung</span> Bitte Studienberatung kontaktieren</div>
     </div>
 
     <div id="module-list"></div>
@@ -585,44 +585,86 @@ body {
 </div><!-- /wrapper -->
 <script>
 const ALL_MODULES = [
-  // === BACHELOR KERN (sichtbar für alle) ===
-  { id:'inf030', name:'Programmierung, Datenstrukturen und Algorithmen', kp:9, tag:'alt', visible:'all' },
-  { id:'inf031', name:'Objektorientierte Modellierung und Programmierung', kp:9, tag:'alt', visible:'all' },
-  { id:'inf033', name:'Programmierung und Algorithmik I', kp:6, tag:'neu', visible:'all' },
-  { id:'inf034', name:'Programmierung und Algorithmik II', kp:3, tag:'neu', visible:'all' },
-  { id:'inf035', name:'Programmierung und Modellierung I', kp:6, tag:'neu', visible:'all' },
-  { id:'inf036', name:'Programmierung und Modellierung II', kp:3, tag:'neu', visible:'all' },
-  { id:'inf700', name:'Didaktik der Informatik I', kp:6, tag:'ok', visible:'all' },
-  { id:'inf010', name:'Rechnernetze', kp:6, tag:'alt', visible:'all' },
-  { id:'inf050', name:'Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit', kp:6, tag:'neu', visible:'all' },
-  { id:'mat950', name:'Mathematik für Informatik (Diskrete Strukturen)', kp:6, tag:'ok', visible:'all' },
-  // === NUR 60 KP-Bachelor ===
-  { id:'inf200', name:'Grundlagen der Technischen Informatik', kp:6, tag:'alt', visible:'60' },
-  { id:'inf401', name:'Grundlagen der Theoretischen Informatik', kp:6, tag:'neu', visible:'60' },
-  { id:'inf005', name:'Softwaretechnik I', kp:6, tag:'alt', visible:'60' },
-  { id:'inf007', name:'Informationssysteme I / Datenbanken I', kp:6, tag:'ok', visible:'60' },
-  { id:'inf859', name:'Informatik im Kontext', kp:6, tag:'neu', visible:'60' },
-  // === WAHLPFLICHT ===
-  { id:'pb085', name:'Soft Skills (pb085)', kp:6, tag:'alt', visible:'all' },
-  { id:'inf715', name:'Physical Computing in Bildungskontexten', kp:3, tag:'neu', visible:'all' },
-  { id:'inf400', name:'Theoretische Informatik: Logik', kp:6, tag:'ok', visible:'all' },
-  { id:'inf201', name:'Technische Informatik', kp:6, tag:'ok', visible:'all' },
-  { id:'inf530', name:'Künstliche Intelligenz', kp:6, tag:'ok', visible:'all' },
-  { id:'inf004', name:'Softwareprojekt', kp:9, tag:'ok', visible:'all' },
-  { id:'inf009', name:'Praktikum Datenbanken', kp:6, tag:'ok', visible:'all' },
-  { id:'inf018', name:'Medienverarbeitung', kp:6, tag:'ok', visible:'all' },
-  { id:'inf016', name:'Web-/Internet-Technologien', kp:6, tag:'ok', visible:'all' },
-  { id:'inf040', name:'Introduction to Data Science', kp:6, tag:'ok', visible:'60' },
-  { id:'inf800', name:'Proseminar Informatik', kp:3, tag:'ok', visible:'all' },
-  { id:'inf803', name:'Spezielle Themen der Informatik I', kp:6, tag:'ok', visible:'all' },
-  { id:'inf804', name:'Spezielle Themen der Informatik II', kp:6, tag:'ok', visible:'all' },
-  // === MASTER-MODULE ===
-  { id:'inf701', name:'Didaktik der Informatik II', kp:6, tag:'ok', visible:'master' },
-  { id:'inf704', name:'Didaktik der Informatik III', kp:3, tag:'ok', visible:'master' },
-  { id:'inf712', name:'Aktuelle Themen Didaktik der Informatik I', kp:3, tag:'ok', visible:'master' },
-  { id:'inf600', name:'Wirtschaftsinformatik I', kp:6, tag:'ok', visible:'master' },
-  { id:'inf851', name:'Informatik und Gesellschaft', kp:6, tag:'ok', visible:'master' },
-  { id:'wir806', name:'Informationstechnologierecht (wir806)', kp:6, tag:'ok', visible:'master' },
+
+  // ═══════════════════════════════════════════════════════
+  // 30 KP — PFLICHTMODULE (Tabelle 1, neue Ordnung)
+  // ═══════════════════════════════════════════════════════
+  { id:'inf033', name:'Programmierung und Algorithmik I',                              kp:6,  tag:'neu', visible:'all',  group:'30pfl',  groupLabel:'30 KP · Pflichtmodule (Tabelle 1)' },
+  { id:'inf035', name:'Programmierung und Modellierung I',                             kp:6,  tag:'neu', visible:'all',  group:'30pfl',  groupLabel:'30 KP · Pflichtmodule (Tabelle 1)' },
+  { id:'inf700', name:'Didaktik der Informatik I',                                     kp:6,  tag:'ok',  visible:'all',  group:'30pfl',  groupLabel:'30 KP · Pflichtmodule (Tabelle 1)' },
+  { id:'inf050', name:'Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit',    kp:6,  tag:'neu', visible:'all',  group:'30pfl',  groupLabel:'30 KP · Pflichtmodule (Tabelle 1)' },
+
+  // ═══════════════════════════════════════════════════════
+  // 30 KP — WAHLPFLICHT (Tabelle 2, 6 KP wählen)
+  // ═══════════════════════════════════════════════════════
+  { id:'inf200', name:'Grundlagen der Technischen Informatik',                         kp:6,  tag:'alt', visible:'all',  group:'30wp',   groupLabel:'30 KP · Wahlpflicht (Tabelle 2, 6 KP)' },
+  { id:'inf859', name:'Informatik im Kontext',                                         kp:6,  tag:'neu', visible:'all',  group:'30wp',   groupLabel:'30 KP · Wahlpflicht (Tabelle 2, 6 KP)' },
+  { id:'inf034', name:'Programmierung und Algorithmik II',                             kp:3,  tag:'neu', visible:'all',  group:'30wp',   groupLabel:'30 KP · Wahlpflicht (Tabelle 2, 6 KP)' },
+  { id:'inf036', name:'Programmierung und Modellierung II',                            kp:3,  tag:'neu', visible:'all',  group:'30wp',   groupLabel:'30 KP · Wahlpflicht (Tabelle 2, 6 KP)' },
+  { id:'inf715', name:'Physical Computing in Bildungskontexten',                      kp:3,  tag:'neu', visible:'all',  group:'30wp',   groupLabel:'30 KP · Wahlpflicht (Tabelle 2, 6 KP)' },
+
+  // ═══════════════════════════════════════════════════════
+  // 30 KP — ALTE PFLICHTMODULE (vorherige Ordnung)
+  // ═══════════════════════════════════════════════════════
+  { id:'inf030', name:'Programmierung, Datenstrukturen und Algorithmen (alt)',         kp:9,  tag:'alt', visible:'all',  group:'30alt',  groupLabel:'30 KP · Alte Pflichtmodule (vor WS 2026/27)' },
+  { id:'inf031', name:'Objektorientierte Modellierung und Programmierung (alt)',       kp:9,  tag:'alt', visible:'all',  group:'30alt',  groupLabel:'30 KP · Alte Pflichtmodule (vor WS 2026/27)' },
+  { id:'inf010', name:'Rechnernetze (alt)',                                            kp:6,  tag:'alt', visible:'all',  group:'30alt',  groupLabel:'30 KP · Alte Pflichtmodule (vor WS 2026/27)' },
+  { id:'pb085', name:'Soft Skills / pb085 (alt, jetzt gesperrt)',                     kp:6,  tag:'alt', visible:'all',  group:'30alt',  groupLabel:'30 KP · Alte Pflichtmodule (vor WS 2026/27)' },
+
+  // ═══════════════════════════════════════════════════════
+  // 60 KP — BASISCURRICULUM PFLICHT (Tabelle 3)
+  // ═══════════════════════════════════════════════════════
+  // inf033, inf035, inf700 bereits oben — shared mit 30 KP
+  { id:'mat950', name:'Mathematik für Informatik (Diskrete Strukturen)',               kp:6,  tag:'ok',  visible:'60',   group:'60bas',  groupLabel:'60 KP · Basiscurriculum Pflicht (Tabelle 3)' },
+  // inf859 bereits oben als 30wp, wird für 60 auch als Basis-Pflicht gezeigt
+
+  // ═══════════════════════════════════════════════════════
+  // 60 KP — AUFBAUCURRICULUM PFLICHT (Tabelle 4)
+  // ═══════════════════════════════════════════════════════
+  { id:'inf401', name:'Grundlagen der Theoretischen Informatik',                       kp:6,  tag:'neu', visible:'60',   group:'60auf',  groupLabel:'60 KP · Aufbaucurriculum Pflicht (Tabelle 4)' },
+  { id:'inf007', name:'Informationssysteme / Datenbanken I',                           kp:6,  tag:'ok',  visible:'60',   group:'60auf',  groupLabel:'60 KP · Aufbaucurriculum Pflicht (Tabelle 4)' },
+  // inf050 bereits oben — auch Aufbau-Pflicht 60 KP
+
+  // ═══════════════════════════════════════════════════════
+  // 60 KP — WAHLPFLICHT Tabelle 5: Praktische Vertiefung
+  // ═══════════════════════════════════════════════════════
+  { id:'inf004', name:'Softwareprojekt',                                               kp:9,  tag:'ok',  visible:'60',   group:'60t5',   groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
+  { id:'inf009', name:'Praktikum Datenbanken',                                         kp:6,  tag:'ok',  visible:'60',   group:'60t5',   groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
+  { id:'inf018', name:'Medienverarbeitung',                                            kp:6,  tag:'ok',  visible:'60',   group:'60t5',   groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
+  { id:'inf021', name:'Fortgeschrittene Java-Technologien',                            kp:6,  tag:'ok',  visible:'60',   group:'60t5',   groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
+  { id:'inf202', name:'Praktikum Technische Informatik',                               kp:6,  tag:'ok',  visible:'60',   group:'60t5',   groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
+  { id:'inf808', name:'Aktuelle Themen der Informatik',                                kp:3,  tag:'ok',  visible:'60',   group:'60t5',   groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
+  { id:'inf016', name:'Web-Technologien',                                              kp:6,  tag:'ok',  visible:'60',   group:'60t5',   groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
+  // inf715 bereits oben (30wp), auch in Tab.5 60 KP
+  { id:'inf803', name:'Spezielle Themen der Informatik I',                             kp:6,  tag:'ok',  visible:'60',   group:'60t5',   groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
+  { id:'inf804', name:'Spezielle Themen der Informatik II',                            kp:6,  tag:'ok',  visible:'60',   group:'60t5',   groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
+
+  // ═══════════════════════════════════════════════════════
+  // 60 KP — WAHLPFLICHT Tabelle 6: weitere Wahlpflichtmodule
+  // ═══════════════════════════════════════════════════════
+  // inf034, inf036 bereits oben (30wp) — auch Tab.6 60KP
+  { id:'inf800', name:'Proseminar Informatik',                                         kp:3,  tag:'ok',  visible:'60',   group:'60t6',   groupLabel:'60 KP · Wahlpflicht Tabelle 6: weitere Module' },
+  { id:'inf040', name:'Introduction to Data Science',                                  kp:6,  tag:'ok',  visible:'60',   group:'60t6',   groupLabel:'60 KP · Wahlpflicht Tabelle 6: weitere Module' },
+  { id:'inf012', name:'Betriebssysteme I',                                             kp:6,  tag:'ok',  visible:'60',   group:'60t6',   groupLabel:'60 KP · Wahlpflicht Tabelle 6: weitere Module' },
+  // inf200, inf201, inf530 bereits oben (30wp / alt)
+  { id:'inf201', name:'Technische Informatik',                                         kp:6,  tag:'ok',  visible:'60',   group:'60t6',   groupLabel:'60 KP · Wahlpflicht Tabelle 6: weitere Module' },
+  { id:'inf530', name:'Künstliche Intelligenz',                                        kp:6,  tag:'ok',  visible:'60',   group:'60t6',   groupLabel:'60 KP · Wahlpflicht Tabelle 6: weitere Module' },
+
+  // ═══════════════════════════════════════════════════════
+  // 60 KP — ALTE PFLICHTMODULE (vorherige Ordnung)
+  // ═══════════════════════════════════════════════════════
+  { id:'inf005', name:'Softwaretechnik I (alt)',                                       kp:6,  tag:'alt', visible:'60',   group:'60alt',  groupLabel:'60 KP · Alte Pflichtmodule (vor WS 2026/27)' },
+  { id:'inf400', name:'Theoretische Informatik: Logik (alt, Wahlpflicht)',             kp:6,  tag:'alt', visible:'60',   group:'60alt',  groupLabel:'60 KP · Alte Pflichtmodule (vor WS 2026/27)' },
+
+  // ═══════════════════════════════════════════════════════
+  // MASTER-MODULE
+  // ═══════════════════════════════════════════════════════
+  { id:'inf701', name:'Didaktik der Informatik II',                                    kp:6,  tag:'ok',  visible:'master', group:'master', groupLabel:'Master-Module (bereits begonnen?)' },
+  { id:'inf704', name:'Didaktik der Informatik III',                                   kp:3,  tag:'ok',  visible:'master', group:'master', groupLabel:'Master-Module (bereits begonnen?)' },
+  { id:'inf712', name:'Aktuelle Themen Didaktik der Informatik I',                    kp:3,  tag:'ok',  visible:'master', group:'master', groupLabel:'Master-Module (bereits begonnen?)' },
+  { id:'inf600', name:'Wirtschaftsinformatik I',                                       kp:6,  tag:'ok',  visible:'master', group:'master', groupLabel:'Master-Module (bereits begonnen?)' },
+  { id:'inf851', name:'Informatik und Gesellschaft',                                   kp:6,  tag:'ok',  visible:'master', group:'master', groupLabel:'Master-Module (bereits begonnen?)' },
+  { id:'wir806', name:'Informationstechnologierecht',                                  kp:6,  tag:'ok',  visible:'master', group:'master', groupLabel:'Master-Module (bereits begonnen?)' },
 ];
 
 // ============================================================
@@ -1259,21 +1301,21 @@ function getSurplusModules(sg, m) {
     const inf859Used = m.has('inf859');
     const inf050Used = m.has('inf050') || m.has('inf010');
     if (inf859Used && inf050Used) {
-      surplus.push({ id:'inf200', reason:'inf200 Techn. Informatik ist überzählig: inf859 (Basis) und inf050 (Aufbau) sind bereits belegt. inf200 kann nicht zusätzlich verrechnet werden.' });
+      surplus.push({ id:'inf200', reason:'inf200 Techn. Informatik bitte Verrechnung klären: inf859 (Basis) und inf050 (Aufbau) sind bereits belegt. inf200 Bitte Studienberatung kontaktieren.' });
     }
   }
   // inf010 surplus if inf050 already covered by inf050 itself AND inf034+036 not needed
   if (m.has('inf010') && m.has('inf050')) {
-    surplus.push({ id:'inf010', reason:'inf010 Rechnernetze ist überzählig: inf050 ist bereits direkt belegt. inf010 kann nicht doppelt angerechnet werden.' });
+    surplus.push({ id:'inf010', reason:'inf010 Rechnernetze bitte Verrechnung klären: inf050 ist bereits direkt belegt. inf010 Bitte Studienberatung kontaktieren.' });
   }
   // inf034 + inf036 surplus if inf050 already filled directly
   if (m.has('inf034') && m.has('inf036') && m.has('inf050')) {
-    surplus.push({ id:'inf034', reason:'inf034 ist überzählig: inf050 ist bereits direkt belegt. inf034 kann nicht zusätzlich als Ersatz für inf050 verbucht werden — evtl. als Wahlpflicht nutzbar.' });
-    surplus.push({ id:'inf036', reason:'inf036 ist überzählig: inf050 ist bereits direkt belegt. inf036 kann nicht zusätzlich als Ersatz für inf050 verbucht werden — evtl. als Wahlpflicht nutzbar.' });
+    surplus.push({ id:'inf034', reason:'inf034 bitte Verrechnung klären: inf050 ist bereits direkt belegt. inf034 Bitte Studienberatung kontaktieren — evtl. als Wahlpflicht nutzbar.' });
+    surplus.push({ id:'inf036', reason:'inf036 bitte Verrechnung klären: inf050 ist bereits direkt belegt. inf036 Bitte Studienberatung kontaktieren — evtl. als Wahlpflicht nutzbar.' });
   }
   // inf005 surplus in ba60/gym/hr if inf401 is already done AND inf005 not needed for Master
   if ((sg === 'ba60') && m.has('inf005') && m.has('inf401')) {
-    surplus.push({ id:'inf005', reason:'inf005 Softwaretechnik I ist im Bachelor überzählig: inf401 ist bereits als Aufbau-Pflicht belegt. Falls du den M.Ed. Gymnasium anstrebst, wird inf005 dort als Pflichtmodul benötigt.' });
+    surplus.push({ id:'inf005', reason:'inf005 Softwaretechnik I im Bachelor bitte Verrechnung klären: inf401 ist bereits als Aufbau-Pflicht belegt. Falls du den M.Ed. Gymnasium anstrebst, wird inf005 dort als Pflichtmodul benötigt.' });
   }
   // inf401 surplus in gym if already covered in bachelor (cannot be in master too)
   // But: in gym it's needed in bachelor, not master — so no surplus there
@@ -1295,7 +1337,7 @@ function getSurplusModules(sg, m) {
           const extraIds = wpUsed.slice(1); // keep first, rest surplus
           extraIds.forEach(eid => {
             if (!surplus.find(s => s.id === eid)) {
-              surplus.push({ id: eid, reason: `Überzählig im Wahlpflichtbereich 30 KP (max. 6 KP Wahlpflicht): ${eid} kann nicht zusätzlich verrechnet werden. Ggf. zählt es für das Zweitfach oder gar nicht.` });
+              surplus.push({ id: eid, reason: `Überzählig im Wahlpflichtbereich 30 KP (max. 6 KP Wahlpflicht): ${eid} Bitte Studienberatung kontaktieren. Ggf. zählt es für das Zweitfach oder gar nicht.` });
             }
           });
           break;
@@ -1349,43 +1391,55 @@ function buildModuleList() {
   const variant = sg.bachelorVariant;
   const isBachelorOnly = selectedSG === 'ba30' || selectedSG === 'ba60';
 
-  // Compute which modules are surplus
-  const surplusModules = getSurplusModules(selectedSG, checkedModules);
-  const surplusIds = new Set(surplusModules.map(s => s.id));
+  const surplusIds = new Set(getSurplusModules(selectedSG, checkedModules).map(s => s.id));
 
   const container = document.getElementById('module-list');
   container.innerHTML = '';
 
-  const sections = [
-    {
-      label: 'Bachelor-Module (bereits absolviert?)',
-      modules: ALL_MODULES.filter(m => m.visible === 'all' || (variant === '60' && m.visible === '60'))
-    },
-  ];
-  if (!isBachelorOnly) {
-    sections.push({
-      label: 'Master-Module (falls schon begonnen)',
-      modules: ALL_MODULES.filter(m => m.visible === 'master')
-    });
+  // Which modules to show based on variant
+  const showMods = ALL_MODULES.filter(m =>
+    m.visible === 'all' ||
+    (variant === '60' && (m.visible === '60' || m.visible === 'all')) ||
+    (!isBachelorOnly && m.visible === 'master')
+  );
+
+  // For 30KP: hide purely-60-only groups
+  const filtered = variant === '30'
+    ? showMods.filter(m => !['60bas','60auf','60t5','60t6','60alt'].includes(m.group))
+    : showMods;
+
+  // Group by groupLabel, preserving order
+  const groups = [];
+  const seen = new Map();
+  for (const mod of filtered) {
+    const key = mod.group || 'other';
+    if (!seen.has(key)) { seen.set(key, []); groups.push({ key, label: mod.groupLabel || key, mods: seen.get(key) }); }
+    seen.get(key).push(mod);
   }
 
-  sections.forEach(sec => {
+  // Add inf859 explicitly to 60 KP Basiscurriculum group too (it's in 30wp but also 60 basis)
+  // Already handled by showing it when visible='all' — just need label context in requirements
+
+  for (const grp of groups) {
+    if (!isBachelorOnly && grp.key === 'master') {
+      // master group only for Lehramt paths
+    }
+    const count = grp.mods.filter(m => checkedModules.has(m.id)).length;
     const labelEl = document.createElement('div');
     labelEl.className = 'section-label';
-    const count = sec.modules.filter(m => checkedModules.has(m.id)).length;
-    labelEl.innerHTML = sec.label + (count > 0 ? `<span class="count-badge">${count} gewählt</span>` : '');
+    labelEl.innerHTML = grp.label + (count > 0 ? `<span class="count-badge">${count}</span>` : '');
     container.appendChild(labelEl);
 
     const grid = document.createElement('div');
     grid.className = 'module-grid';
-    sec.modules.forEach(mod => {
+    for (const mod of grp.mods) {
       const isChecked = checkedModules.has(mod.id);
       const isSurplus = isChecked && surplusIds.has(mod.id);
       const row = document.createElement('div');
       row.className = 'module-row' + (isSurplus ? ' surplus' : (isChecked ? ' checked' : ''));
       row.onclick = () => toggleModule(mod.id);
       const tagHtml = isSurplus
-        ? '<span class="mod-tag tag-surplus">Überzählig</span>'
+        ? '<span class="mod-tag tag-surplus">Zur Beratung</span>'
         : mod.tag === 'neu' ? '<span class="mod-tag tag-neu">Neu 26/27</span>'
         : mod.tag === 'alt' ? '<span class="mod-tag tag-alt">Alt → prüfen</span>'
         : '<span class="mod-tag tag-ok">Unverändert</span>';
@@ -1397,9 +1451,18 @@ function buildModuleList() {
         ${tagHtml}
       `;
       grid.appendChild(row);
-    });
+    }
     container.appendChild(grid);
-  });
+  }
+
+  // inf034+inf036 combination hint
+  if (checkedModules.has('inf034') && checkedModules.has('inf036') && !checkedModules.has('inf050')) {
+    const hint = document.createElement('div');
+    hint.className = 'info-box blue';
+    hint.style.marginTop = '12px';
+    hint.innerHTML = `<span>💡</span><span><strong>Hinweis inf034 + inf036:</strong> Da du beide Module (3+3 KP) absolviert hast, können sie <em>in Kombination</em> auf Antrag anstelle von inf050 (30- und 60-KP-Variante) oder inf859 (60-KP-Variante) als Pflichtmodul verbucht werden — sofern das jeweilige Zielmodul noch nicht anderweitig verbucht ist. Die Module sind dann nicht mehr als Wahlpflicht wählbar.</span>`;
+    container.appendChild(hint);
+  }
 }
 
 function toggleModule(id) {
@@ -1457,7 +1520,7 @@ function buildResults() {
   if (surplusList.length > 0) {
     const sc = document.createElement('div');
     sc.className = 'surplus-card';
-    sc.innerHTML = `<strong>🟣 ${surplusList.length} Modul${surplusList.length > 1 ? 'e' : ''} nicht verrechenbar (überzählig):</strong><br>
+    sc.innerHTML = `<strong>🟣 ${surplusList.length} Modul${surplusList.length > 1 ? 'e' : ''} zur Beratung — bitte Studienberatung kontaktieren:</strong><br>
       ${surplusList.map(s => `<br>• <strong>${s.id}</strong>: ${s.reason}`).join('')}`;
     area.appendChild(sc);
   }
@@ -1506,7 +1569,7 @@ function buildResults() {
       let noteHtml = '';
       if (reqIsSurplus) {
         const surplusInfo = surplusList.find(s => s.id === req.id);
-        noteHtml = `<div class="mod-status-note surplus-note">🟣 ${surplusInfo ? surplusInfo.reason : 'Nicht verrechenbar.'}</div>`;
+        noteHtml = `<div class="mod-status-note surplus-note">🟣 Zur Beratung — ${surplusInfo ? surplusInfo.reason : 'Bitte Studienberatung kontaktieren.'}</div>`;
       } else if (note) {
         noteHtml = `<div class="mod-status-note">${note}</div>`;
       } else if (!done && req.missing) {
@@ -1532,7 +1595,7 @@ function buildResults() {
     sc2.innerHTML = `
       <div class="result-card-head">
         <span class="rc-icon">🟣</span>
-        <span class="rc-title">Nicht verrechenbare Module</span>
+        <span class="rc-title">Module zur Beratung</span>
         <span class="rc-badge" style="background:var(--uol-surplus-lt);color:var(--uol-surplus)">${surplusList.length} Modul${surplusList.length>1?'e':''}</span>
       </div>
       <div class="result-card-body"></div>
@@ -1566,7 +1629,7 @@ function buildResults() {
       ? '<strong>Alle Pflichtanforderungen erfüllt!</strong> Denk noch an die Bachelorarbeit und ggf. ausstehende Wahlpflichtmodule für dein Zweitfach.'
       : '<strong>Herzlichen Glückwunsch!</strong> Alle erkannten Anforderungen sind erfüllt. Prüfe mit dem Studiendekanat, ob noch Wahlpflichtmodule oder das Abschlussmodul fehlen.'));
   } else if (missingModules.length === 0 && surplusList.length > 0) {
-    area.appendChild(mkBox('green', '✅', '<strong>Alle Pflichtanforderungen erfüllt.</strong> Beachte aber die überzähligen Module — diese können leider nicht in deine Prüfungsordnung eingerechnet werden.'));
+    area.appendChild(mkBox('green', '✅', '<strong>Alle Pflichtanforderungen erfüllt.</strong> Für einige Module empfehlen wir ein Beratungsgespräch — diese sind lila markiert.'));
   } else {
     area.appendChild(mkBox('blue', 'ℹ', `<strong>${missingModules.length} Anforderungsblock${missingModules.length > 1 ? 'e' : ''} noch offen.</strong> Melde dich bei der Fachstudienberatung Informatik für eine individuelle Beratung — besonders bei Anrechnungen nach alter Ordnung.`));
   }
@@ -1576,7 +1639,7 @@ function buildResults() {
 
   if (surplusList.length > 0) {
     area.appendChild(mkBox('surplus', '🟣',
-      '<strong>Überzählige Module:</strong> Diese Veranstaltungen wurden erfolgreich absolviert, können aber in der neuen Prüfungsordnung nicht mehr verrechnet werden — entweder weil die entsprechende Stelle schon durch ein anderes Modul gefüllt ist, oder weil das Modul für deinen Studiengang gesperrt wurde. Kläre mit dem Prüfungsamt, ob eine Anerkennung als Zusatzleistung oder für das Zweitfach möglich ist.'));
+      '<strong>Module zur Beratung:</strong> Bei diesen Veranstaltungen ist die Verrechnung in der neuen Prüfungsordnung nicht eindeutig. Bitte wende dich an die Fachstudienberatung Informatik oder das Prüfungsamt — oft gibt es Möglichkeiten zur Anrechnung als Zusatzleistung oder im Zweitfach.'));
   }
 }
 
