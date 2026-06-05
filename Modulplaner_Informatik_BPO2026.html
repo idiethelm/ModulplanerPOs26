@@ -833,10 +833,12 @@ const REQUIREMENTS = {
             note: (m) => {
               if (m.has('inf050')) return '✓ inf050 — direkt erfüllt';
               if (m.has('inf010')) return '⚠ inf010 (alt, Rechnernetze) kann auf Antrag als inf050 angerechnet werden (Übergang bis SS 2029)';
-              if (m.has('inf034') && m.has('inf036')) return '⚠ inf034 + inf036 (kombiniert) können auf Antrag als inf050 angerechnet werden — dann kein Wahlrecht auf diese Module mehr';
+              if (m.has('inf034') && m.has('inf036')) return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag als Ersatz für inf050 angerechnet werden — dann kein Wahlrecht auf diese Module mehr.';
+              if (m.has('inf034') && !m.has('inf036')) return '⚠ Du hast inf034 (3 KP). Falls du zusätzlich inf036 Programmierung und Modellierung II (3 KP) absolvierst, können beide zusammen auf Antrag statt inf050 angerechnet werden.';
+              if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 Programmierung und Algorithmik II (3 KP) absolvierst, können beide zusammen auf Antrag statt inf050 angerechnet werden.';
               return null;
             },
-            missing: 'inf050 (neu) — oder Übergang: inf010 auf Antrag | inf034+inf036 kombiniert auf Antrag'
+            missing: 'inf050 fehlt noch. Übergang möglich: inf010 Rechnernetze auf Antrag — oder: inf034 + inf036 (je 3 KP) zusammen auf Antrag (beide müssen absolviert sein)'
           },
           {
             id: 'b30_700', label: 'inf700 Didaktik der Informatik I', kp: 6,
@@ -927,7 +929,9 @@ const REQUIREMENTS = {
             note: (m) => {
               if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
               if (m.has('inf200')) return '⚠ inf200 (Grundl. Techn. Inf., alt) kann auf Antrag statt inf859 verbucht werden — inf200 dann kein Wahlrecht mehr';
-              if (m.has('inf034') && m.has('inf036')) return '⚠ inf034+inf036 (kombiniert) können auf Antrag statt inf859 verbucht werden';
+              if (m.has('inf034') && m.has('inf036')) return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag statt inf859 verbucht werden — dann kein Wahlrecht auf diese Module mehr.';
+              if (m.has('inf034') && !m.has('inf036')) return '⚠ Du hast inf034 (3 KP). Falls du zusätzlich inf036 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
+              if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
               if (m.has('pb085')) return '⚠ pb085 ist NICHT anrechenbar für inf859 (pb085 für 2FB Inf. gesperrt) — inf859 muss separat belegt werden';
               return null;
             },
@@ -1072,10 +1076,12 @@ const REQUIREMENTS = {
             note: (m) => {
               if (m.has('inf050')) return '✓ inf050 (neu) — direkt erfüllt';
               if (m.has('inf010')) return '⚠ inf010 (alt) kann auf Antrag als inf050 angerechnet werden';
-              if (m.has('inf034') && m.has('inf036')) return '⚠ inf034+inf036 (kombiniert) können auf Antrag als inf050 angerechnet werden';
+              if (m.has('inf034') && m.has('inf036')) return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag als Ersatz für inf050 angerechnet werden — dann kein Wahlrecht auf diese Module mehr.';
+              if (m.has('inf034') && !m.has('inf036')) return '⚠ Du hast inf034 (3 KP). Falls du zusätzlich inf036 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf050 angerechnet werden.';
+              if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf050 angerechnet werden.';
               return null;
             },
-            missing: 'inf050 (neu) — oder: inf010 (alt) auf Antrag | inf034+inf036 kombiniert auf Antrag'
+            missing: 'inf050 fehlt noch. Übergang möglich: inf010 auf Antrag — oder: inf034 + inf036 (je 3 KP) zusammen auf Antrag'
           },
           {
             id: 'inf700', label: 'inf700 Didaktik der Informatik I', kp: 6,
@@ -1188,7 +1194,9 @@ const REQUIREMENTS = {
             note: (m) => {
               if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
               if (m.has('inf200')) return '⚠ inf200 kann auf Antrag als inf859 angerechnet werden (Übergang bis SS 2029)';
-              if (m.has('inf034') && m.has('inf036')) return '⚠ inf034+inf036 (kombiniert) können auf Antrag als inf859 angerechnet werden';
+              if (m.has('inf034') && m.has('inf036')) return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag als Ersatz für inf859 angerechnet werden — dann kein Wahlrecht auf diese Module mehr.';
+              if (m.has('inf034') && !m.has('inf036')) return '⚠ Du hast inf034 (3 KP). Falls du zusätzlich inf036 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
+              if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
               return null;
             },
             missing: 'inf859 — Pflicht | Übergang: inf200 oder inf034+inf036 auf Antrag'
@@ -1345,7 +1353,9 @@ const REQUIREMENTS = {
             note: (m) => {
               if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
               if (m.has('inf200')) return '⚠ inf200 kann auf Antrag als inf859 angerechnet werden';
-              if (m.has('inf034') && m.has('inf036')) return '⚠ inf034+inf036 können kombiniert auf Antrag angerechnet werden';
+              if (m.has('inf034') && m.has('inf036')) return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag als Ersatz für inf859 angerechnet werden — dann kein Wahlrecht auf diese Module mehr.';
+              if (m.has('inf034') && !m.has('inf036')) return '⚠ Du hast inf034 (3 KP). Falls du zusätzlich inf036 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
+              if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
               return null;
             },
             missing: 'inf859 — Pflicht | Übergang: inf200 oder inf034+inf036 auf Antrag'
@@ -1466,7 +1476,9 @@ const REQUIREMENTS = {
             note: (m) => {
               if (m.has('inf050')) return '✓ inf050 — direkt erfüllt';
               if (m.has('inf010')) return '⚠ inf010 (alt) kann auf Antrag als inf050 angerechnet werden';
-              if (m.has('inf034') && m.has('inf036')) return '⚠ inf034+inf036 (kombiniert) können auf Antrag als inf050 angerechnet werden';
+              if (m.has('inf034') && m.has('inf036')) return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag als Ersatz für inf050 angerechnet werden — dann kein Wahlrecht auf diese Module mehr.';
+              if (m.has('inf034') && !m.has('inf036')) return '⚠ Du hast inf034 (3 KP). Falls du zusätzlich inf036 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf050 angerechnet werden.';
+              if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf050 angerechnet werden.';
               return null;
             },
             missing: 'inf050 — Pflicht | Übergang: inf010 oder inf034+inf036 auf Antrag'
