@@ -462,7 +462,7 @@ body {
       <span style="background:var(--uol-orange-lt); color:var(--uol-orange); border:1px solid #F5C87A; border-radius:4px; padding:3px 10px; font-size:12px; font-weight:700;">⚠ Beta-Version</span>
       <span style="font-size:12px; color:var(--uol-gray-50);">Dieses Tool befindet sich in der Entwicklung. Alle Angaben ohne Gewähr — bitte im Zweifelsfall immer beim Prüfungsamt oder der Fachstudienberatung nachfragen.</span>
     </div>
-    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 05.06.2026, 16:11 Uhr (MESZ)</div>
+    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 05.06.2026, 16:32 Uhr (MESZ)</div>
   </div>
 
   <!-- STEP INDICATOR -->
@@ -820,7 +820,7 @@ const REQUIREMENTS = {
               if (m.has('inf033')) return '✓ inf033 (6 KP, neu) — Pflicht erfüllt; inf034 (3 KP) kann ergänzend im Wahlbereich belegt werden';
               return null;
             },
-            missing: 'inf030 (9 KP, alt) oder inf033 (6 KP, neu)'
+            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
           },
           {
             id: 'b30_oo', label: 'Programmierung und Modellierung I (inf035/inf031)', kp: 9,
@@ -830,7 +830,7 @@ const REQUIREMENTS = {
               if (m.has('inf035')) return '✓ inf035 (6 KP, neu) — Pflicht erfüllt; inf036 (3 KP) als Vertiefung im Wahlbereich möglich';
               return null;
             },
-            missing: 'inf031 (9 KP, alt) oder inf035 (6 KP, neu)'
+            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
           },
           {
             id: 'b30_050', label: 'inf050 Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit', kp: 6,
@@ -916,7 +916,7 @@ const REQUIREMENTS = {
               if (m.has('inf033')) return '✓ inf033 (6 KP, neu) — Basispflicht erfüllt';
               return null;
             },
-            missing: 'inf033 (6 KP, neu) oder inf030 (9 KP, alt, anrechenbar)'
+            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
           },
           {
             id: 'b60_oo', label: 'Programmierung und Modellierung I (inf035 neu / inf031 alt)', kp: 6,
@@ -926,21 +926,26 @@ const REQUIREMENTS = {
               if (m.has('inf035')) return '✓ inf035 (6 KP, neu)';
               return null;
             },
-            missing: 'inf035 (6 KP, neu) oder inf031 (9 KP, alt)'
+            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
           },
           {
             id: 'b60_859', label: 'inf859 Informatik im Kontext (NEU Basis-Pflicht)', kp: 6,
-            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')),
+            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')) || (m.has('inf030') && m.has('inf031')),
             note: (m) => {
+                          if (m.has('inf030') && m.has('inf031')) return '⚠ Programmierung, Datenstrukturen und Algorithmen (inf030, 9 KP) + Objektorientierte Modellierung und Programmierung (inf031, 9 KP) zusammen belegt: inf030 deckt inf033 (6 KP) + inf034 (3 KP) ab, inf031 deckt inf035 (6 KP) + inf036 (3 KP) ab. Die verbleibende Kombination inf034+inf036 kann auf Antrag als Ersatz für inf859 Informatik im Kontext (6 KP) angerechnet werden. KP-Summe bleibt konstant: 18 KP → 18 KP. Antrag beim Prüfungsamt erforderlich.';
+
               if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
               if (m.has('inf200')) return '⚠ inf200 (Grundl. Techn. Inf., alt) kann auf Antrag statt inf859 verbucht werden — inf200 dann kein Wahlrecht mehr';
-              if (m.has('inf034') && m.has('inf036')) return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag statt inf859 verbucht werden — dann kein Wahlrecht auf diese Module mehr.';
+              if (m.has('inf034') && m.has('inf036')) {
+                if (m.has('inf050')) return '✓ inf859 ist durch inf034+inf036 abgedeckt — da inf050 direkt belegt ist, können inf034 und inf036 alternativ als Wahlpflichtmodule (Tab. 6 / Tab. 2) eingebracht werden. Bitte mit dem Prüfungsamt klären, welcher Weg gewählt wird.';
+                return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag statt inf859 verbucht werden — dann kein Wahlrecht auf diese Module mehr.';
+              }
               if (m.has('inf034') && !m.has('inf036')) return '⚠ Du hast inf034 (3 KP). Falls du zusätzlich inf036 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
               if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
               if (m.has('pb085')) return '⚠ pb085 ist NICHT anrechenbar für inf859 (pb085 für 2FB Inf. gesperrt) — inf859 muss separat belegt werden';
               return null;
             },
-            missing: 'inf859 (6 KP, neu) — Pflichtmodul Basis | Übergang: inf200 oder inf034+inf036 auf Antrag (bis SS 2029)'
+            missing: 'inf859 Informatik im Kontext fehlt noch. Übergänge (auf Antrag): inf200 — oder inf034+inf036 kombiniert — oder inf030+inf031 zusammen (decken dann inf033+inf034+inf035+inf036+inf859 ab)'
           },
           {
             id: 'b60_mat', label: 'mat950 Mathematik für Informatik', kp: 6,
@@ -1066,14 +1071,22 @@ const REQUIREMENTS = {
           {
             id: 'inf030_033', label: 'Programmierung und Algorithmik I (inf030/inf033)', kp: 9,
             satisfied: (m) => m.has('inf030') || m.has('inf033'),
-            note: (m) => m.has('inf030') ? '✓ inf030 (9 KP, alt) — vollständig erfüllt' : m.has('inf033') ? '✓ inf033 (6 KP, neu) — ggf. inf034 (3 KP) im Wahlbereich ergänzen' : null,
-            missing: 'inf030 (9 KP, alt) oder inf033 (6 KP, neu)'
+            note: (m) => {
+              if (m.has('inf033')) return '✓ Programmierung und Algorithmik I (inf033, 6 KP) — direkt erfüllt.';
+              if (m.has('inf030')) return '⚠ Programmierung, Datenstrukturen und Algorithmen (inf030, 9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden. Da inf030 die Kompetenzen beider Module abdeckt, gilt damit auch inf034 als erfüllt.';
+              return null;
+            },
+            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
           },
           {
             id: 'inf031_035', label: 'Programmierung und Modellierung I (inf035/inf031)', kp: 9,
             satisfied: (m) => m.has('inf031') || m.has('inf035'),
-            note: (m) => m.has('inf031') ? '✓ inf031 (9 KP, alt) — vollständig erfüllt' : m.has('inf035') ? '✓ inf035 (6 KP, neu) — ggf. inf036 (3 KP) im Wahlbereich ergänzen' : null,
-            missing: 'inf031 (9 KP, alt) oder inf035 (6 KP, neu)'
+            note: (m) => {
+              if (m.has('inf035')) return '✓ Programmierung und Modellierung I (inf035, 6 KP) — direkt erfüllt.';
+              if (m.has('inf031')) return '⚠ Objektorientierte Modellierung und Programmierung (inf031, 9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden. Da inf031 die Kompetenzen beider Module abdeckt, gilt damit auch inf036 als erfüllt.';
+              return null;
+            },
+            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
           },
           {
             id: 'inf050_req', label: 'inf050 Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit', kp: 6,
@@ -1185,18 +1198,20 @@ const REQUIREMENTS = {
             id: 'ba_prog', label: 'Programmierung und Algorithmik I (inf033 / inf030)', kp: 6,
             satisfied: (m) => m.has('inf030') || m.has('inf033'),
             note: (m) => m.has('inf030') ? '✓ inf030 (9 KP, alt) anrechenbar' : m.has('inf033') ? '✓ inf033 (6 KP, neu)' : null,
-            missing: 'inf033 (6 KP, neu) oder inf030 (9 KP, alt)'
+            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
           },
           {
             id: 'ba_oo', label: 'Programmierung und Modellierung I (inf035 / inf031)', kp: 6,
             satisfied: (m) => m.has('inf031') || m.has('inf035'),
             note: (m) => m.has('inf031') ? '✓ inf031 (9 KP, alt) anrechenbar' : m.has('inf035') ? '✓ inf035 (6 KP, neu)' : null,
-            missing: 'inf035 (6 KP, neu) oder inf031 (9 KP, alt)'
+            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
           },
           {
             id: 'ba_859', label: 'inf859 Informatik im Kontext', kp: 6,
-            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')),
+            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')) || (m.has('inf030') && m.has('inf031')),
             note: (m) => {
+                          if (m.has('inf030') && m.has('inf031')) return '⚠ Programmierung, Datenstrukturen und Algorithmen (inf030, 9 KP) + Objektorientierte Modellierung und Programmierung (inf031, 9 KP) zusammen belegt: inf030 deckt inf033 (6 KP) + inf034 (3 KP) ab, inf031 deckt inf035 (6 KP) + inf036 (3 KP) ab. Die verbleibende Kombination inf034+inf036 kann auf Antrag als Ersatz für inf859 Informatik im Kontext (6 KP) angerechnet werden. KP-Summe bleibt konstant: 18 KP → 18 KP. Antrag beim Prüfungsamt erforderlich.';
+
               if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
               if (m.has('inf200')) return '⚠ inf200 kann auf Antrag als inf859 angerechnet werden (Übergang bis SS 2029)';
               if (m.has('inf034') && m.has('inf036')) return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag als Ersatz für inf859 angerechnet werden — dann kein Wahlrecht auf diese Module mehr.';
@@ -1204,7 +1219,7 @@ const REQUIREMENTS = {
               if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
               return null;
             },
-            missing: 'inf859 — Pflicht | Übergang: inf200 oder inf034+inf036 auf Antrag'
+            missing: 'inf859 Informatik im Kontext fehlt noch. Übergänge (auf Antrag): inf200 — oder inf034+inf036 kombiniert — oder inf030+inf031 zusammen (decken dann inf033+inf034+inf035+inf036+inf859 ab)'
           },
           {
             id: 'ba_mat', label: 'mat950 Mathematik für Informatik (Diskrete Strukturen)', kp: 6,
@@ -1344,18 +1359,24 @@ const REQUIREMENTS = {
             id: 'hr_prog', label: 'Programmierung und Algorithmik I (inf033 / inf030)', kp: 6,
             satisfied: (m) => m.has('inf030') || m.has('inf033'),
             note: (m) => m.has('inf030') ? '✓ inf030 (alt) anrechenbar' : m.has('inf033') ? '✓ inf033 (neu)' : null,
-            missing: 'inf033 (neu) oder inf030 (alt)'
+            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
           },
           {
             id: 'hr_oo', label: 'Programmierung und Modellierung I (inf035 / inf031)', kp: 6,
             satisfied: (m) => m.has('inf031') || m.has('inf035'),
-            note: (m) => m.has('inf031') ? '✓ inf031 (alt)' : m.has('inf035') ? '✓ inf035 (neu)' : null,
-            missing: 'inf035 (neu) oder inf031 (alt)'
+            note: (m) => {
+              if (m.has('inf035')) return '✓ Programmierung und Modellierung I (inf035, 6 KP) — direkt erfüllt.';
+              if (m.has('inf031')) return '⚠ Objektorientierte Modellierung und Programmierung (inf031, 9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden. Da inf031 die Kompetenzen beider Module abdeckt, gilt damit auch inf036 als erfüllt.';
+              return null;
+            },
+            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
           },
           {
             id: 'hr_859', label: 'inf859 Informatik im Kontext', kp: 6,
-            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')),
+            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')) || (m.has('inf030') && m.has('inf031')),
             note: (m) => {
+                          if (m.has('inf030') && m.has('inf031')) return '⚠ Programmierung, Datenstrukturen und Algorithmen (inf030, 9 KP) + Objektorientierte Modellierung und Programmierung (inf031, 9 KP) zusammen belegt: inf030 deckt inf033 (6 KP) + inf034 (3 KP) ab, inf031 deckt inf035 (6 KP) + inf036 (3 KP) ab. Die verbleibende Kombination inf034+inf036 kann auf Antrag als Ersatz für inf859 Informatik im Kontext (6 KP) angerechnet werden. KP-Summe bleibt konstant: 18 KP → 18 KP. Antrag beim Prüfungsamt erforderlich.';
+
               if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
               if (m.has('inf200')) return '⚠ inf200 kann auf Antrag als inf859 angerechnet werden';
               if (m.has('inf034') && m.has('inf036')) return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag als Ersatz für inf859 angerechnet werden — dann kein Wahlrecht auf diese Module mehr.';
@@ -1363,7 +1384,7 @@ const REQUIREMENTS = {
               if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
               return null;
             },
-            missing: 'inf859 — Pflicht | Übergang: inf200 oder inf034+inf036 auf Antrag'
+            missing: 'inf859 Informatik im Kontext fehlt noch. Übergänge (auf Antrag): inf200 — oder inf034+inf036 kombiniert — oder inf030+inf031 zusammen (decken dann inf033+inf034+inf035+inf036+inf859 ab)'
           },
           {
             id: 'hr_mat', label: 'mat950 Mathematik für Informatik (Diskrete Strukturen)', kp: 6,
@@ -1461,13 +1482,13 @@ const REQUIREMENTS = {
             id: 'wp_prog', label: 'Programmierung und Algorithmik I (inf033 / inf030)', kp: 6,
             satisfied: (m) => m.has('inf030') || m.has('inf033'),
             note: (m) => m.has('inf030') ? '✓ inf030 (9 KP, alt) — anrechenbar' : m.has('inf033') ? '✓ inf033 (6 KP, neu)' : null,
-            missing: 'inf033 (neu) oder inf030 (alt)'
+            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
           },
           {
             id: 'wp_oo', label: 'Programmierung und Modellierung I (inf035 / inf031)', kp: 6,
             satisfied: (m) => m.has('inf031') || m.has('inf035'),
             note: (m) => m.has('inf031') ? '✓ inf031 (9 KP, alt)' : m.has('inf035') ? '✓ inf035 (6 KP, neu)' : null,
-            missing: 'inf035 (neu) oder inf031 (alt)'
+            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
           },
           {
             id: 'wp_700', label: 'inf700 Didaktik der Informatik I', kp: 6,
@@ -1769,59 +1790,90 @@ function resetModules() {
 
 function getSurplusModules(sg, m) {
   const surplus = [];
-  // pb085 is always surplus for 2FB-Informatik students
+
+  // ── pb085: immer gesperrt für 2FB-Informatik ─────────────────────────
   if (m.has('pb085')) {
-    surplus.push({ id:'pb085', reason:'pb085 Soft Skills darf von 2FB-Informatik-Studierenden nicht mehr belegt werden (ab WS 2026/27 gesperrt). Keine Verrechnung möglich — Ersatz: inf859 oder inf715.' });
+    surplus.push({ id:'pb085', reason:'Soft Skills (pb085) darf von 2FB-Informatik-Studierenden ab WS 2026/27 nicht mehr belegt werden. Ersatz: inf859 oder inf715 — bitte Studienberatung kontaktieren.' });
   }
-  // For 60KP variants: inf200 is surplus if BOTH inf859 AND inf050 are already satisfied otherwise
-  if ((sg === 'ba60' || sg === 'gym' || sg === 'hr') && m.has('inf200')) {
-    const inf859Used = m.has('inf859');
-    const inf050Used = m.has('inf050') || m.has('inf010');
-    if (inf859Used && inf050Used) {
-      surplus.push({ id:'inf200', reason:'inf200 Techn. Informatik bitte Verrechnung klären: inf859 (Basis) und inf050 (Aufbau) sind bereits belegt. inf200 Bitte Studienberatung kontaktieren.' });
+
+  // ── Bestimme welche Pflichtstellen durch welche Module besetzt sind ───
+  const has859  = m.has('inf859');
+  const has050  = m.has('inf050');
+  const has010  = m.has('inf010');
+  const has200  = m.has('inf200') || m.has('inf200b');
+  const has034  = m.has('inf034');
+  const has036  = m.has('inf036');
+  const has030  = m.has('inf030');
+  const has031  = m.has('inf031');
+
+  // Welcher Weg wurde für inf859 gewählt?
+  const inf859_via_direct   = has859;
+  const inf859_via_034_036  = has034 && has036 && !has859;
+  const inf859_via_030_031  = has030 && has031 && !has859 && !has034 && !has036;
+  const inf859_via_200      = has200 && !has859 && !has034 && !has036 && !has030;
+
+  // Welcher Weg wurde für inf050 gewählt?
+  const inf050_via_direct   = has050;
+  const inf050_via_010      = has010 && !has050;
+  const inf050_via_034_036  = has034 && has036 && !has050 && !has010;
+
+  // ── inf034 + inf036: Wahlpflicht ODER Ersatz für inf050/inf859 ────────
+  // Wenn inf859 direkt belegt UND inf050 direkt belegt: inf034+inf036 können
+  // regulär im Wahlpflichtbereich (Tab.6 60KP bzw. Tab.2 30KP) verrechnet werden — kein Surplus!
+  // Wenn inf034+inf036 für inf050 ODER inf859 verwendet wurden, sind sie als Wahlpflicht gesperrt.
+  // Wenn inf034+inf036 belegt, aber weder für Pflicht noch Wahlpflicht verwertbar: Surplus.
+
+  if (has034 || has036) {
+    const used_for_pflicht = inf859_via_034_036 || inf050_via_034_036 || (has030 && has031);
+    const usable_as_wp = has859 && has050; // inf859 und inf050 direkt belegt → inf034+inf036 frei für WP
+
+    if (used_for_pflicht && usable_as_wp) {
+      // Sonderfall: durch inf030+inf031 entstehen inf034+inf036, die über inf859 verbucht werden,
+      // ABER inf859 ist auch direkt belegt → inf034+inf036 wären doppelt verbucht
+      if (has034) surplus.push({ id:'inf034', reason:'Programmierung und Algorithmik II (inf034) ist möglicherweise doppelt verbucht: inf859 ist direkt belegt UND die Kombination inf034+inf036 würde ebenfalls für inf859 angerechnet. Bitte Studienberatung kontaktieren.' });
+      if (has036) surplus.push({ id:'inf036', reason:'Programmierung und Modellierung II (inf036) ist möglicherweise doppelt verbucht: inf859 ist direkt belegt UND die Kombination inf034+inf036 würde ebenfalls für inf859 angerechnet. Bitte Studienberatung kontaktieren.' });
+    } else if (!used_for_pflicht && !usable_as_wp) {
+      // inf034/036 belegt, aber weder inf859 noch inf050 direkt belegt und auch keine Kombination möglich
+      // (Einzelmodul ohne Partner) → noch kein Surplus, nur Hinweis (bereits in note-Funktionen)
     }
+    // Wenn usable_as_wp (inf859 + inf050 direkt belegt): inf034+inf036 gehen regulär in Wahlpflicht → OK
+    // Wenn used_for_pflicht (!usable_as_wp): inf034+inf036 sind Pflichtverrechnung → kein Wahlrecht
   }
-  // inf010 surplus if inf050 already covered by inf050 itself AND inf034+036 not needed
-  if (m.has('inf010') && m.has('inf050')) {
-    surplus.push({ id:'inf010', reason:'inf010 Rechnernetze bitte Verrechnung klären: inf050 ist bereits direkt belegt. inf010 Bitte Studienberatung kontaktieren.' });
+
+  // ── inf010: Surplus wenn inf050 direkt belegt ──────────────────────────
+  if (has010 && has050) {
+    surplus.push({ id:'inf010', reason:'Rechnernetze (inf010) bitte Verrechnung klären: inf050 Grundlagen Betriebssysteme ist bereits direkt belegt — inf010 kann nicht zusätzlich verrechnet werden. Bitte Studienberatung kontaktieren.' });
   }
-  // inf034 + inf036 surplus if inf050 already filled directly
-  if (m.has('inf034') && m.has('inf036') && m.has('inf050')) {
-    surplus.push({ id:'inf034', reason:'inf034 bitte Verrechnung klären: inf050 ist bereits direkt belegt. inf034 Bitte Studienberatung kontaktieren — evtl. als Wahlpflicht nutzbar.' });
-    surplus.push({ id:'inf036', reason:'inf036 bitte Verrechnung klären: inf050 ist bereits direkt belegt. inf036 Bitte Studienberatung kontaktieren — evtl. als Wahlpflicht nutzbar.' });
+
+  // ── inf200: Surplus wenn inf859 UND inf050 beide direkt belegt ────────
+  if ((sg === 'ba60' || sg === 'gym' || sg === 'hr') && has200 && has859 && has050) {
+    surplus.push({ id:'inf200', reason:'Grundlagen der Technischen Informatik (inf200) bitte Verrechnung klären: inf859 und inf050 sind bereits direkt belegt — inf200 kann nicht zusätzlich verrechnet werden. Bitte Studienberatung kontaktieren.' });
   }
-  // inf005 surplus in ba60/gym/hr if inf401 is already done AND inf005 not needed for Master
-  if ((sg === 'ba60') && m.has('inf005') && m.has('inf401')) {
-    surplus.push({ id:'inf005', reason:'inf005 Softwaretechnik I im Bachelor bitte Verrechnung klären: inf401 ist bereits als Aufbau-Pflicht belegt. Falls du den M.Ed. Gymnasium anstrebst, wird inf005 dort als Pflichtmodul benötigt.' });
+
+  // ── inf005: im ba60 Surplus wenn inf401 bereits belegt (kein Zweck mehr im BA) ──
+  if (sg === 'ba60' && m.has('inf005') && m.has('inf401')) {
+    surplus.push({ id:'inf005', reason:'Softwaretechnik I (inf005) im Bachelor bitte Verrechnung klären: inf401 Grundlagen der Theoretischen Informatik ist bereits als Aufbau-Pflicht belegt. Falls M.Ed. Gymnasium angestrebt: inf005 wird dort als Pflicht benötigt — dann ist kein Surplus. Bitte Studienberatung kontaktieren.' });
   }
-  // inf401 surplus in gym if already covered in bachelor (cannot be in master too)
-  // But: in gym it's needed in bachelor, not master — so no surplus there
-  // Excess wahlpflicht: for 30KP: only 6KP wahlpflicht allowed
+
+  // ── inf034/inf036 einzeln als Wahlpflicht: prüfen ob verrechenbar ─────
+  // Wenn inf859 direkt belegt UND inf050 direkt belegt, können inf034 und inf036
+  // einzeln als Wahlpflichtmodule (Tab.6 60KP / Tab.2 30KP) eingebracht werden — das ist korrekt.
+  // Kein Surplus in diesem Fall.
+
+  // ── 30 KP Wahlpflicht: max. 6 KP ─────────────────────────────────────
   if (sg === 'ba30') {
-    const wpModules = ['inf200','inf201','inf400','inf401','inf034','inf036','inf715','inf859','inf800','inf803','inf804','inf016','inf009','inf018','inf004'];
-    const wpHas = wpModules.filter(id => m.has(id));
-    if (wpHas.length >= 2) { // more than 6KP worth selected (rough: any 2 full modules)
-      // Mark the extra ones as surplus beyond 6KP
-      // Since KP differ we just flag if total KP > 6
-      let totalWpKp = 0;
-      const wpKpMap = { inf200:6,inf201:6,inf400:6,inf401:6,inf034:3,inf036:3,inf715:3,inf859:6,inf800:3,inf803:6,inf804:6,inf016:6,inf009:6,inf018:6,inf004:9 };
-      const wpUsed = [];
-      for (const id of wpHas) {
-        totalWpKp += (wpKpMap[id] || 6);
-        wpUsed.push(id);
-        if (totalWpKp > 6) {
-          // remaining ones are surplus
-          const extraIds = wpUsed.slice(1); // keep first, rest surplus
-          extraIds.forEach(eid => {
-            if (!surplus.find(s => s.id === eid)) {
-              surplus.push({ id: eid, reason: `Überzählig im Wahlpflichtbereich 30 KP (max. 6 KP Wahlpflicht): ${eid} Bitte Studienberatung kontaktieren. Ggf. zählt es für das Zweitfach oder gar nicht.` });
-            }
-          });
-          break;
-        }
+    const wpKpMap = { inf200:6, inf859:6, inf034:3, inf036:3, inf715:3, inf800:3,
+                      inf201:6, inf400:6, inf401:6, inf803:6, inf804:6, inf016:6, inf009:6, inf018:6, inf004:9 };
+    const wpHas = Object.keys(wpKpMap).filter(id => m.has(id));
+    let total = 0;
+    for (const id of wpHas) {
+      total += wpKpMap[id];
+      if (total > 6 && !surplus.find(s => s.id === id)) {
+        surplus.push({ id, reason: `Überzählig im Wahlpflichtbereich 30 KP (maximal 6 KP): ${id} kann nicht zusätzlich verrechnet werden — ggf. für das Zweitfach nutzbar. Bitte Studienberatung kontaktieren.` });
       }
     }
   }
+
   return surplus;
 }
 
