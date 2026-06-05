@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modulplaner Informatik — BPO 2026/27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg2: #161b27;
+    --bg3: #1e2535;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.15);
+    --text: #e8ecf4;
+    --muted: #7a8499;
+    --accent: #5b9cf6;
+    --accent-dim: rgba(91,156,246,0.15);
+    --accent2: #7edda1;
+    --accent2-dim: rgba(126,221,161,0.12);
+    --warn: #f0a832;
+    --warn-dim: rgba(240,168,50,0.12);
+    --danger: #f06b6b;
+    --danger-dim: rgba(240,107,107,0.12);
+    --purple: #b89af5;
+    --purple-dim: rgba(184,154,245,0.12);
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Background grid */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: 
+      linear-gradient(rgba(91,156,246,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,156,246,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .wrapper { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* HEADER */
+  header { padding: 48px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+  .uni-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+    color: var(--accent); background: var(--accent-dim);
+    border: 1px solid rgba(91,156,246,0.3);
+    padding: 4px 12px; border-radius: 20px; margin-bottom: 20px;
+  }
+  .uni-tag::before { content: '●'; font-size: 8px; }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .subtitle { color: var(--muted); font-size: 14px; max-width: 540px; }
+
+  /* STEP INDICATOR */
+  .steps-bar {
+    display: flex; gap: 0; margin-bottom: 36px;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); overflow: hidden;
+  }
+  .step-btn {
+    flex: 1; padding: 12px 8px; text-align: center;
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    border: none; background: none; color: var(--muted);
+    transition: all 0.2s; position: relative;
+    border-right: 1px solid var(--border);
+  }
+  .step-btn:last-child { border-right: none; }
+  .step-btn.active { background: var(--accent-dim); color: var(--accent); }
+  .step-btn .step-num {
+    display: block; font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.05em; margin-bottom: 2px;
+    opacity: 0.6;
+  }
+  .step-btn.done { color: var(--accent2); }
+  .step-btn.done .step-num { color: var(--accent2); }
+
+  /* PANELS */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* STUDIENGANG SELECTOR */
+  .sg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .sg-card {
+    padding: 20px; border-radius: var(--radius-lg);
+    border: 1.5px solid var(--border);
+    background: var(--bg2); cursor: pointer;
+    transition: all 0.2s;
+  }
+  .sg-card:hover { border-color: var(--border2); background: var(--bg3); }
+  .sg-card.selected { border-color: var(--accent); background: var(--accent-dim); }
+  .sg-card .sg-icon { font-size: 24px; margin-bottom: 10px; }
+  .sg-card .sg-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  .sg-card .sg-desc { font-size: 12px; color: var(--muted); }
+  .sg-card .sg-kp {
+    display: inline-block; margin-top: 8px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    background: var(--bg3); border: 1px solid var(--border2);
+    padding: 2px 8px; border-radius: 4px; color: var(--accent);
+  }
+  .sg-card.selected .sg-kp { background: rgba(91,156,246,0.2); }
+
+  /* SECTION LABELS */
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.08em; color: var(--muted);
+    text-transform: uppercase; margin: 28px 0 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* MODULE GRID */
+  .module-grid { display: flex; flex-direction: column; gap: 6px; }
+  .module-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 14px; border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg2); cursor: pointer;
+    transition: all 0.15s;
+  }
+  .module-row:hover { border-color: var(--border2); background: var(--bg3); }
+  .module-row.checked { border-color: var(--accent2); background: var(--accent2-dim); }
+  .module-row.checked .mod-id { color: var(--accent2); }
+  .mod-check {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 1.5px solid var(--border2); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; transition: all 0.15s;
+  }
+  .module-row.checked .mod-check {
+    background: var(--accent2); border-color: var(--accent2); color: #0f1117;
+  }
+  .mod-id {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: var(--muted); white-space: nowrap; min-width: 56px;
+  }
+  .mod-name { font-size: 13px; flex: 1; }
+  .mod-kp {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: var(--muted); white-space: nowrap;
+  }
+  .mod-tag {
+    font-size: 10px; padding: 2px 7px; border-radius: 3px;
+    font-weight: 500; white-space: nowrap;
+  }
+  .tag-neu { background: var(--warn-dim); color: var(--warn); border: 1px solid rgba(240,168,50,0.3); }
+  .tag-alt { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(240,107,107,0.25); }
+  .tag-ok { background: var(--accent2-dim); color: var(--accent2); border: 1px solid rgba(126,221,161,0.25); }
+
+  /* BUTTON */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: var(--radius);
+    font-family: 'Instrument Sans', sans-serif; font-size: 14px; font-weight: 600;
+    cursor: pointer; border: none; transition: all 0.2s; text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--accent); color: #0a0f1a;
+  }
+  .btn-primary:hover { background: #7ab3f8; transform: translateY(-1px); }
+  .btn-secondary {
+    background: var(--bg2); color: var(--text);
+    border: 1px solid var(--border2);
+  }
+  .btn-secondary:hover { background: var(--bg3); }
+  .btn-row { display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap; }
+
+  /* RESULTS */
+  .result-hero {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px;
+  }
+  .result-headline {
+    font-family: 'DM Serif Display', serif; font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .result-headline.ok { color: var(--accent2); }
+  .result-headline.warn { color: var(--warn); }
+  .result-hero p { color: var(--muted); font-size: 13px; }
+
+  .progress-bar-wrap { margin: 16px 0 8px; background: var(--bg3); border-radius: 4px; height: 6px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; border-radius: 4px; background: var(--accent2); transition: width 0.6s ease; }
+  .progress-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+
+  .result-card {
+    border-radius: var(--radius-lg); border: 1px solid var(--border);
+    overflow: hidden; margin-bottom: 14px;
+  }
+  .result-card-head {
+    padding: 14px 18px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .result-card-head .rc-icon { font-size: 18px; }
+  .result-card-head .rc-title { font-weight: 600; font-size: 14px; flex: 1; }
+  .result-card-head .rc-badge {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    padding: 3px 8px; border-radius: 4px;
+  }
+  .badge-done { background: var(--accent2-dim); color: var(--accent2); }
+  .badge-missing { background: var(--danger-dim); color: var(--danger); }
+  .badge-partial { background: var(--warn-dim); color: var(--warn); }
+  .result-card-body { padding: 14px 18px; background: var(--bg2); }
+
+  .mod-status-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .mod-status-row:last-child { border-bottom: none; }
+  .status-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px;
+  }
+  .dot-ok { background: var(--accent2); }
+  .dot-anr { background: var(--warn); }
+  .dot-miss { background: var(--danger); }
+  .mod-status-info { flex: 1; }
+  .mod-status-name { font-weight: 500; margin-bottom: 2px; }
+  .mod-status-note { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .mod-status-kp { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+  .info-box {
+    display: flex; gap: 10px; padding: 12px 14px;
+    border-radius: var(--radius); font-size: 12px;
+    margin-top: 10px; line-height: 1.5;
+  }
+  .info-box.blue { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(91,156,246,0.2); }
+  .info-box.green { background: var(--accent2-dim); color: var(--accent2); border: 1px solid rgba(126,221,161,0.2); }
+  .info-box.warn { background: var(--warn-dim); color: var(--warn); border: 1px solid rgba(240,168,50,0.2); }
+
+  /* ANRECHNUNGS-KARTE */
+  .anr-card {
+    background: var(--warn-dim); border: 1px solid rgba(240,168,50,0.25);
+    border-radius: var(--radius); padding: 12px 14px;
+    font-size: 12px; color: var(--warn); margin-bottom: 8px;
+  }
+  .anr-card strong { font-weight: 600; }
+
+  /* RESET BUTTON */
+  .reset-btn {
+    background: none; border: 1px solid var(--border2); color: var(--muted);
+    padding: 8px 16px; border-radius: var(--radius); cursor: pointer;
+    font-size: 13px; font-family: 'Instrument Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .reset-btn:hover { color: var(--text); border-color: var(--text); }
+
+  /* COUNT BADGE */
+  .count-badge {
+    display: inline-block; background: var(--accent-dim);
+    color: var(--accent); font-family: 'DM Mono', monospace;
+    font-size: 11px; padding: 2px 8px; border-radius: 10px;
+    margin-left: 6px;
+  }
+
+  @media (max-width: 600px) {
+    .steps-bar { flex-direction: column; }
+    .step-btn { border-right: none; border-bottom: 1px solid var(--border); }
+    .step-btn:last-child { border-bottom: none; }
+    .sg-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="uni-tag">Carl von Ossietzky Universität Oldenburg</div>
+    <h1>Modulplaner<br><em>Informatik</em> ab WS 2026/27</h1>
+    <p class="subtitle">Wähle deinen Studiengang, markiere deine bereits abgelegten Module und erfahre, wie du sie optimal in die neue Prüfungsordnung einbringst.</p>
+  </header>
+
+  <div class="steps-bar">
+    <button class="step-btn active" id="step-btn-1" onclick="goStep(1)">
+      <span class="step-num">SCHRITT 01</span>Studiengang
+    </button>
+    <button class="step-btn" id="step-btn-2" onclick="goStep(2)">
+      <span class="step-num">SCHRITT 02</span>Module eingeben
+    </button>
+    <button class="step-btn" id="step-btn-3" onclick="goStep(3)">
+      <span class="step-num">SCHRITT 03</span>Mein Plan
+    </button>
+  </div>
+
+  <!-- STEP 1: Studiengang -->
+  <div class="panel active" id="panel-1">
+    <div class="section-label">Welchen Abschluss strebst du an?</div>
+    <div class="section-label" style="margin-top:0">Nur Bachelor-Abschluss</div>
+    <div class="sg-grid">
+      <div class="sg-card" onclick="selectSG('ba30')" id="sg-ba30">
+        <div class="sg-icon">📘</div>
+        <div class="sg-name">2FB Informatik 30 KP</div>
+        <div class="sg-desc">Zwei-Fächer-Bachelor mit außerschulischem Berufsziel oder Vorbereitung auf M.Ed. WiPäd</div>
+        <div class="sg-kp">Abschluss: B.Sc. / B.A.</div>
+      </div>
+      <div class="sg-card" onclick="selectSG('ba60')" id="sg-ba60">
+        <div class="sg-icon">📗</div>
+        <div class="sg-name">2FB Informatik 60 KP</div>
+        <div class="sg-desc">Zwei-Fächer-Bachelor mit außerschulischem Berufsziel oder Vorbereitung auf M.Ed. Gym / HR</div>
+        <div class="sg-kp">Abschluss: B.Sc. / B.A.</div>
+      </div>
+    </div>
+    <div class="section-label">Bachelor + Master (Lehramt)</div>
+    <div class="sg-grid">
+      <div class="sg-card" onclick="selectSG('wipaed')" id="sg-wipaed">
+        <div class="sg-icon">🏛️</div>
+        <div class="sg-name">M.Ed. Wirtschaftspädagogik</div>
+        <div class="sg-desc">Lehramt an Berufsbildenden Schulen · aufbauend auf 2FB Inf. 30 KP</div>
+        <div class="sg-kp">30 KP Bachelor → Master</div>
+      </div>
+      <div class="sg-card" onclick="selectSG('gym')" id="sg-gym">
+        <div class="sg-icon">🎓</div>
+        <div class="sg-name">M.Ed. Gymnasium</div>
+        <div class="sg-desc">Lehramt an Gymnasien · aufbauend auf 2FB Inf. 60 KP</div>
+        <div class="sg-kp">60 KP Bachelor → Master</div>
+      </div>
+      <div class="sg-card" onclick="selectSG('hr')" id="sg-hr">
+        <div class="sg-icon">🏫</div>
+        <div class="sg-name">M.Ed. Haupt- &amp; Realschule</div>
+        <div class="sg-desc">Lehramt an Haupt- und Realschulen · aufbauend auf 2FB Inf. 60 KP</div>
+        <div class="sg-kp">60 KP Bachelor → Master</div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="goStep(2)" id="btn-to-step2" disabled style="opacity:0.4;cursor:not-allowed">Weiter → Module eingeben</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Module -->
+  <div class="panel" id="panel-2">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px">
+      <div>
+        <span id="sg-display" style="font-weight:600; color:var(--accent)"></span>
+        <span style="color:var(--muted); font-size:13px"> — welche Module hast du bereits?</span>
+      </div>
+      <button class="reset-btn" onclick="resetModules()">Auswahl zurücksetzen</button>
+    </div>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:20px">Klicke auf alle Module, die du bereits erfolgreich abgeschlossen hast — egal nach welcher Ordnung.</p>
+    <div id="module-list"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goStep(1)">← Zurück</button>
+      <button class="btn btn-primary" onclick="goStep(3)">Meinen Plan anzeigen →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Results -->
+  <div class="panel" id="panel-3">
+    <div id="result-area"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goStep(2)">← Module ändern</button>
+      <button class="btn btn-secondary" onclick="goStep(1)">Neu starten</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+// All modules that can appear in the module selector
+// category: 'ba30'=nur 30KP-BA, 'ba60'=60KP-BA (auch für 30KP sichtbar), 'both'=alle, 'master'=Master-Module
+const ALL_MODULES = [
+  // === BACHELOR KERN (sichtbar für alle) ===
+  { id:'inf030', name:'Programmierung, Datenstrukturen und Algorithmen', kp:9, tag:'alt', visible:'all' },
+  { id:'inf031', name:'Objektorientierte Modellierung und Programmierung', kp:9, tag:'alt', visible:'all' },
+  { id:'inf033', name:'Grundlagen der Programmierung, DS und Algorithmen I', kp:6, tag:'neu', visible:'all' },
+  { id:'inf034', name:'Vertiefung Programmierung und Algorithmik II', kp:3, tag:'neu', visible:'all' },
+  { id:'inf035', name:'Grundlagen der OO-Modellierung und Programmierung I', kp:6, tag:'neu', visible:'all' },
+  { id:'inf036', name:'Vertiefung OO-Modellierung und Programmierung II', kp:3, tag:'neu', visible:'all' },
+  { id:'inf700', name:'Didaktik der Informatik I', kp:6, tag:'ok', visible:'all' },
+  { id:'inf010', name:'Rechnernetze', kp:6, tag:'alt', visible:'all' },
+  { id:'inf050', name:'Grundlagengebiete der Praktischen Informatik', kp:6, tag:'neu', visible:'all' },
+  { id:'mat950', name:'Mathematik für Informatik (Diskrete Strukturen)', kp:6, tag:'ok', visible:'all' },
+  // === NUR 60 KP-Bachelor ===
+  { id:'inf200', name:'Grundlagen der Technischen Informatik', kp:6, tag:'alt', visible:'60' },
+  { id:'inf401', name:'Grundlagen der Theoretischen Informatik', kp:6, tag:'neu', visible:'60' },
+  { id:'inf005', name:'Softwaretechnik I', kp:6, tag:'alt', visible:'60' },
+  { id:'inf007', name:'Informationssysteme I / Datenbanken I', kp:6, tag:'ok', visible:'60' },
+  { id:'inf859', name:'Informatik im Kontext', kp:6, tag:'neu', visible:'60' },
+  // === WAHLPFLICHT (alle) ===
+  { id:'pb085', name:'Soft Skills (pb085)', kp:6, tag:'alt', visible:'all' },
+  { id:'inf715', name:'Physical Computing in Bildungskontexten', kp:3, tag:'neu', visible:'all' },
+  { id:'inf400', name:'Theoretische Informatik: Logik', kp:6, tag:'ok', visible:'all' },
+  { id:'inf201', name:'Technische Informatik', kp:6, tag:'ok', visible:'all' },
+  { id:'inf530', name:'Künstliche Informatik', kp:6, tag:'ok', visible:'all' },
+  { id:'inf004', name:'Softwareprojekt', kp:9, tag:'ok', visible:'all' },
+  { id:'inf009', name:'Praktikum Datenbanken', kp:6, tag:'ok', visible:'all' },
+  { id:'inf018', name:'Medienverarbeitung', kp:6, tag:'ok', visible:'all' },
+  { id:'inf016', name:'Web-/Internet-Technologien', kp:6, tag:'ok', visible:'all' },
+  { id:'inf040', name:'Introduction to Data Science', kp:6, tag:'ok', visible:'60' },
+  { id:'inf800', name:'Proseminar Informatik', kp:3, tag:'ok', visible:'all' },
+  { id:'inf803', name:'Spezielle Themen der Informatik I', kp:6, tag:'ok', visible:'all' },
+  { id:'inf804', name:'Spezielle Themen der Informatik II', kp:6, tag:'ok', visible:'all' },
+  // === MASTER-MODULE ===
+  { id:'inf701', name:'Didaktik der Informatik II', kp:6, tag:'ok', visible:'master' },
+  { id:'inf704', name:'Didaktik der Informatik III', kp:3, tag:'ok', visible:'master' },
+  { id:'inf712', name:'Aktuelle Themen Didaktik der Informatik I', kp:3, tag:'ok', visible:'master' },
+  { id:'inf600', name:'Wirtschaftsinformatik I', kp:6, tag:'ok', visible:'master' },
+  { id:'inf851', name:'Informatik und Gesellschaft', kp:6, tag:'ok', visible:'master' },
+  { id:'wir806', name:'Informationstechnologierecht (wir806)', kp:6, tag:'ok', visible:'master' },
+];
+
+// ============================================================
+// REQUIREMENT DEFINITIONS PER STUDIENGANG
+// ============================================================
+
+const REQUIREMENTS = {
+
+  ba30: {
+    label: '2FB Informatik 30 KP (außerschulisch / Vorbereitung WiPäd)',
+    bachelorVariant: '30',
+    sections: [
+      {
+        title: 'Pflichtmodule (24 KP)',
+        icon: '📚',
+        modules: [
+          {
+            id: 'b30_prog', label: 'Programmiergrundlagen', kp: 9,
+            satisfied: (m) => m.has('inf030') || m.has('inf033'),
+            note: (m) => {
+              if (m.has('inf030')) return '✓ inf030 (9 KP, alt) — vollständig erfüllt';
+              if (m.has('inf033')) return '✓ inf033 (6 KP, neu) — Pflicht erfüllt; inf034 (3 KP) kann ergänzend im Wahlbereich belegt werden';
+              return null;
+            },
+            missing: 'inf030 (9 KP, alt) oder inf033 (6 KP, neu)'
+          },
+          {
+            id: 'b30_oo', label: 'OO-Modellierung Grundlagen', kp: 9,
+            satisfied: (m) => m.has('inf031') || m.has('inf035'),
+            note: (m) => {
+              if (m.has('inf031')) return '✓ inf031 (9 KP, alt) — vollständig erfüllt';
+              if (m.has('inf035')) return '✓ inf035 (6 KP, neu) — Pflicht erfüllt; inf036 (3 KP) als Vertiefung im Wahlbereich möglich';
+              return null;
+            },
+            missing: 'inf031 (9 KP, alt) oder inf035 (6 KP, neu)'
+          },
+          {
+            id: 'b30_050', label: 'inf050 Grundlagengebiete Prakt. Inf. (neu)', kp: 6,
+            satisfied: (m) => m.has('inf050') || m.has('inf010') || (m.has('inf034') && m.has('inf036')),
+            note: (m) => {
+              if (m.has('inf050')) return '✓ inf050 — direkt erfüllt';
+              if (m.has('inf010')) return '⚠ inf010 (alt, Rechnernetze) kann auf Antrag als inf050 angerechnet werden (Übergang bis SS 2029)';
+              if (m.has('inf034') && m.has('inf036')) return '⚠ inf034 + inf036 (kombiniert) können auf Antrag als inf050 angerechnet werden — dann kein Wahlrecht auf diese Module mehr';
+              return null;
+            },
+            missing: 'inf050 (neu) — oder Übergang: inf010 auf Antrag | inf034+inf036 kombiniert auf Antrag'
+          },
+          {
+            id: 'b30_700', label: 'inf700 Didaktik der Informatik I', kp: 6,
+            satisfied: (m) => m.has('inf700'),
+            note: (m) => m.has('inf700') ? '✓ inf700 — erfüllt' : null,
+            missing: 'inf700 — noch zu belegen'
+          },
+        ]
+      },
+      {
+        title: 'Wahlpflichtbereich (6 KP)',
+        icon: '⚙️',
+        modules: [
+          {
+            id: 'b30_wp', label: '6 KP Wahlpflicht: Techn. oder Theor. Informatik',  kp: 6,
+            satisfied: (m) => m.has('inf200') || m.has('inf201') || m.has('inf203') || m.has('inf400') || m.has('inf401') || m.has('inf034') || m.has('inf036') || m.has('inf715') || m.has('inf859') || m.has('inf800') || m.has('inf803') || m.has('inf804') || m.has('inf016') || m.has('inf009') || m.has('inf018') || m.has('inf004'),
+            note: (m) => {
+              const hits = [];
+              if (m.has('inf859')) hits.push('inf859 Informatik im Kontext (neu, 6 KP)');
+              if (m.has('inf715')) hits.push('inf715 Physical Computing (neu, 3 KP)');
+              if (m.has('inf034')) hits.push('inf034 Vertiefung Programmierung II (3 KP)');
+              if (m.has('inf036')) hits.push('inf036 Vertiefung OO-Modellierung II (3 KP)');
+              if (m.has('inf200')) hits.push('inf200 Techn. Informatik (alt, 6 KP)');
+              if (m.has('inf400')) hits.push('inf400 Theor. Inf.: Logik (6 KP)');
+              if (m.has('inf401')) hits.push('inf401 Theor. Inf.: Grundlagen (6 KP)');
+              if (hits.length > 0) return '✓ Geeignete Wahlpflichtmodule vorhanden: ' + hits.join(', ');
+              return null;
+            },
+            missing: 'Mindestens 6 KP aus Tab. 2 (Techn. Inf.) oder Tab. 3 (Theor. Inf.) oder den neuen Modulen (inf859, inf715, inf034, inf036)'
+          },
+          {
+            id: 'b30_pb085', label: 'Hinweis: pb085 Soft Skills gesperrt', kp: 0,
+            satisfied: (m) => !m.has('pb085'),
+            note: (m) => {
+              if (m.has('pb085')) return '⚠ pb085 Soft Skills darf ab WS 2026/27 nicht mehr von 2FB-Inf-Studierenden belegt werden. Bereits absolviert: Anerkennung prüfen. Ersatz: inf859 oder inf715.';
+              return '→ pb085 ist für 2FB Informatik gesperrt — stattdessen inf859 (6 KP) oder inf715 (3 KP) wählen';
+            },
+            missing: null
+          },
+        ]
+      },
+      {
+        title: 'Bachelorarbeitsmodul (optional in Informatik)',
+        icon: '🏁',
+        modules: [
+          {
+            id: 'b30_bam', label: 'Bachelorarbeit in Informatik (falls Inf. als Hauptfach)', kp: 15,
+            satisfied: (m) => true,
+            note: (m) => '→ Die Bachelorarbeit kann in Informatik oder im Zweitfach verfasst werden. Im 30 KP-Programm ist kein eigenes Bachelorarbeitsmodul Pflicht, wenn das Zweitfach die Arbeit trägt.',
+            missing: null
+          },
+        ]
+      }
+    ]
+  },
+
+  ba60: {
+    label: '2FB Informatik 60 KP (außerschulisch / Vorbereitung Gym & HR)',
+    bachelorVariant: '60',
+    sections: [
+      {
+        title: 'Basiscurriculum (30 KP Pflicht)',
+        icon: '📚',
+        modules: [
+          {
+            id: 'b60_prog', label: 'Programmiergrundlagen (inf033 neu / inf030 alt)', kp: 6,
+            satisfied: (m) => m.has('inf030') || m.has('inf033'),
+            note: (m) => {
+              if (m.has('inf030')) return '✓ inf030 (9 KP, alt) — anrechenbar als Basis + Wahlvertiefung';
+              if (m.has('inf033')) return '✓ inf033 (6 KP, neu) — Basispflicht erfüllt';
+              return null;
+            },
+            missing: 'inf033 (6 KP, neu) oder inf030 (9 KP, alt, anrechenbar)'
+          },
+          {
+            id: 'b60_oo', label: 'OO-Modellierung (inf035 neu / inf031 alt)', kp: 6,
+            satisfied: (m) => m.has('inf031') || m.has('inf035'),
+            note: (m) => {
+              if (m.has('inf031')) return '✓ inf031 (9 KP, alt) — anrechenbar als Basis + Vertiefung';
+              if (m.has('inf035')) return '✓ inf035 (6 KP, neu)';
+              return null;
+            },
+            missing: 'inf035 (6 KP, neu) oder inf031 (9 KP, alt)'
+          },
+          {
+            id: 'b60_859', label: 'inf859 Informatik im Kontext (NEU Basis-Pflicht)', kp: 6,
+            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')),
+            note: (m) => {
+              if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
+              if (m.has('inf200')) return '⚠ inf200 (Grundl. Techn. Inf., alt) kann auf Antrag statt inf859 verbucht werden — inf200 dann kein Wahlrecht mehr';
+              if (m.has('inf034') && m.has('inf036')) return '⚠ inf034+inf036 (kombiniert) können auf Antrag statt inf859 verbucht werden';
+              if (m.has('pb085')) return '⚠ pb085 ist NICHT anrechenbar für inf859 (pb085 für 2FB Inf. gesperrt) — inf859 muss separat belegt werden';
+              return null;
+            },
+            missing: 'inf859 (6 KP, neu) — Pflichtmodul Basis | Übergang: inf200 oder inf034+inf036 auf Antrag (bis SS 2029)'
+          },
+          {
+            id: 'b60_mat', label: 'mat950 Mathematik für Informatik', kp: 6,
+            satisfied: (m) => m.has('mat950'),
+            note: (m) => m.has('mat950') ? '✓ mat950 — erfüllt' : null,
+            missing: 'mat950 Diskrete Strukturen — noch zu belegen'
+          },
+          {
+            id: 'b60_700', label: 'inf700 Didaktik der Informatik I (jetzt im Basis)', kp: 6,
+            satisfied: (m) => m.has('inf700'),
+            note: (m) => m.has('inf700') ? '✓ inf700 — erfüllt (ab WS 26/27 im Basiscurriculum, nicht mehr im Aufbau)' : null,
+            missing: 'inf700 — ab WS 2026/27 im Basiscurriculum (war im Aufbau)'
+          },
+        ]
+      },
+      {
+        title: 'Aufbaucurriculum (18 KP Pflicht)',
+        icon: '🔧',
+        modules: [
+          {
+            id: 'b60_401', label: 'inf401 Theor. Informatik (NEU als Aufbau-Pflicht)', kp: 6,
+            satisfied: (m) => m.has('inf401'),
+            note: (m) => {
+              if (m.has('inf401')) return '✓ inf401 — direkt erfüllt (war evtl. Wahlpflicht)';
+              if (m.has('inf005')) return '⚠ inf005 (Softwaretechnik I, alt) kann auf Antrag statt inf401 verbucht werden (Übergang bis SS 2029) — inf005 muss dann im M.Ed. Gym nachgeholt werden';
+              return null;
+            },
+            missing: 'inf401 (6 KP) — NEU als Pflicht im Aufbau | Übergang: inf005 als Ersatz auf Antrag'
+          },
+          {
+            id: 'b60_050', label: 'inf050 Grundlagengebiete Prakt. Inf. (NEU Aufbau)', kp: 6,
+            satisfied: (m) => m.has('inf050') || m.has('inf010') || m.has('inf200'),
+            note: (m) => {
+              if (m.has('inf050')) return '✓ inf050 — direkt erfüllt';
+              if (m.has('inf010')) return '⚠ inf010 (Rechnernetze, alt) kann auf Antrag als inf050 angerechnet werden (Übergang bis SS 2029)';
+              if (m.has('inf200')) return '⚠ inf200 (Techn. Inf., alt) kann auf Antrag statt inf050 verbucht werden, sofern nicht schon als inf859 genutzt';
+              return null;
+            },
+            missing: 'inf050 (6 KP) — NEU als Aufbau-Pflicht | Übergang: inf010 oder inf200 auf Antrag'
+          },
+          {
+            id: 'b60_007', label: 'inf007 Datenbanken I (umbenannt)', kp: 6,
+            satisfied: (m) => m.has('inf007'),
+            note: (m) => m.has('inf007') ? '✓ inf007 — erfüllt (früher: Informationssysteme I)' : null,
+            missing: 'inf007 Datenbanken I — noch zu belegen (früher: Informationssysteme I)'
+          },
+        ]
+      },
+      {
+        title: 'Wahlpflicht Praktische Vertiefung (12 KP)',
+        icon: '⚙️',
+        modules: [
+          {
+            id: 'b60_wp1', label: 'Mindestens 6 KP aus Tab. 5 (Praktische Vertiefung)', kp: 6,
+            satisfied: (m) => m.has('inf004') || m.has('inf009') || m.has('inf018') || m.has('inf016') || m.has('inf800') || m.has('inf803') || m.has('inf804'),
+            note: (m) => {
+              const hits = [];
+              if (m.has('inf004')) hits.push('inf004 Softwareprojekt');
+              if (m.has('inf009')) hits.push('inf009 Praktikum Datenbanken');
+              if (m.has('inf018')) hits.push('inf018 Medienverarbeitung');
+              if (m.has('inf016')) hits.push('inf016 Web-Technologien');
+              if (m.has('inf800')) hits.push('inf800 Proseminar');
+              if (hits.length) return '✓ Aus Tab. 5 vorhanden: ' + hits.join(', ');
+              return null;
+            },
+            missing: 'Mindestens 6 KP aus Tab. 5 (Praktische Vertiefung): inf004, inf009, inf018, inf016, inf800, inf803, inf804 u.a.'
+          },
+          {
+            id: 'b60_wp2', label: 'Weitere 6 KP aus Tab. 5 oder Tab. 6', kp: 6,
+            satisfied: (m) => {
+              const tab5 = ['inf004','inf009','inf018','inf016','inf800','inf803','inf804'].filter(id => m.has(id));
+              const tab6 = ['inf034','inf036','inf040','inf200','inf201','inf530','inf715'].filter(id => m.has(id));
+              return (tab5.length + tab6.length) >= 2;
+            },
+            note: (m) => {
+              const hits = [];
+              if (m.has('inf034')) hits.push('inf034 (3 KP, Tab.6, neu)');
+              if (m.has('inf036')) hits.push('inf036 (3 KP, Tab.6, neu)');
+              if (m.has('inf040')) hits.push('inf040 Data Science (Tab.6)');
+              if (m.has('inf200')) hits.push('inf200 Techn. Inf. (Tab.6)');
+              if (m.has('inf201')) hits.push('inf201 Techn. Inf. (Tab.6)');
+              if (m.has('inf530')) hits.push('inf530 KI (Tab.6)');
+              if (m.has('inf715')) hits.push('inf715 Physical Computing (Tab.6, neu)');
+              if (hits.length) return '✓ Aus Tab. 6 vorhanden: ' + hits.join(', ');
+              return null;
+            },
+            missing: 'Weitere 6 KP aus Tab. 5 oder Tab. 6 (z.B. inf034, inf036, inf040, inf715, inf200, inf201, inf530)'
+          },
+          {
+            id: 'b60_pb085', label: 'Hinweis: pb085 gesperrt für 2FB Informatik', kp: 0,
+            satisfied: (m) => !m.has('pb085'),
+            note: (m) => {
+              if (m.has('pb085')) return '⚠ pb085 Soft Skills darf ab WS 2026/27 nicht mehr von 2FB-Inf-Studierenden belegt werden. Ersatz: inf859 (Basis) und/oder inf715 (Wahlpflicht).';
+              return '→ pb085 ist für 2FB Informatik gesperrt — wird durch inf859 und inf715 ersetzt';
+            },
+            missing: null
+          },
+        ]
+      },
+      {
+        title: 'Bachelorarbeitsmodul Informatik (15 KP)',
+        icon: '🏁',
+        modules: [
+          {
+            id: 'b60_bam', label: 'Bachelorarbeit + Seminar (60 KP-Variante)', kp: 15,
+            satisfied: (m) => true,
+            note: (m) => '→ Die Bachelorarbeit (12 KP) + begleitendes Seminar (3 KP) kann in Informatik oder im Zweitfach geschrieben werden. Bei 60 KP in Informatik besteht ein eigenes Bachelorarbeitsmodul.',
+            missing: null
+          },
+        ]
+      }
+    ]
+  },
+
+  wipaed: {
+    label: 'M.Ed. Wirtschaftspädagogik',
+    bachelorVariant: '30',
+    sections: [
+      {
+        title: 'Bachelor 30 KP — Pflichtmodule',
+        icon: '📚',
+        modules: [
+          {
+            id: 'inf030_033', label: 'Programmierung Grundlagen', kp: 9,
+            satisfied: (m) => m.has('inf030') || m.has('inf033'),
+            note: (m) => m.has('inf030') ? '✓ inf030 (9 KP, alt) — vollständig erfüllt' : m.has('inf033') ? '✓ inf033 (6 KP, neu) — ggf. inf034 (3 KP) im Wahlbereich ergänzen' : null,
+            missing: 'inf030 (9 KP, alt) oder inf033 (6 KP, neu)'
+          },
+          {
+            id: 'inf031_035', label: 'OO-Modellierung Grundlagen', kp: 9,
+            satisfied: (m) => m.has('inf031') || m.has('inf035'),
+            note: (m) => m.has('inf031') ? '✓ inf031 (9 KP, alt) — vollständig erfüllt' : m.has('inf035') ? '✓ inf035 (6 KP, neu) — ggf. inf036 (3 KP) im Wahlbereich ergänzen' : null,
+            missing: 'inf031 (9 KP, alt) oder inf035 (6 KP, neu)'
+          },
+          {
+            id: 'inf050_req', label: 'inf050 Grundlagengebiete Prakt. Inf.', kp: 6,
+            satisfied: (m) => m.has('inf050') || m.has('inf010') || (m.has('inf034') && m.has('inf036')),
+            note: (m) => {
+              if (m.has('inf050')) return '✓ inf050 (neu) — direkt erfüllt';
+              if (m.has('inf010')) return '⚠ inf010 (alt) kann auf Antrag als inf050 angerechnet werden';
+              if (m.has('inf034') && m.has('inf036')) return '⚠ inf034+inf036 (kombiniert) können auf Antrag als inf050 angerechnet werden';
+              return null;
+            },
+            missing: 'inf050 (neu) — oder: inf010 (alt) auf Antrag | inf034+inf036 kombiniert auf Antrag'
+          },
+          {
+            id: 'inf700', label: 'inf700 Didaktik der Informatik I', kp: 6,
+            satisfied: (m) => m.has('inf700'),
+            note: (m) => m.has('inf700') ? '✓ inf700 — direkt erfüllt' : null,
+            missing: 'inf700 — muss absolviert werden'
+          },
+        ]
+      },
+      {
+        title: 'Master WiPäd — Pflichtbereich (33 KP)',
+        icon: '🎓',
+        modules: [
+          {
+            id: 'inf701_m', label: 'inf701 Didaktik der Informatik II', kp: 6,
+            satisfied: (m) => m.has('inf701'),
+            note: (m) => m.has('inf701') ? '✓ inf701 — direkt erfüllt' : null,
+            missing: 'inf701 — Pflichtmodul Master'
+          },
+          {
+            id: 'inf005_m', label: 'inf005 Softwaretechnik I', kp: 6,
+            satisfied: (m) => m.has('inf005'),
+            note: (m) => m.has('inf005') ? '✓ inf005 — direkt erfüllt' : null,
+            missing: 'inf005 — Pflichtmodul Master (noch belegen)'
+          },
+          {
+            id: 'inf007_m', label: 'inf007 Datenbanken I', kp: 6,
+            satisfied: (m) => m.has('inf007'),
+            note: (m) => m.has('inf007') ? '✓ inf007 — direkt erfüllt' : null,
+            missing: 'inf007 Datenbanken I — noch belegen'
+          },
+          {
+            id: 'inf712_m', label: 'inf712 Aktuelle Themen Didaktik I', kp: 3,
+            satisfied: (m) => m.has('inf712'),
+            note: (m) => m.has('inf712') ? '✓ inf712 — direkt erfüllt' : null,
+            missing: 'inf712 — Pflichtmodul Master'
+          },
+          {
+            id: 'inf704_m', label: 'inf704 Didaktik der Informatik III (neu!)', kp: 3,
+            satisfied: (m) => m.has('inf704'),
+            note: (m) => m.has('inf704') ? '✓ inf704 — direkt erfüllt' : null,
+            missing: 'inf704 — NEU als Pflichtmodul im Master WiPäd ab WS 2026/27'
+          },
+          {
+            id: 'mat950_m', label: 'mat950 Mathematik für Informatik (neu!)', kp: 6,
+            satisfied: (m) => m.has('mat950'),
+            note: (m) => {
+              if (m.has('mat950')) return '✓ mat950 — direkt erfüllt (wurde schon im BA belegt)';
+              if (m.has('inf600')) return '⚠ inf600 Wirtschaftsinformatik I kann auf Antrag statt mat950 als Pflicht verbucht werden (inf600 dann nicht mehr im Wahlbereich)';
+              return null;
+            },
+            missing: 'mat950 — NEU als Pflicht im Master WiPäd | Ersatz: inf600 auf Antrag'
+          },
+          {
+            id: 'inf401_m', label: 'inf401 Grundlagen Theor. Informatik (neu!)', kp: 6,
+            satisfied: (m) => m.has('inf401'),
+            note: (m) => {
+              if (m.has('inf401')) return '✓ inf401 — direkt erfüllt (war ggf. schon Wahlpflicht)';
+              if (m.has('inf050') || m.has('inf010')) return '⚠ Falls inf401 schon im BA war: inf050/inf010 als Ersatz-Pflicht (Übergang). Sind inf401 UND inf010/inf050 im BA: Pflicht sinkt auf 27 KP, Wahlpflicht Tab.4 auf 12 KP erhöht.';
+              return null;
+            },
+            missing: 'inf401 — NEU als Pflicht im Master WiPäd | Übergangsregel: inf050-Ersatz möglich (bis SS 2028)'
+          },
+        ]
+      },
+      {
+        title: 'Master WiPäd — Wahlpflicht (12 KP)',
+        icon: '⚙️',
+        modules: [
+          {
+            id: 'wp_imug', label: '6 KP Informatik, Mensch und Gesellschaft (Tab. 2)', kp: 6,
+            satisfied: (m) => m.has('inf851') || m.has('wir806') || m.has('inf600') || m.has('inf017') || m.has('inf528') || m.has('inf529'),
+            note: (m) => (m.has('inf851') || m.has('wir806') || m.has('inf600')) ? '✓ Mindestens ein Modul aus Tab. 2 vorhanden' : null,
+            missing: 'Noch kein Modul aus Tab. 2 (inf851, wir806, inf600, inf528, inf529, inf017)'
+          },
+          {
+            id: 'wp_prakt', label: '6 KP Prakt. Vertiefung (Tab. 3) oder Akzentsetzung (Tab. 4)', kp: 6,
+            satisfied: (m) => m.has('inf009') || m.has('inf018') || m.has('inf202') || m.has('inf010') || m.has('inf200') || m.has('inf201') || m.has('inf530') || m.has('inf400'),
+            note: (m) => null,
+            missing: 'Noch kein Modul aus Tab. 3 oder Tab. 4 erkennbar — im Modulwähler ggf. nicht alle gelistet'
+          },
+        ]
+      }
+    ]
+  },
+
+  gym: {
+    label: 'M.Ed. Gymnasium',
+    bachelorVariant: '60',
+    sections: [
+      {
+        title: 'Bachelor 60 KP — Basiscurriculum',
+        icon: '📚',
+        modules: [
+          {
+            id: 'ba_prog', label: 'Programmiergrundlagen', kp: 6,
+            satisfied: (m) => m.has('inf030') || m.has('inf033'),
+            note: (m) => m.has('inf030') ? '✓ inf030 (9 KP, alt) anrechenbar' : m.has('inf033') ? '✓ inf033 (6 KP, neu)' : null,
+            missing: 'inf033 (neu, 6 KP) oder inf030 (alt, 9 KP)'
+          },
+          {
+            id: 'ba_oo', label: 'OO-Modellierung Grundlagen', kp: 6,
+            satisfied: (m) => m.has('inf031') || m.has('inf035'),
+            note: (m) => m.has('inf031') ? '✓ inf031 (9 KP, alt) anrechenbar' : m.has('inf035') ? '✓ inf035 (6 KP, neu)' : null,
+            missing: 'inf035 (neu, 6 KP) oder inf031 (alt, 9 KP)'
+          },
+          {
+            id: 'ba_859', label: 'inf859 Informatik im Kontext (neu)', kp: 6,
+            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')) || m.has('pb085'),
+            note: (m) => {
+              if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
+              if (m.has('inf200')) return '⚠ inf200 (alt) kann auf Antrag als inf859 angerechnet werden (dann kein Wahlrecht auf inf200 mehr)';
+              if (m.has('inf034') && m.has('inf036')) return '⚠ inf034+inf036 können auf Antrag als inf859 angerechnet werden';
+              if (m.has('pb085')) return '⚠ pb085 wurde nicht als Ersatz für inf859 im Studiengang belegt — inf859 muss nachgeholt werden (pb085 ist für 2FB Inf. gesperrt)';
+              return null;
+            },
+            missing: 'inf859 (neu) muss belegt werden | Übergang: inf200 oder inf034+inf036 auf Antrag'
+          },
+          {
+            id: 'ba_mat', label: 'mat950 Mathematik für Informatik', kp: 6,
+            satisfied: (m) => m.has('mat950'),
+            note: (m) => m.has('mat950') ? '✓ mat950 — erfüllt' : null,
+            missing: 'mat950 — noch zu belegen'
+          },
+          {
+            id: 'ba_700', label: 'inf700 Didaktik der Informatik I', kp: 6,
+            satisfied: (m) => m.has('inf700'),
+            note: (m) => m.has('inf700') ? '✓ inf700 — jetzt im Basiscurriculum (neu positioniert, erfüllt)' : null,
+            missing: 'inf700 — ab WS 2026/27 im Basiscurriculum (nicht im Aufbau)'
+          },
+        ]
+      },
+      {
+        title: 'Bachelor 60 KP — Aufbaucurriculum',
+        icon: '🔧',
+        modules: [
+          {
+            id: 'ba_401', label: 'inf401 Theor. Informatik (neu als Pflicht!)', kp: 6,
+            satisfied: (m) => m.has('inf401'),
+            note: (m) => {
+              if (m.has('inf401')) return '✓ inf401 — direkt erfüllt (war ggf. Wahlpflicht)';
+              if (m.has('inf005')) return '⚠ inf005 (Softwaretechnik) kann auf Antrag statt inf401 verbucht werden (Übergang bis SS 2029) — inf005 dann im M.Ed. Gym nachzuholen nicht nötig';
+              return null;
+            },
+            missing: 'inf401 — NEU als Pflicht im Aufbau | Übergang: inf005 als Ersatz auf Antrag'
+          },
+          {
+            id: 'ba_050', label: 'inf050 Grundlagengebiete Prakt. Inf. (neu)', kp: 6,
+            satisfied: (m) => m.has('inf050') || m.has('inf010') || m.has('inf200'),
+            note: (m) => {
+              if (m.has('inf050')) return '✓ inf050 — direkt erfüllt';
+              if (m.has('inf010')) return '⚠ inf010 (alt) kann auf Antrag als inf050 angerechnet werden';
+              if (m.has('inf200')) return '⚠ inf200 kann auf Antrag statt inf050 verbucht werden (nicht als inf859 bereits genutzt)';
+              return null;
+            },
+            missing: 'inf050 (neu) | Übergang: inf010 oder inf200 auf Antrag'
+          },
+          {
+            id: 'ba_007', label: 'inf007 Datenbanken I', kp: 6,
+            satisfied: (m) => m.has('inf007'),
+            note: (m) => m.has('inf007') ? '✓ inf007 — direkt erfüllt' : null,
+            missing: 'inf007 Datenbanken I — noch zu belegen'
+          },
+        ]
+      },
+      {
+        title: 'Master Gymnasium — Pflichtbereich (18 KP)',
+        icon: '🎓',
+        modules: [
+          {
+            id: 'mg_701', label: 'inf701 Didaktik der Informatik II', kp: 6,
+            satisfied: (m) => m.has('inf701'),
+            note: (m) => m.has('inf701') ? '✓ inf701 — erfüllt' : null,
+            missing: 'inf701 — Pflicht im Master Gym'
+          },
+          {
+            id: 'mg_704', label: 'inf704 Didaktik der Informatik III', kp: 3,
+            satisfied: (m) => m.has('inf704'),
+            note: (m) => m.has('inf704') ? '✓ inf704 — erfüllt' : null,
+            missing: 'inf704 — Pflicht im Master Gym'
+          },
+          {
+            id: 'mg_712', label: 'inf712 Aktuelle Themen Didaktik I', kp: 3,
+            satisfied: (m) => m.has('inf712'),
+            note: (m) => m.has('inf712') ? '✓ inf712 — erfüllt' : null,
+            missing: 'inf712 — Pflicht im Master Gym'
+          },
+          {
+            id: 'mg_005', label: 'inf005 Softwaretechnik I (NEU als Pflicht!)', kp: 6,
+            satisfied: (m) => m.has('inf005'),
+            note: (m) => {
+              if (m.has('inf005')) return '✓ inf005 — erfüllt (z.B. schon im BA absolviert)';
+              if (m.has('inf401') && m.has('inf007')) return '⚠ Falls inf005 im BA absolviert wurde, kann auf Antrag inf401 oder inf007 als Ersatz-Pflicht dienen';
+              return null;
+            },
+            missing: 'inf005 Softwaretechnik I — NEU als Pflicht im Master Gym (von Bachelor hierher verschoben) | Übergang: Ersatz durch inf401 oder inf007 auf Antrag'
+          },
+        ]
+      },
+      {
+        title: 'Master Gymnasium — Wahlpflicht (12 KP)',
+        icon: '⚙️',
+        modules: [
+          {
+            id: 'mg_wp1', label: '6 KP aus Tab. 2: Inf., Mensch und Gesellschaft', kp: 6,
+            satisfied: (m) => m.has('inf851') || m.has('wir806') || m.has('inf600'),
+            note: (m) => (m.has('inf851') || m.has('wir806') || m.has('inf600')) ? '✓ Mindestens ein passendes Modul vorhanden' : null,
+            missing: 'Noch kein Modul aus Tab. 2 (inf851, wir806, inf600, inf528, inf529, inf017)'
+          },
+          {
+            id: 'mg_wp2', label: '6 KP aus Tab. 3–6 (Prakt./Techn./Theor./Angew.)', kp: 6,
+            satisfied: (m) => m.has('inf201') || m.has('inf530') || m.has('inf400') || m.has('inf200'),
+            note: (m) => null,
+            missing: 'Noch kein Modul aus Tab. 3–6 im Selektor erkannt — weitere Module ggf. vorhanden'
+          },
+        ]
+      }
+    ]
+  },
+
+  hr: {
+    label: 'M.Ed. Haupt- & Realschule',
+    bachelorVariant: '60',
+    sections: [
+      {
+        title: 'Bachelor 60 KP — Basiscurriculum',
+        icon: '📚',
+        modules: [
+          {
+            id: 'hr_prog', label: 'Programmiergrundlagen', kp: 6,
+            satisfied: (m) => m.has('inf030') || m.has('inf033'),
+            note: (m) => m.has('inf030') ? '✓ inf030 (alt) anrechenbar' : m.has('inf033') ? '✓ inf033 (neu)' : null,
+            missing: 'inf033 (neu) oder inf030 (alt)'
+          },
+          {
+            id: 'hr_oo', label: 'OO-Modellierung Grundlagen', kp: 6,
+            satisfied: (m) => m.has('inf031') || m.has('inf035'),
+            note: (m) => m.has('inf031') ? '✓ inf031 (alt)' : m.has('inf035') ? '✓ inf035 (neu)' : null,
+            missing: 'inf035 (neu) oder inf031 (alt)'
+          },
+          {
+            id: 'hr_859', label: 'inf859 Informatik im Kontext (neu)', kp: 6,
+            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')),
+            note: (m) => {
+              if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
+              if (m.has('inf200')) return '⚠ inf200 kann auf Antrag als inf859 angerechnet werden';
+              if (m.has('inf034') && m.has('inf036')) return '⚠ inf034+inf036 können kombiniert auf Antrag angerechnet werden';
+              return null;
+            },
+            missing: 'inf859 (neu) | Übergang: inf200 oder inf034+inf036 auf Antrag'
+          },
+          {
+            id: 'hr_mat', label: 'mat950 Mathematik für Informatik', kp: 6,
+            satisfied: (m) => m.has('mat950'),
+            note: (m) => m.has('mat950') ? '✓ mat950 — erfüllt' : null,
+            missing: 'mat950 — noch zu belegen'
+          },
+          {
+            id: 'hr_700', label: 'inf700 Didaktik der Informatik I', kp: 6,
+            satisfied: (m) => m.has('inf700'),
+            note: (m) => m.has('inf700') ? '✓ inf700 — erfüllt (jetzt im Basis positioniert)' : null,
+            missing: 'inf700 — noch zu belegen'
+          },
+        ]
+      },
+      {
+        title: 'Bachelor 60 KP — Aufbaucurriculum',
+        icon: '🔧',
+        modules: [
+          {
+            id: 'hr_401', label: 'inf401 Theor. Informatik (neu als Pflicht!)', kp: 6,
+            satisfied: (m) => m.has('inf401'),
+            note: (m) => {
+              if (m.has('inf401')) return '✓ inf401 — bereits erfüllt';
+              if (m.has('inf005')) return '⚠ inf005 kann auf Antrag statt inf401 verbucht werden (bis SS 2029)';
+              return null;
+            },
+            missing: 'inf401 — NEU als Pflicht im Aufbau des 60 KP-Bachelors'
+          },
+          {
+            id: 'hr_050', label: 'inf050 Grundlagengebiete Prakt. Inf. (neu)', kp: 6,
+            satisfied: (m) => m.has('inf050') || m.has('inf010') || m.has('inf200'),
+            note: (m) => {
+              if (m.has('inf050')) return '✓ inf050 — direkt erfüllt';
+              if (m.has('inf010')) return '⚠ inf010 kann auf Antrag als inf050 angerechnet werden';
+              if (m.has('inf200')) return '⚠ inf200 kann auf Antrag statt inf050 verbucht werden';
+              return null;
+            },
+            missing: 'inf050 (neu) | Übergang: inf010 oder inf200 auf Antrag'
+          },
+          {
+            id: 'hr_007', label: 'inf007 Datenbanken I', kp: 6,
+            satisfied: (m) => m.has('inf007'),
+            note: (m) => m.has('inf007') ? '✓ inf007 — direkt erfüllt' : null,
+            missing: 'inf007 — noch zu belegen'
+          },
+        ]
+      },
+      {
+        title: 'Master HR — Pflichtmodul (6 KP)',
+        icon: '🎓',
+        modules: [
+          {
+            id: 'hr_701', label: 'inf701 Didaktik der Informatik II', kp: 6,
+            satisfied: (m) => m.has('inf701'),
+            note: (m) => m.has('inf701') ? '✓ inf701 — erfüllt' : null,
+            missing: 'inf701 — einziges Pflichtmodul im Master HR'
+          },
+        ]
+      },
+      {
+        title: 'Master HR — Wahlpflicht (6 KP aus Tab. 2–6)',
+        icon: '⚙️',
+        modules: [
+          {
+            id: 'hr_wp', label: '6 KP Wahlpflicht (aus erweitertem Angebot)', kp: 6,
+            satisfied: (m) => m.has('inf201') || m.has('inf401') || m.has('inf530') || m.has('inf851') || m.has('inf400') || m.has('inf200'),
+            note: (m) => {
+              if (m.has('inf401')) return '⚠ Achtung: inf401 ist jetzt Pflicht im Bachelor, darf nicht doppelt verbucht werden. Anderes Modul für Wahlpflicht wählen.';
+              return null;
+            },
+            missing: 'Noch kein Wahlpflichtmodul aus dem erweiterten Angebot erkannt'
+          },
+          {
+            id: 'hr_462', label: 'NEU im Wahlbereich: inf462 Cryptography', kp: 6,
+            satisfied: (m) => true,
+            note: (m) => '→ inf462 Cryptography ist neu in Tab. 4 — kann als Wahlpflicht gewählt werden',
+            missing: null
+          },
+        ]
+      }
+    ]
+  }
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let selectedSG = null;
+let checkedModules = new Set();
+let currentStep = 1;
+
+// ============================================================
+// STEP NAVIGATION
+// ============================================================
+function goStep(n) {
+  if (n === 2 && !selectedSG) return;
+  currentStep = n;
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+  document.querySelectorAll('.step-btn').forEach((b, i) => {
+    b.classList.remove('active', 'done');
+    if (i + 1 < n) b.classList.add('done');
+    if (i + 1 === n) b.classList.add('active');
+  });
+  if (n === 2) buildModuleList();
+  if (n === 3) buildResults();
+}
+
+// ============================================================
+// STEP 1: STUDIENGANG
+// ============================================================
+function selectSG(sg) {
+  selectedSG = sg;
+  document.querySelectorAll('.sg-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('sg-' + sg).classList.add('selected');
+  const btn = document.getElementById('btn-to-step2');
+  btn.disabled = false;
+  btn.style.opacity = '1';
+  btn.style.cursor = 'pointer';
+  checkedModules.clear();
+}
+
+// ============================================================
+// STEP 2: MODULE LIST
+// ============================================================
+function buildModuleList() {
+  const sg = REQUIREMENTS[selectedSG];
+  document.getElementById('sg-display').textContent = sg.label;
+  const variant = sg.bachelorVariant;
+  const isBachelorOnly = selectedSG === 'ba30' || selectedSG === 'ba60';
+
+  const container = document.getElementById('module-list');
+  container.innerHTML = '';
+
+  // Filter modules based on variant
+  const sections = [
+    {
+      label: 'Bachelor-Module (bereits absolviert?)',
+      modules: ALL_MODULES.filter(m => m.visible === 'all' || (variant === '60' && m.visible === '60'))
+    },
+  ];
+  if (!isBachelorOnly) {
+    sections.push({
+      label: 'Master-Module (falls schon begonnen)',
+      modules: ALL_MODULES.filter(m => m.visible === 'master')
+    });
+  }
+
+  sections.forEach(sec => {
+    const labelEl = document.createElement('div');
+    labelEl.className = 'section-label';
+    const count = sec.modules.filter(m => checkedModules.has(m.id)).length;
+    labelEl.innerHTML = sec.label + (count > 0 ? `<span class="count-badge">${count} gewählt</span>` : '');
+    container.appendChild(labelEl);
+
+    const grid = document.createElement('div');
+    grid.className = 'module-grid';
+    sec.modules.forEach(mod => {
+      const row = document.createElement('div');
+      row.className = 'module-row' + (checkedModules.has(mod.id) ? ' checked' : '');
+      row.id = 'modrow-' + mod.id;
+      row.onclick = () => toggleModule(mod.id);
+      const tagHtml = mod.tag === 'neu' ? '<span class="mod-tag tag-neu">Neu 26/27</span>'
+                    : mod.tag === 'alt' ? '<span class="mod-tag tag-alt">Alt → prüfen</span>'
+                    : '<span class="mod-tag tag-ok">Unverändert</span>';
+      row.innerHTML = `
+        <div class="mod-check">${checkedModules.has(mod.id) ? '✓' : ''}</div>
+        <div class="mod-id">${mod.id}</div>
+        <div class="mod-name">${mod.name}</div>
+        <div class="mod-kp">${mod.kp} KP</div>
+        ${tagHtml}
+      `;
+      grid.appendChild(row);
+    });
+    container.appendChild(grid);
+  });
+}
+
+function toggleModule(id) {
+  if (checkedModules.has(id)) {
+    checkedModules.delete(id);
+  } else {
+    checkedModules.add(id);
+  }
+  buildModuleList();
+}
+
+function resetModules() {
+  checkedModules.clear();
+  buildModuleList();
+}
+
+// ============================================================
+// STEP 3: RESULTS
+// ============================================================
+function buildResults() {
+  const sg = REQUIREMENTS[selectedSG];
+  const m = checkedModules;
+  const area = document.getElementById('result-area');
+  area.innerHTML = '';
+
+  // Count satisfied requirements
+  let totalReqs = 0, satisfiedReqs = 0;
+  sg.sections.forEach(sec => {
+    sec.modules.forEach(req => {
+      totalReqs++;
+      if (req.satisfied(m)) satisfiedReqs++;
+    });
+  });
+  const pct = Math.round((satisfiedReqs / totalReqs) * 100);
+
+  // Hero card
+  const hero = document.createElement('div');
+  hero.className = 'result-hero';
+  const headline = pct === 100 ? 'Alle Anforderungen erfüllt! 🎉'
+    : pct >= 70 ? `Guter Fortschritt — ${pct}% erfüllt`
+    : pct >= 40 ? `Solider Start — ${pct}% erfüllt`
+    : `Noch ${100-pct}% offen — los geht's!`;
+  hero.innerHTML = `
+    <div class="result-headline ${pct >= 80 ? 'ok' : 'warn'}">${headline}</div>
+    <p>Studiengang: <strong>${sg.label}</strong> · ${satisfiedReqs} von ${totalReqs} Anforderungsblöcken erfüllt</p>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+    <div class="progress-label">${satisfiedReqs}/${totalReqs} Blöcke · ${pct}%</div>
+  `;
+  area.appendChild(hero);
+
+  // Anrechnungshinweis wenn alt-Module vorhanden
+  const hasAlt = m.has('inf030') || m.has('inf031') || m.has('inf010') || m.has('inf200') || m.has('inf005');
+  const isBachelorOnly = selectedSG === 'ba30' || selectedSG === 'ba60';
+  if (hasAlt) {
+    const anr = document.createElement('div');
+    anr.className = 'anr-card';
+    anr.innerHTML = `<strong>⚠ Anrechnungshinweis:</strong> Du hast Module nach alter Ordnung absolviert. Anrechnungen gelten nur <strong>auf Antrag</strong> beim Prüfungsamt. Alle Übergangsregeln laufen längstens bis <strong>Ende SS 2029</strong> (Anmeldestopp) / WS 2029/30 (Prüfungsende).`;
+    area.appendChild(anr);
+  }
+
+  // Sections
+  sg.sections.forEach(sec => {
+    const card = document.createElement('div');
+    card.className = 'result-card';
+
+    const satisfied = sec.modules.filter(r => r.satisfied(m)).length;
+    const total = sec.modules.length;
+    const allDone = satisfied === total;
+    const badgeClass = allDone ? 'badge-done' : satisfied > 0 ? 'badge-partial' : 'badge-missing';
+    const badgeText = allDone ? '✓ Vollständig' : `${satisfied}/${total} erfüllt`;
+
+    card.innerHTML = `
+      <div class="result-card-head">
+        <span class="rc-icon">${sec.icon}</span>
+        <span class="rc-title">${sec.title}</span>
+        <span class="rc-badge ${badgeClass}">${badgeText}</span>
+      </div>
+      <div class="result-card-body" id="rcard-body-${Math.random().toString(36).substr(2,6)}"></div>
+    `;
+    area.appendChild(card);
+    const body = card.querySelector('.result-card-body');
+
+    sec.modules.forEach(req => {
+      const done = req.satisfied(m);
+      const note = req.note ? req.note(m) : null;
+      const isAnrechnung = note && note.startsWith('⚠');
+
+      const row = document.createElement('div');
+      row.className = 'mod-status-row';
+      row.innerHTML = `
+        <div class="status-dot ${done ? (isAnrechnung ? 'dot-anr' : 'dot-ok') : 'dot-miss'}"></div>
+        <div class="mod-status-info">
+          <div class="mod-status-name">${req.label}</div>
+          ${note ? `<div class="mod-status-note">${note}</div>` : (!done && req.missing ? `<div class="mod-status-note" style="color:var(--danger)">${req.missing}</div>` : '')}
+        </div>
+        <div class="mod-status-kp">${req.kp} KP</div>
+      `;
+      body.appendChild(row);
+    });
+  });
+
+  // Summary recommendation box
+  const missingModules = [];
+  sg.sections.forEach(sec => {
+    sec.modules.forEach(req => {
+      if (!req.satisfied(m) && req.missing) missingModules.push(req);
+    });
+  });
+
+  if (missingModules.length === 0) {
+    const box = document.createElement('div');
+    box.className = 'info-box green';
+    const msg = isBachelorOnly
+      ? `<span>🎉</span><span><strong>Sehr gut!</strong> Alle erkannten Pflicht- und Wahlpflichtanforderungen sind erfüllt. Denke noch an die <strong>Bachelorarbeit</strong> und ggf. ausstehende Wahlpflichtmodule für dein Zweitfach.</span>`
+      : `<span>🎉</span><span><strong>Herzlichen Glückwunsch!</strong> Alle erkannten Anforderungen sind erfüllt. Bitte prüfe mit deinem Studiendekanat, ob noch ausstehende Wahlpflichtmodule oder das Abschlussmodul (Bachelorarbeit/Masterarbeit) fehlen.</span>`;
+    box.innerHTML = msg;
+    area.appendChild(box);
+  } else {
+    const box = document.createElement('div');
+    box.className = 'info-box blue';
+    const contact = isBachelorOnly
+      ? 'Melde dich bei der Fachstudienberatung Informatik (FK II) für eine individuelle Beratung zu Übergangsregelungen.'
+      : 'Melde dich im Studiendekanat oder der Fachstudienberatung Informatik, um deine individuelle Übergangsregelung zu besprechen — besonders bei Anrechnungen nach alter Ordnung.';
+    box.innerHTML = `<span>ℹ</span><span><strong>${missingModules.length} Anforderungsblöcke noch offen.</strong> ${contact}</span>`;
+    area.appendChild(box);
+  }
+
+  // Note about transition deadline
+  const deadlineBox = document.createElement('div');
+  deadlineBox.className = 'info-box warn';
+  deadlineBox.style.marginTop = '10px';
+  deadlineBox.innerHTML = `<span>⏰</span><span><strong>Übergangsfristen:</strong> Prüfungsanmeldungen nach alter Ordnung sind nur bis <strong>Ende SS 2029</strong> möglich. Prüfungsleistungen müssen bis <strong>WS 2029/30</strong> vollständig erbracht sein. Alle Anrechnungsanträge rechtzeitig stellen!</span>`;
+  area.appendChild(deadlineBox);
+}
+</script>
+</body>
+</html>
