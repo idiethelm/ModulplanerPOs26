@@ -462,7 +462,7 @@ body {
       <span style="background:var(--uol-orange-lt); color:var(--uol-orange); border:1px solid #F5C87A; border-radius:4px; padding:3px 10px; font-size:12px; font-weight:700;">⚠ Beta-Version</span>
       <span style="font-size:12px; color:var(--uol-gray-50);">Dieses Tool befindet sich in der Entwicklung. Alle Angaben ohne Gewähr — bitte im Zweifelsfall immer beim Prüfungsamt oder der Fachstudienberatung nachfragen.</span>
     </div>
-    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 05.06.2026, 16:32 Uhr (MESZ)</div>
+    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 09.06.2026, 17:56 Uhr (MESZ)</div>
   </div>
 
   <!-- STEP INDICATOR -->
@@ -617,6 +617,7 @@ const ALL_MODULES = [
   // inf010: war Pflicht im 30 KP (Tab.1) UND im alten 60 KP Aufbau (als HR/Gym Wahlpflicht)
   { id:'inf010', name:'Rechnernetze',                                                kp:6,  tag:'alt', group:'30alt', visible:['30only','60only'], groupLabel:'30/60 KP · Alte Pflichtmodule (vor WS 2026/27)' },
   { id:'pb085',  name:'Soft Skills',                                                 kp:6,  tag:'alt', group:'30alt', visible:['30only'], groupLabel:'30 KP · Alte Pflichtmodule (vor WS 2026/27)' },
+  { id:'inf850', name:'Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit (inf850, Vorgänger von inf050)', kp:6, tag:'alt', group:'30alt', visible:['30only','60only'], groupLabel:'30/60 KP · Alte Pflichtmodule (vor WS 2026/27)' },
 
   // ── 60 KP BASISCURRICULUM PFLICHT (Tabelle 3) ────────────────────────────────────────
   // inf033, inf035, inf700, inf859 auch 60 KP Basis → sichtbar via ['30only','60only'] oben
@@ -644,6 +645,7 @@ const ALL_MODULES = [
   { id:'inf016', name:'Web-Technologien',                                            kp:6,  tag:'ok',  group:'60t5',  visible:['60only'], groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
   // inf715 auch in Tab.5 → sichtbar via ['30only','60only'] oben
   { id:'inf803', name:'Spezielle Themen der Informatik I',                           kp:6,  tag:'ok',  group:'60t5',  visible:['60only'], groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
+  { id:'inf803_st', name:'Spezielle Themen der Informatik I (Veranstaltung „Soft Skills und Technische Kompetenz")', kp:6, tag:'alt', group:'30alt', visible:['30only','60only'], groupLabel:'30/60 KP · Alte Pflichtmodule (vor WS 2026/27)' },
   { id:'inf804', name:'Spezielle Themen der Informatik II',                          kp:6,  tag:'ok',  group:'60t5',  visible:['60only'], groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
 
   // ── 60 KP WAHLPFLICHT Tabelle 6: weitere Module ──────────────────────────────────────
@@ -813,31 +815,31 @@ const REQUIREMENTS = {
         icon: '📚',
         modules: [
           {
-            id: 'b30_prog', label: 'Programmierung und Algorithmik I (inf033/inf030)', kp: 9,
+            id: 'b30_prog', label: 'Programmierung und Algorithmik I (inf033 / inf030)', kp: 6,
             satisfied: (m) => m.has('inf030') || m.has('inf033'),
             note: (m) => {
-              if (m.has('inf030')) return '✓ inf030 (9 KP, alt) — vollständig erfüllt';
-              if (m.has('inf033')) return '✓ inf033 (6 KP, neu) — Pflicht erfüllt; inf034 (3 KP) kann ergänzend im Wahlbereich belegt werden';
+              if (m.has('inf030') && !m.has('inf033')) return '✓ Programmierung, Datenstrukturen und Algorithmen (inf030, 9 KP) wird gemäß Überführungstabelle automatisch in inf033 (6 KP) + inf034 (3 KP) umgebucht — inf033 gilt damit als belegt, inf034 steht für Wahlpflicht oder weitere Anrechnungen zur Verfügung.';
+              if (m.has('inf033')) return '✓ Programmierung und Algorithmik I (inf033, 6 KP) — direkt belegt.';
               return null;
             },
-            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
+            missing: 'Programmierung und Algorithmik I (inf033) fehlt noch — oder inf030 (9 KP, wird automatisch in inf033+inf034 umgebucht)'
           },
           {
-            id: 'b30_oo', label: 'Programmierung und Modellierung I (inf035/inf031)', kp: 9,
+            id: 'b30_oo', label: 'Programmierung und Modellierung I (inf035 / inf031)', kp: 6,
             satisfied: (m) => m.has('inf031') || m.has('inf035'),
             note: (m) => {
-              if (m.has('inf031')) return '✓ inf031 (9 KP, alt) — vollständig erfüllt';
-              if (m.has('inf035')) return '✓ inf035 (6 KP, neu) — Pflicht erfüllt; inf036 (3 KP) als Vertiefung im Wahlbereich möglich';
+              if (m.has('inf031') && !m.has('inf035')) return '✓ Objektorientierte Modellierung und Programmierung (inf031, 9 KP) wird gemäß Überführungstabelle automatisch in inf035 (6 KP) + inf036 (3 KP) umgebucht — inf035 gilt damit als belegt, inf036 steht für Wahlpflicht oder weitere Anrechnungen zur Verfügung.';
+              if (m.has('inf035')) return '✓ Programmierung und Modellierung I (inf035, 6 KP) — direkt belegt.';
               return null;
             },
-            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
+            missing: 'Programmierung und Modellierung I (inf035) fehlt noch — oder inf031 (9 KP, wird automatisch in inf035+inf036 umgebucht)'
           },
           {
             id: 'b30_050', label: 'inf050 Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit', kp: 6,
             satisfied: (m) => m.has('inf050') || m.has('inf010') || (m.has('inf034') && m.has('inf036')),
             note: (m) => {
               if (m.has('inf050')) return '✓ inf050 — direkt erfüllt';
-              if (m.has('inf010')) return '⚠ inf010 (alt, Rechnernetze) kann auf Antrag als inf050 angerechnet werden (Übergang bis SS 2029)';
+              if (m.has('inf010')) return '⚠ inf010 (alt, Rechnernetze) kann auf Antrag als inf050 angerechnet werden (Übergang bis SoSe 2029)';
               if (m.has('inf034') && m.has('inf036')) return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag als Ersatz für inf050 angerechnet werden — dann kein Wahlrecht auf diese Module mehr.';
               if (m.has('inf034') && !m.has('inf036')) return '⚠ Du hast inf034 (3 KP). Falls du zusätzlich inf036 Programmierung und Modellierung II (3 KP) absolvierst, können beide zusammen auf Antrag statt inf050 angerechnet werden.';
               if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 Programmierung und Algorithmik II (3 KP) absolvierst, können beide zusammen auf Antrag statt inf050 angerechnet werden.';
@@ -912,27 +914,30 @@ const REQUIREMENTS = {
             id: 'b60_prog', label: 'Programmierung und Algorithmik I (inf033 neu / inf030 alt)', kp: 6,
             satisfied: (m) => m.has('inf030') || m.has('inf033'),
             note: (m) => {
-              if (m.has('inf030')) return '✓ inf030 (9 KP, alt) — anrechenbar als Basis + Wahlvertiefung';
-              if (m.has('inf033')) return '✓ inf033 (6 KP, neu) — Basispflicht erfüllt';
+              if (m.has('inf030') && !m.has('inf033')) return '✓ Programmierung, Datenstrukturen und Algorithmen (inf030, 9 KP) wird automatisch in inf033 (6 KP) + inf034 (3 KP) umgebucht — inf033 gilt damit als belegt.';
+              if (m.has('inf033')) return '✓ Programmierung und Algorithmik I (inf033, 6 KP) — direkt belegt.';
               return null;
             },
-            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
+            missing: 'Programmierung und Algorithmik I (inf033) fehlt noch — oder inf030 (9 KP, wird automatisch in inf033+inf034 umgebucht)'
           },
           {
             id: 'b60_oo', label: 'Programmierung und Modellierung I (inf035 neu / inf031 alt)', kp: 6,
             satisfied: (m) => m.has('inf031') || m.has('inf035'),
             note: (m) => {
-              if (m.has('inf031')) return '✓ inf031 (9 KP, alt) — anrechenbar als Basis + Vertiefung';
-              if (m.has('inf035')) return '✓ inf035 (6 KP, neu)';
+              if (m.has('inf031') && !m.has('inf035')) return '✓ Objektorientierte Modellierung und Programmierung (inf031, 9 KP) wird automatisch in inf035 (6 KP) + inf036 (3 KP) umgebucht — inf035 gilt damit als belegt.';
+              if (m.has('inf035')) return '✓ Programmierung und Modellierung I (inf035, 6 KP) — direkt belegt.';
               return null;
             },
-            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
+            missing: 'Programmierung und Modellierung I (inf035) fehlt noch — oder inf031 (9 KP, wird automatisch in inf035+inf036 umgebucht)'
           },
           {
             id: 'b60_859', label: 'inf859 Informatik im Kontext (NEU Basis-Pflicht)', kp: 6,
-            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')) || (m.has('inf030') && m.has('inf031')),
+            satisfied: (m) => m.has('inf859') || m.has('inf200') || m.has('pb085') || m.has('inf803') || m.has('inf803_st') || (m.has('inf034') && m.has('inf036')) || (m.has('inf030') && m.has('inf031')),
             note: (m) => {
-                          if (m.has('inf030') && m.has('inf031')) return '⚠ Programmierung, Datenstrukturen und Algorithmen (inf030, 9 KP) + Objektorientierte Modellierung und Programmierung (inf031, 9 KP) zusammen belegt: inf030 deckt inf033 (6 KP) + inf034 (3 KP) ab, inf031 deckt inf035 (6 KP) + inf036 (3 KP) ab. Die verbleibende Kombination inf034+inf036 kann auf Antrag als Ersatz für inf859 Informatik im Kontext (6 KP) angerechnet werden. KP-Summe bleibt konstant: 18 KP → 18 KP. Antrag beim Prüfungsamt erforderlich.';
+                          if (m.has('pb085')) return '✓ Soft Skills (pb085) wird gemäß Überführungstabelle automatisch auf inf859 Informatik im Kontext umgebucht (6 KP). Gilt bis SoSe 2029 — kein Antrag erforderlich.';
+              if (m.has('inf803_st')) return '✓ Spezielle Themen der Informatik I in der Veranstaltung „Soft Skills und Technische Kompetenz" (Prüfende: Dittert, Duwe, Fandrich oder Groza) wird gemäß Überführungstabelle automatisch auf inf859 Informatik im Kontext umgebucht. Gilt bis SoSe 2029.';
+              if (m.has('inf803')) return '✓ Spezielle Themen der Informatik I (inf803, Veranstaltung „Soft Skills und Technische Kompetenz") wird gemäß Überführungstabelle automatisch auf inf859 Informatik im Kontext umgebucht (6 KP). Gilt bis SoSe 2029.';
+              if (m.has('inf030') && m.has('inf031')) return '⚠ inf030 wird in inf033+inf034 umgebucht, inf031 in inf035+inf036. Die entstehende Kombination inf034+inf036 (3+3 KP) kann auf Antrag als Ersatz für inf859 Informatik im Kontext (6 KP) verbucht werden. KP-Summe bleibt konstant: 18 KP = inf033(6)+inf034(3)+inf035(6)+inf036(3) deckt inf033+inf035+inf859 = 6+6+6 ab. Antrag beim Prüfungsamt erforderlich.';
 
               if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
               if (m.has('inf200')) return '⚠ inf200 (Grundl. Techn. Inf., alt) kann auf Antrag statt inf859 verbucht werden — inf200 dann kein Wahlrecht mehr';
@@ -945,7 +950,7 @@ const REQUIREMENTS = {
               if (m.has('pb085')) return '⚠ pb085 ist NICHT anrechenbar für inf859 (pb085 für 2FB Inf. gesperrt) — inf859 muss separat belegt werden';
               return null;
             },
-            missing: 'inf859 Informatik im Kontext fehlt noch. Übergänge (auf Antrag): inf200 — oder inf034+inf036 kombiniert — oder inf030+inf031 zusammen (decken dann inf033+inf034+inf035+inf036+inf859 ab)'
+            missing: 'inf859 Informatik im Kontext fehlt noch. Überführungen (automatisch/auf Antrag, bis SoSe 2029): pb085 oder inf803 (automatisch) — inf200 (sofern inf859 noch nicht anderweitig verbucht; inf200 dann nicht mehr als Wahloption Tab.6) — inf034+inf036 kombiniert — inf030+inf031 zusammen'
           },
           {
             id: 'b60_mat', label: 'mat950 Mathematik für Informatik', kp: 6,
@@ -970,7 +975,7 @@ const REQUIREMENTS = {
             satisfied: (m) => m.has('inf401'),
             note: (m) => {
               if (m.has('inf401')) return '✓ inf401 — direkt erfüllt (war evtl. Wahlpflicht)';
-              if (m.has('inf005')) return '⚠ inf005 (Softwaretechnik I, alt) kann auf Antrag statt inf401 verbucht werden (Übergang bis SS 2029) — inf005 muss dann im M.Ed. Gym nachgeholt werden';
+              if (m.has('inf005')) return '⚠ inf005 (Softwaretechnik I, alt) kann auf Antrag statt inf401 verbucht werden (Übergang bis SoSe 2029) — inf005 muss dann im M.Ed. Gym nachgeholt werden';
               return null;
             },
             missing: 'inf401 (6 KP) — NEU als Pflicht im Aufbau | Übergang: inf005 als Ersatz auf Antrag'
@@ -980,7 +985,7 @@ const REQUIREMENTS = {
             satisfied: (m) => m.has('inf050') || m.has('inf010') || m.has('inf200'),
             note: (m) => {
               if (m.has('inf050')) return '✓ inf050 — direkt erfüllt';
-              if (m.has('inf010')) return '⚠ inf010 (Rechnernetze, alt) kann auf Antrag als inf050 angerechnet werden (Übergang bis SS 2029)';
+              if (m.has('inf010')) return '⚠ inf010 (Rechnernetze, alt) kann auf Antrag als inf050 angerechnet werden (Übergang bis SoSe 2029)';
               if (m.has('inf200')) return '⚠ inf200 (Techn. Inf., alt) kann auf Antrag statt inf050 verbucht werden, sofern nicht schon als inf859 genutzt';
               return null;
             },
@@ -1069,24 +1074,24 @@ const REQUIREMENTS = {
         icon: '📚',
         modules: [
           {
-            id: 'inf030_033', label: 'Programmierung und Algorithmik I (inf030/inf033)', kp: 9,
+            id: 'inf030_033', label: 'Programmierung und Algorithmik I (inf033 / inf030)', kp: 6,
             satisfied: (m) => m.has('inf030') || m.has('inf033'),
             note: (m) => {
-              if (m.has('inf033')) return '✓ Programmierung und Algorithmik I (inf033, 6 KP) — direkt erfüllt.';
-              if (m.has('inf030')) return '⚠ Programmierung, Datenstrukturen und Algorithmen (inf030, 9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden. Da inf030 die Kompetenzen beider Module abdeckt, gilt damit auch inf034 als erfüllt.';
+              if (m.has('inf033')) return '✓ Programmierung und Algorithmik I (inf033, 6 KP) — direkt belegt.';
+              if (m.has('inf030') && !m.has('inf033')) return '✓ Programmierung, Datenstrukturen und Algorithmen (inf030, 9 KP) wird gemäß Überführungstabelle automatisch in inf033 (6 KP) + inf034 (3 KP) umgebucht.';
               return null;
             },
-            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
+            missing: 'Programmierung und Algorithmik I (inf033) fehlt noch — oder inf030 (9 KP, wird automatisch in inf033+inf034 umgebucht)'
           },
           {
-            id: 'inf031_035', label: 'Programmierung und Modellierung I (inf035/inf031)', kp: 9,
+            id: 'inf031_035', label: 'Programmierung und Modellierung I (inf035 / inf031)', kp: 6,
             satisfied: (m) => m.has('inf031') || m.has('inf035'),
             note: (m) => {
-              if (m.has('inf035')) return '✓ Programmierung und Modellierung I (inf035, 6 KP) — direkt erfüllt.';
-              if (m.has('inf031')) return '⚠ Objektorientierte Modellierung und Programmierung (inf031, 9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden. Da inf031 die Kompetenzen beider Module abdeckt, gilt damit auch inf036 als erfüllt.';
+              if (m.has('inf035')) return '✓ Programmierung und Modellierung I (inf035, 6 KP) — direkt belegt.';
+              if (m.has('inf031') && !m.has('inf035')) return '✓ Objektorientierte Modellierung und Programmierung (inf031, 9 KP) wird gemäß Überführungstabelle automatisch in inf035 (6 KP) + inf036 (3 KP) umgebucht.';
               return null;
             },
-            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
+            missing: 'Programmierung und Modellierung I (inf035) fehlt noch — oder inf031 (9 KP, wird automatisch in inf035+inf036 umgebucht)'
           },
           {
             id: 'inf050_req', label: 'inf050 Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit', kp: 6,
@@ -1161,7 +1166,7 @@ const REQUIREMENTS = {
               if (m.has('inf050') || m.has('inf010')) return '⚠ Falls inf401 schon im BA war: inf050/inf010 als Ersatz-Pflicht (Übergang). Sind inf401 UND inf010/inf050 im BA: Pflicht sinkt auf 27 KP, Wahlpflicht Tab.4 auf 12 KP erhöht.';
               return null;
             },
-            missing: 'inf401 — NEU als Pflicht im Master WiPäd | Übergangsregel: inf050-Ersatz möglich (bis SS 2028)'
+            missing: 'inf401 — NEU als Pflicht im Master WiPäd | Übergangsregel: inf050-Ersatz möglich (bis SoSe 2028)'
           },
         ]
       },
@@ -1198,28 +1203,31 @@ const REQUIREMENTS = {
             id: 'ba_prog', label: 'Programmierung und Algorithmik I (inf033 / inf030)', kp: 6,
             satisfied: (m) => m.has('inf030') || m.has('inf033'),
             note: (m) => m.has('inf030') ? '✓ inf030 (9 KP, alt) anrechenbar' : m.has('inf033') ? '✓ inf033 (6 KP, neu)' : null,
-            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
+            missing: 'Programmierung und Algorithmik I (inf033) fehlt noch — oder inf030 (9 KP, wird automatisch in inf033+inf034 umgebucht)'
           },
           {
             id: 'ba_oo', label: 'Programmierung und Modellierung I (inf035 / inf031)', kp: 6,
             satisfied: (m) => m.has('inf031') || m.has('inf035'),
             note: (m) => m.has('inf031') ? '✓ inf031 (9 KP, alt) anrechenbar' : m.has('inf035') ? '✓ inf035 (6 KP, neu)' : null,
-            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
+            missing: 'Programmierung und Modellierung I (inf035) fehlt noch — oder inf031 (9 KP, wird automatisch in inf035+inf036 umgebucht)'
           },
           {
             id: 'ba_859', label: 'inf859 Informatik im Kontext', kp: 6,
-            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')) || (m.has('inf030') && m.has('inf031')),
+            satisfied: (m) => m.has('inf859') || m.has('inf200') || m.has('pb085') || m.has('inf803') || m.has('inf803_st') || (m.has('inf034') && m.has('inf036')) || (m.has('inf030') && m.has('inf031')),
             note: (m) => {
-                          if (m.has('inf030') && m.has('inf031')) return '⚠ Programmierung, Datenstrukturen und Algorithmen (inf030, 9 KP) + Objektorientierte Modellierung und Programmierung (inf031, 9 KP) zusammen belegt: inf030 deckt inf033 (6 KP) + inf034 (3 KP) ab, inf031 deckt inf035 (6 KP) + inf036 (3 KP) ab. Die verbleibende Kombination inf034+inf036 kann auf Antrag als Ersatz für inf859 Informatik im Kontext (6 KP) angerechnet werden. KP-Summe bleibt konstant: 18 KP → 18 KP. Antrag beim Prüfungsamt erforderlich.';
+                          if (m.has('pb085')) return '✓ Soft Skills (pb085) wird gemäß Überführungstabelle automatisch auf inf859 Informatik im Kontext umgebucht (6 KP). Gilt bis SoSe 2029 — kein Antrag erforderlich.';
+              if (m.has('inf803_st')) return '✓ Spezielle Themen der Informatik I in der Veranstaltung „Soft Skills und Technische Kompetenz" (Prüfende: Dittert, Duwe, Fandrich oder Groza) wird gemäß Überführungstabelle automatisch auf inf859 Informatik im Kontext umgebucht. Gilt bis SoSe 2029.';
+              if (m.has('inf803')) return '✓ Spezielle Themen der Informatik I (inf803, Veranstaltung „Soft Skills und Technische Kompetenz") wird gemäß Überführungstabelle automatisch auf inf859 Informatik im Kontext umgebucht (6 KP). Gilt bis SoSe 2029.';
+              if (m.has('inf030') && m.has('inf031')) return '⚠ inf030 wird in inf033+inf034 umgebucht, inf031 in inf035+inf036. Die entstehende Kombination inf034+inf036 (3+3 KP) kann auf Antrag als Ersatz für inf859 Informatik im Kontext (6 KP) verbucht werden. KP-Summe bleibt konstant: 18 KP = inf033(6)+inf034(3)+inf035(6)+inf036(3) deckt inf033+inf035+inf859 = 6+6+6 ab. Antrag beim Prüfungsamt erforderlich.';
 
               if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
-              if (m.has('inf200')) return '⚠ inf200 kann auf Antrag als inf859 angerechnet werden (Übergang bis SS 2029)';
+              if (m.has('inf200')) return '⚠ inf200 kann auf Antrag als inf859 angerechnet werden (Übergang bis SoSe 2029)';
               if (m.has('inf034') && m.has('inf036')) return '⚠ Programmierung und Algorithmik II (inf034) + Programmierung und Modellierung II (inf036) können in Kombination (3+3 KP) auf Antrag als Ersatz für inf859 angerechnet werden — dann kein Wahlrecht auf diese Module mehr.';
               if (m.has('inf034') && !m.has('inf036')) return '⚠ Du hast inf034 (3 KP). Falls du zusätzlich inf036 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
               if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
               return null;
             },
-            missing: 'inf859 Informatik im Kontext fehlt noch. Übergänge (auf Antrag): inf200 — oder inf034+inf036 kombiniert — oder inf030+inf031 zusammen (decken dann inf033+inf034+inf035+inf036+inf859 ab)'
+            missing: 'inf859 Informatik im Kontext fehlt noch. Überführungen (automatisch/auf Antrag, bis SoSe 2029): pb085 oder inf803 (automatisch) — inf200 (sofern inf859 noch nicht anderweitig verbucht; inf200 dann nicht mehr als Wahloption Tab.6) — inf034+inf036 kombiniert — inf030+inf031 zusammen'
           },
           {
             id: 'ba_mat', label: 'mat950 Mathematik für Informatik (Diskrete Strukturen)', kp: 6,
@@ -1244,7 +1252,7 @@ const REQUIREMENTS = {
             satisfied: (m) => m.has('inf401'),
             note: (m) => {
               if (m.has('inf401')) return '✓ inf401 — erfüllt (NEU als Bachelor-Pflicht ab WS 2026/27)';
-              if (m.has('inf005')) return '⚠ inf005 (alt) kann auf Antrag statt inf401 verbucht werden (bis SS 2029)';
+              if (m.has('inf005')) return '⚠ inf005 (alt) kann auf Antrag statt inf401 verbucht werden (bis SoSe 2029)';
               return null;
             },
             missing: 'inf401 — NEU als Pflicht im Aufbaucurriculum | Übergang: inf005 auf Antrag'
@@ -1359,23 +1367,26 @@ const REQUIREMENTS = {
             id: 'hr_prog', label: 'Programmierung und Algorithmik I (inf033 / inf030)', kp: 6,
             satisfied: (m) => m.has('inf030') || m.has('inf033'),
             note: (m) => m.has('inf030') ? '✓ inf030 (alt) anrechenbar' : m.has('inf033') ? '✓ inf033 (neu)' : null,
-            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
+            missing: 'Programmierung und Algorithmik I (inf033) fehlt noch — oder inf030 (9 KP, wird automatisch in inf033+inf034 umgebucht)'
           },
           {
             id: 'hr_oo', label: 'Programmierung und Modellierung I (inf035 / inf031)', kp: 6,
             satisfied: (m) => m.has('inf031') || m.has('inf035'),
             note: (m) => {
-              if (m.has('inf035')) return '✓ Programmierung und Modellierung I (inf035, 6 KP) — direkt erfüllt.';
-              if (m.has('inf031')) return '⚠ Objektorientierte Modellierung und Programmierung (inf031, 9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden. Da inf031 die Kompetenzen beider Module abdeckt, gilt damit auch inf036 als erfüllt.';
+              if (m.has('inf035')) return '✓ Programmierung und Modellierung I (inf035, 6 KP) — direkt belegt.';
+              if (m.has('inf031') && !m.has('inf035')) return '✓ Objektorientierte Modellierung und Programmierung (inf031, 9 KP) wird gemäß Überführungstabelle automatisch in inf035 (6 KP) + inf036 (3 KP) umgebucht.';
               return null;
             },
-            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
+            missing: 'Programmierung und Modellierung I (inf035) fehlt noch — oder inf031 (9 KP, wird automatisch in inf035+inf036 umgebucht)'
           },
           {
             id: 'hr_859', label: 'inf859 Informatik im Kontext', kp: 6,
-            satisfied: (m) => m.has('inf859') || m.has('inf200') || (m.has('inf034') && m.has('inf036')) || (m.has('inf030') && m.has('inf031')),
+            satisfied: (m) => m.has('inf859') || m.has('inf200') || m.has('pb085') || m.has('inf803') || m.has('inf803_st') || (m.has('inf034') && m.has('inf036')) || (m.has('inf030') && m.has('inf031')),
             note: (m) => {
-                          if (m.has('inf030') && m.has('inf031')) return '⚠ Programmierung, Datenstrukturen und Algorithmen (inf030, 9 KP) + Objektorientierte Modellierung und Programmierung (inf031, 9 KP) zusammen belegt: inf030 deckt inf033 (6 KP) + inf034 (3 KP) ab, inf031 deckt inf035 (6 KP) + inf036 (3 KP) ab. Die verbleibende Kombination inf034+inf036 kann auf Antrag als Ersatz für inf859 Informatik im Kontext (6 KP) angerechnet werden. KP-Summe bleibt konstant: 18 KP → 18 KP. Antrag beim Prüfungsamt erforderlich.';
+                          if (m.has('pb085')) return '✓ Soft Skills (pb085) wird gemäß Überführungstabelle automatisch auf inf859 Informatik im Kontext umgebucht (6 KP). Gilt bis SoSe 2029 — kein Antrag erforderlich.';
+              if (m.has('inf803_st')) return '✓ Spezielle Themen der Informatik I in der Veranstaltung „Soft Skills und Technische Kompetenz" (Prüfende: Dittert, Duwe, Fandrich oder Groza) wird gemäß Überführungstabelle automatisch auf inf859 Informatik im Kontext umgebucht. Gilt bis SoSe 2029.';
+              if (m.has('inf803')) return '✓ Spezielle Themen der Informatik I (inf803, Veranstaltung „Soft Skills und Technische Kompetenz") wird gemäß Überführungstabelle automatisch auf inf859 Informatik im Kontext umgebucht (6 KP). Gilt bis SoSe 2029.';
+              if (m.has('inf030') && m.has('inf031')) return '⚠ inf030 wird in inf033+inf034 umgebucht, inf031 in inf035+inf036. Die entstehende Kombination inf034+inf036 (3+3 KP) kann auf Antrag als Ersatz für inf859 Informatik im Kontext (6 KP) verbucht werden. KP-Summe bleibt konstant: 18 KP = inf033(6)+inf034(3)+inf035(6)+inf036(3) deckt inf033+inf035+inf859 = 6+6+6 ab. Antrag beim Prüfungsamt erforderlich.';
 
               if (m.has('inf859')) return '✓ inf859 — direkt erfüllt';
               if (m.has('inf200')) return '⚠ inf200 kann auf Antrag als inf859 angerechnet werden';
@@ -1384,7 +1395,7 @@ const REQUIREMENTS = {
               if (m.has('inf036') && !m.has('inf034')) return '⚠ Du hast inf036 (3 KP). Falls du zusätzlich inf034 (3 KP) absolvierst, können beide zusammen auf Antrag statt inf859 angerechnet werden.';
               return null;
             },
-            missing: 'inf859 Informatik im Kontext fehlt noch. Übergänge (auf Antrag): inf200 — oder inf034+inf036 kombiniert — oder inf030+inf031 zusammen (decken dann inf033+inf034+inf035+inf036+inf859 ab)'
+            missing: 'inf859 Informatik im Kontext fehlt noch. Überführungen (automatisch/auf Antrag, bis SoSe 2029): pb085 oder inf803 (automatisch) — inf200 (sofern inf859 noch nicht anderweitig verbucht; inf200 dann nicht mehr als Wahloption Tab.6) — inf034+inf036 kombiniert — inf030+inf031 zusammen'
           },
           {
             id: 'hr_mat', label: 'mat950 Mathematik für Informatik (Diskrete Strukturen)', kp: 6,
@@ -1409,7 +1420,7 @@ const REQUIREMENTS = {
             satisfied: (m) => m.has('inf401'),
             note: (m) => {
               if (m.has('inf401')) return '✓ inf401 — erfüllt';
-              if (m.has('inf005')) return '⚠ inf005 kann auf Antrag statt inf401 verbucht werden (Übergang bis SS 2029)';
+              if (m.has('inf005')) return '⚠ inf005 kann auf Antrag statt inf401 verbucht werden (Übergang bis SoSe 2029)';
               return null;
             },
             missing: 'inf401 — NEU als Pflicht im Aufbaucurriculum | Übergang: inf005 auf Antrag'
@@ -1482,13 +1493,13 @@ const REQUIREMENTS = {
             id: 'wp_prog', label: 'Programmierung und Algorithmik I (inf033 / inf030)', kp: 6,
             satisfied: (m) => m.has('inf030') || m.has('inf033'),
             note: (m) => m.has('inf030') ? '✓ inf030 (9 KP, alt) — anrechenbar' : m.has('inf033') ? '✓ inf033 (6 KP, neu)' : null,
-            missing: 'Programmierung und Algorithmik I (inf033, 6 KP) fehlt noch. Übergang: inf030 (9 KP, alt) kann auf Antrag als Ersatz für inf033 angerechnet werden — gilt dann gleichzeitig auch für inf034.'
+            missing: 'Programmierung und Algorithmik I (inf033) fehlt noch — oder inf030 (9 KP, wird automatisch in inf033+inf034 umgebucht)'
           },
           {
             id: 'wp_oo', label: 'Programmierung und Modellierung I (inf035 / inf031)', kp: 6,
             satisfied: (m) => m.has('inf031') || m.has('inf035'),
             note: (m) => m.has('inf031') ? '✓ inf031 (9 KP, alt)' : m.has('inf035') ? '✓ inf035 (6 KP, neu)' : null,
-            missing: 'Programmierung und Modellierung I (inf035, 6 KP) fehlt noch. Übergang: inf031 (9 KP, alt) kann auf Antrag als Ersatz für inf035 angerechnet werden — gilt dann gleichzeitig auch für inf036.'
+            missing: 'Programmierung und Modellierung I (inf035) fehlt noch — oder inf031 (9 KP, wird automatisch in inf035+inf036 umgebucht)'
           },
           {
             id: 'wp_700', label: 'inf700 Didaktik der Informatik I', kp: 6,
@@ -1572,7 +1583,7 @@ const REQUIREMENTS = {
               if (m.has('inf050') || m.has('inf010') || m.has('wp_inf050')) return '⚠ Übergang: falls inf401 bereits im BA + kein inf010/inf050 im BA → inf050 tritt als Pflichtmodul an die Stelle; sind inf401 UND inf010/inf050 im BA: Pflicht sinkt auf 27 KP, Tab.4 auf 12 KP erhöht';
               return null;
             },
-            missing: 'inf401 — NEU als Pflicht im M.Ed. WiPäd (6 KP) | Übergang: Ersatz möglich (Antrag)'
+            missing: 'inf401 Grundlagen der Theoretischen Informatik fehlt noch. Überführungen (bis SoSe 2028): inf050 tritt ersatzweise an Stelle von inf401 (wenn inf401 bereits im BA und weder inf010/inf050 im BA) — oder: ein Modul aus Wahlpflicht Tab. 3 kann ersatzweise als Pflicht verbucht werden (dann nicht mehr als Wahloption Tab.3). Antrag beim Prüfungsamt erforderlich.'
           },
           {
             id: 'mw_712', label: 'inf712 Aktuelle Themen aus dem Gebiet Didaktik der Informatik I', kp: 3,
@@ -1793,7 +1804,7 @@ function getSurplusModules(sg, m) {
 
   // ── pb085: immer gesperrt für 2FB-Informatik ─────────────────────────
   if (m.has('pb085')) {
-    surplus.push({ id:'pb085', reason:'Soft Skills (pb085) darf von 2FB-Informatik-Studierenden ab WS 2026/27 nicht mehr belegt werden. Ersatz: inf859 oder inf715 — bitte Studienberatung kontaktieren.' });
+    surplus.push({ id:'pb085', reason:'Soft Skills (pb085) wird automatisch auf inf859 Informatik im Kontext (6 KP) umgebucht — kein separater Antrag nötig. Falls inf859 bereits anderweitig verbucht ist oder pb085 in der Veranstaltung "Soft Skills und Technische Kompetenz" (Prüfende: Dittert, Duwe, Fandrich oder Groza) absolviert wurde, gilt dieselbe automatische Umbuchung. Gilt bis SoSe 2029.' });
   }
 
   // ── Bestimme welche Pflichtstellen durch welche Module besetzt sind ───
@@ -1822,6 +1833,15 @@ function getSurplusModules(sg, m) {
   // regulär im Wahlpflichtbereich (Tab.6 60KP bzw. Tab.2 30KP) verrechnet werden — kein Surplus!
   // Wenn inf034+inf036 für inf050 ODER inf859 verwendet wurden, sind sie als Wahlpflicht gesperrt.
   // Wenn inf034+inf036 belegt, aber weder für Pflicht noch Wahlpflicht verwertbar: Surplus.
+
+  // inf030→inf033+inf034 und inf031→inf035+inf036: automatische Umbuchung
+  // Wenn inf030 da ist: inf034 entsteht automatisch — zusätzliches Ankreuzen von inf034 ist Surplus
+  if (checkedModules.has('inf030') && checkedModules.has('inf034') && !checkedModules.has('inf050') && !checkedModules.has('inf859')) {
+    surplus.push({ id:'inf034', reason:'Programmierung und Algorithmik II (inf034) entsteht bereits automatisch aus der Umbuchung von inf030. Zusätzliches Belegen ist nicht nötig — bitte Studienberatung kontaktieren.' });
+  }
+  if (checkedModules.has('inf031') && checkedModules.has('inf036') && !checkedModules.has('inf050') && !checkedModules.has('inf859')) {
+    surplus.push({ id:'inf036', reason:'Programmierung und Modellierung II (inf036) entsteht bereits automatisch aus der Umbuchung von inf031. Zusätzliches Belegen ist nicht nötig — bitte Studienberatung kontaktieren.' });
+  }
 
   if (has034 || has036) {
     const used_for_pflicht = inf859_via_034_036 || inf050_via_034_036 || (has030 && has031);
@@ -1897,7 +1917,14 @@ function buildResults() {
     // Handle b-suffix duplicates (e.g. inf200b → inf200)
     if (id.endsWith('b') && /^inf\d/.test(id)) m.add(id.slice(0, -1));
   }
-
+  // Automatic rebooking per Überführungstabelle:
+  // inf030 (9 KP) → inf033 (6 KP) + inf034 (3 KP) — both modules credited automatically
+  // inf031 (9 KP) → inf035 (6 KP) + inf036 (3 KP) — both modules credited automatically
+  if (checkedModules.has('inf030')) { m.add('inf033'); m.add('inf034'); }
+  if (checkedModules.has('inf031')) { m.add('inf035'); m.add('inf036'); }
+  // pb085 / inf803_st → inf859 automatically
+  if (checkedModules.has('pb085') && !checkedModules.has('inf859')) m.add('inf859_via_pb085');
+  if (checkedModules.has('inf803_st') && !checkedModules.has('inf859')) m.add('inf859_via_inf803');
   const area = document.getElementById('result-area');
   area.innerHTML = '';
   const isBachelorOnly = selectedSG === 'ba30' || selectedSG === 'ba60';
@@ -1956,7 +1983,7 @@ function buildResults() {
   if (hasAlt) {
     const anr = document.createElement('div');
     anr.className = 'anr-card';
-    anr.innerHTML = `<strong>⚠ Anrechnungshinweis:</strong> Du hast Module nach alter Ordnung absolviert. Anrechnungen gelten nur <strong>auf Antrag</strong> beim Prüfungsamt. Übergangsregeln laufen bis <strong>Ende SS 2029</strong> (Anmeldestopp) / WS 2029/30 (Prüfungsende).`;
+    anr.innerHTML = `<strong>⚠ Anrechnungshinweis:</strong> Du hast Module nach alter Ordnung absolviert. Anrechnungen gelten nur <strong>auf Antrag</strong> beim Prüfungsamt. Übergangsregeln laufen bis <strong>Ende SoSe 2029</strong> (Anmeldestopp) / WS 2029/30 (Prüfungsende).`;
     area.appendChild(anr);
   }
 
@@ -2068,7 +2095,7 @@ function buildResults() {
   }
 
   area.appendChild(mkBox('warn', '⏰',
-    '<strong>Übergangsfristen:</strong> Prüfungsanmeldungen nach alter Ordnung sind nur bis <strong>Ende SS 2029</strong> möglich. Prüfungsleistungen müssen bis <strong>WS 2029/30</strong> vollständig erbracht sein. Alle Anrechnungsanträge rechtzeitig stellen!'));
+    '<strong>Übergangsfristen:</strong> Automatische Überführungen (inf030/031→inf033–036, pb085/inf803→inf859) gelten bis <strong>SoSe 2029</strong>. Übergangsregelungen für M.Ed. Gymnasium und WiPäd gelten bis <strong>SoSe 2028</strong>. Prüfungsanmeldungen nach alter Ordnung nur bis Ende SoSe 2029. Anrechnungsanträge rechtzeitig beim Prüfungsamt stellen!'));
 
   if (surplusList.length > 0) {
     area.appendChild(mkBox('surplus', '🟣',
