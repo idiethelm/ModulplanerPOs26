@@ -462,7 +462,7 @@ body {
       <span style="background:var(--uol-orange-lt); color:var(--uol-orange); border:1px solid #F5C87A; border-radius:4px; padding:3px 10px; font-size:12px; font-weight:700;">⚠ Beta-Version</span>
       <span style="font-size:12px; color:var(--uol-gray-50);">Dieses Tool befindet sich in der Entwicklung. Alle Angaben ohne Gewähr — bitte im Zweifelsfall immer beim Prüfungsamt oder der Fachstudienberatung nachfragen.</span>
     </div>
-    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 09.06.2026, 22:27 Uhr (MESZ)</div>
+    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 10.06.2026, 06:12 Uhr (MESZ)</div>
   </div>
 
   <!-- STEP INDICATOR -->
@@ -599,45 +599,45 @@ const ALL_MODULES = [
 
     // ── 30/60 KP ALTE PFLICHTMODULE (linke Seite Synopse, für Übergangsregeln) ──────────
   // inf030 und inf031 stehen in BEIDEN Varianten auf der linken Synopsenseite
-  { id:'inf030', name:'Programmierung, Datenstrukturen und Algorithmen',             kp:9,  tag:'alt', group:'30alt', visible:['30only','60only'], groupLabel:'30/60 KP · Alte Pflichtmodule (vor WS 2026/27)' },
-  { id:'inf031', name:'Objektorientierte Modellierung und Programmierung',           kp:9,  tag:'alt', group:'30alt', visible:['30only','60only'], groupLabel:'30/60 KP · Alte Pflichtmodule (vor WS 2026/27)' },
+  { id:'inf030', name:'Programmierung, Datenstrukturen und Algorithmen',             kp:9,  tag:'alt', group:'alt', visible:['30only','60only'], groupLabel:'Alte Module (vor WS 2026/27)' },
+  { id:'inf031', name:'Objektorientierte Modellierung und Programmierung',           kp:9,  tag:'alt', group:'alt', visible:['30only','60only'], groupLabel:'Alte Module (vor WS 2026/27)' },
   // inf010: war Pflicht im 30 KP (Tab.1) UND im alten 60 KP Aufbau (als HR/Gym Wahlpflicht)
-  { id:'inf010', name:'Rechnernetze',                                                kp:6,  tag:'alt', group:'30alt', visible:['30only','60only'], groupLabel:'30/60 KP · Alte Pflichtmodule (vor WS 2026/27)' },
-  { id:'pb085',  name:'Soft Skills',                                                 kp:6,  tag:'alt', group:'30alt', visible:['30only'], groupLabel:'30 KP · Alte Pflichtmodule (vor WS 2026/27)' },
+  { id:'inf010', name:'Rechnernetze',                                                kp:6,  tag:'alt', group:'alt', visible:['30only','60only'], groupLabel:'Alte Module (vor WS 2026/27)' },
+  { id:'pb085',  name:'Soft Skills',                                                 kp:6,  tag:'alt', group:'alt', visible:['30only'], groupLabel:'Alte Module (vor WS 2026/27)' },
 
 
     // ── 30 KP PFLICHT (Tabelle 1, NEU ab WS 2026/27) ─────────────────────────────────────
-  { id:'inf033', name:'Programmierung und Algorithmik I',                            kp:6,  tag:'neu', group:'30pfl',  visible:['30only','60only'], groupLabel:'30 KP · Pflichtmodule (Tabelle 1)' },
-  { id:'inf035', name:'Programmierung und Modellierung I',                           kp:6,  tag:'neu', group:'30pfl',  visible:['30only','60only'], groupLabel:'30 KP · Pflichtmodule (Tabelle 1)' },
-  { id:'inf700', name:'Didaktik der Informatik I',                                   kp:6,  tag:'ok',  group:'30pfl',  visible:['30only','60only'], groupLabel:'30 KP · Pflichtmodule (Tabelle 1)' },
-  { id:'inf050', name:'Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit',  kp:6,  tag:'neu', group:'30pfl',  visible:['30only','60only'], groupLabel:'30 KP · Pflichtmodule (Tabelle 1)' },
+  { id:'inf033', name:'Programmierung und Algorithmik I',                            kp:6,  tag:'neu', group:'pfl',  visible:['30only','60only'], groupLabel:'Neue Pflichtmodule (ab WS 2026/27)' },
+  { id:'inf035', name:'Programmierung und Modellierung I',                           kp:6,  tag:'neu', group:'pfl',  visible:['30only','60only'], groupLabel:'Neue Pflichtmodule (ab WS 2026/27)' },
+  { id:'inf700', name:'Didaktik der Informatik I',                                   kp:6,  tag:'ok',  group:'pfl',  visible:['30only','60only'], groupLabel:'Neue Pflichtmodule (ab WS 2026/27)' },
+  { id:'inf050', name:'Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit',  kp:6,  tag:'neu', group:'pfl',  visible:['30only','60only'], groupLabel:'Neue Pflichtmodule (ab WS 2026/27)' },
 
 
     // ── 30 KP WAHLPFLICHT (Tabelle 2) ────────────────────────────────────────────────────
   // inf200: nur in 30 KP Tab.2 (nicht in 60 KP Tab.2, dort ist es in Tab.6 und 60alt)
-  { id:'inf200', name:'Grundlagen der Technischen Informatik',                       kp:6,  tag:'alt', group:'30wp',  visible:['30only'], groupLabel:'30 KP · Wahlpflicht (Tabelle 2, 6 KP)' },
-  { id:'inf859', name:'Informatik im Kontext',                                       kp:6,  tag:'neu', group:'30wp',  visible:['30only','60only'], groupLabel:'30 KP · Wahlpflicht (Tabelle 2, 6 KP)' },
-  { id:'inf034', name:'Programmierung und Algorithmik II',                           kp:3,  tag:'neu', group:'30wp',  visible:['30only','60only'], groupLabel:'30 KP · Wahlpflicht (Tabelle 2, 6 KP)' },
-  { id:'inf036', name:'Programmierung und Modellierung II',                          kp:3,  tag:'neu', group:'30wp',  visible:['30only','60only'], groupLabel:'30 KP · Wahlpflicht (Tabelle 2, 6 KP)' },
-  { id:'inf715', name:'Physical Computing in Bildungskontexten',                    kp:3,  tag:'neu', group:'30wp',  visible:['30only','60only'], groupLabel:'30 KP · Wahlpflicht (Tabelle 2, 6 KP)' },
+  { id:'inf200', name:'Grundlagen der Technischen Informatik',                       kp:6,  tag:'alt', group:'30wp',  visible:['30only'], groupLabel:'Wahlpflichtmodule (neue Ordnung)' },
+  { id:'inf859', name:'Informatik im Kontext',                                       kp:6,  tag:'neu', group:'pfl',   visible:['30only','60only'], groupLabel:'Neue Pflichtmodule (ab WS 2026/27)' },
+  { id:'inf034', name:'Programmierung und Algorithmik II',                           kp:3,  tag:'neu', group:'30wp',  visible:['30only','60only'], groupLabel:'Wahlpflichtmodule (neue Ordnung)' },
+  { id:'inf036', name:'Programmierung und Modellierung II',                          kp:3,  tag:'neu', group:'30wp',  visible:['30only','60only'], groupLabel:'Wahlpflichtmodule (neue Ordnung)' },
+  { id:'inf715', name:'Physical Computing in Bildungskontexten',                    kp:3,  tag:'neu', group:'30wp',  visible:['30only','60only'], groupLabel:'Wahlpflichtmodule (neue Ordnung)' },
 
 
     // ── 60 KP ALTE AUFBAU-PFLICHTMODULE (linke Seite Synopse) ────────────────────────────
   // inf005: war Aufbau-Pflicht im 60 KP (Tab.5 alt), ist jetzt Pflicht im M.Ed. Gym
-  { id:'inf005', name:'Softwaretechnik I',                                           kp:6,  tag:'alt', group:'60alt', visible:['60only'], groupLabel:'60 KP · Alte Aufbau-Pflichtmodule (vor WS 2026/27)' },
+  { id:'inf005', name:'Softwaretechnik I',                                           kp:6,  tag:'alt', group:'alt', visible:['60only'], groupLabel:'Alte Module (vor WS 2026/27)' },
   // inf200: war Basis-Pflicht im alten 60 KP, ist jetzt in Tab.6 als Wahlpflicht
-  { id:'inf200b',name:'Grundlagen der Technischen Informatik',                       kp:6,  tag:'alt', group:'60alt', visible:['60only'], groupLabel:'60 KP · Alte Aufbau-Pflichtmodule (vor WS 2026/27)' },
-  { id:'inf400', name:'Theoretische Informatik: Logik',                              kp:6,  tag:'alt', group:'60alt', visible:['60only'], groupLabel:'60 KP · Alte Aufbau-Pflichtmodule (vor WS 2026/27)' },
+  { id:'inf200b',name:'Grundlagen der Technischen Informatik',                       kp:6,  tag:'alt', group:'alt', visible:['60only'], groupLabel:'Alte Module (vor WS 2026/27)' },
+  { id:'inf400', name:'Theoretische Informatik: Logik',                              kp:6,  tag:'alt', group:'alt', visible:['60only'], groupLabel:'Alte Module (vor WS 2026/27)' },
 
 
     // ── 60 KP BASISCURRICULUM PFLICHT (Tabelle 3) ────────────────────────────────────────
   // inf033, inf035, inf700, inf859 auch 60 KP Basis → sichtbar via ['30only','60only'] oben
-  { id:'mat950', name:'Mathematik für Informatik (Diskrete Strukturen)',             kp:6,  tag:'ok',  group:'60bas', visible:['60only'], groupLabel:'60 KP · Basiscurriculum Pflicht (Tabelle 3)' },
+  { id:'mat950', name:'Mathematik für Informatik (Diskrete Strukturen)',             kp:6,  tag:'ok',  group:'pfl', visible:['60only'], groupLabel:'Neue Pflichtmodule (ab WS 2026/27)' },
 
   // ── 60 KP AUFBAUCURRICULUM PFLICHT (Tabelle 4, NEU) ──────────────────────────────────
   // inf050 auch Aufbau-Pflicht → sichtbar via ['30only','60only'] oben
-  { id:'inf401', name:'Grundlagen der Theoretischen Informatik',                    kp:6,  tag:'neu', group:'60auf', visible:['60only'], groupLabel:'60 KP · Aufbaucurriculum Pflicht (Tabelle 4)' },
-  { id:'inf007', name:'Datenbanken I',                                               kp:6,  tag:'ok',  group:'60auf', visible:['60only'], groupLabel:'60 KP · Aufbaucurriculum Pflicht (Tabelle 4)' },
+  { id:'inf401', name:'Grundlagen der Theoretischen Informatik',                    kp:6,  tag:'neu', group:'pfl', visible:['60only'], groupLabel:'Neue Pflichtmodule (ab WS 2026/27)' },
+  { id:'inf007', name:'Datenbanken I',                                               kp:6,  tag:'ok',  group:'pfl', visible:['60only'], groupLabel:'Neue Pflichtmodule (ab WS 2026/27)' },
 
   // ── 60 KP WAHLPFLICHT Tabelle 5: Praktische Vertiefung ───────────────────────────────
   { id:'inf004', name:'Softwareprojekt',                                             kp:9,  tag:'ok',  group:'60t5',  visible:['60only'], groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
@@ -649,7 +649,7 @@ const ALL_MODULES = [
   { id:'inf016', name:'Web-Technologien',                                            kp:6,  tag:'ok',  group:'60t5',  visible:['60only'], groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
   // inf715 auch in Tab.5 → sichtbar via ['30only','60only'] oben
   { id:'inf803', name:'Spezielle Themen der Informatik I',                           kp:6,  tag:'ok',  group:'60t5',  visible:['60only'], groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
-  { id:'inf803_st', name:'Spezielle Themen der Informatik I (Veranstaltung „Soft Skills und Technische Kompetenz")', kp:6, tag:'alt', group:'30alt', visible:['30only','60only'], groupLabel:'30/60 KP · Alte Pflichtmodule (vor WS 2026/27)' },
+  { id:'inf803_st', name:'Spezielle Themen der Informatik I (Veranstaltung „Soft Skills und Technische Kompetenz")', kp:6, tag:'alt', group:'alt', visible:['30only','60only'], groupLabel:'Alte Module (vor WS 2026/27)' },
   { id:'inf804', name:'Spezielle Themen der Informatik II',                          kp:6,  tag:'ok',  group:'60t5',  visible:['60only'], groupLabel:'60 KP · Wahlpflicht Tabelle 5: Praktische Vertiefung' },
 
 
@@ -1740,12 +1740,12 @@ function buildModuleList() {
 
   // Define desired group display order: alt/old first, then pflicht new, then wahlpflicht
   const GROUP_ORDER = [
-    // 30/60 KP: alte Module zuerst
-    '30alt', '60alt',
-    // 30 KP: Pflicht neu, dann Wahlpflicht
-    '30pfl', '30wp',
-    // 60 KP: Pflicht neu, dann Wahlpflicht
-    '60bas', '60auf', '60t5', '60t6',
+    // Alte Module zuerst (alle Varianten zusammengefasst)
+    'alt',
+    // Neue Pflichtmodule (Basis + Aufbau zusammengefasst)
+    'pfl',
+    // Wahlpflichtmodule
+    '30wp', '60t5', '60t6',
     // M.Ed. Gymnasium: Übergang (alt), dann Pflicht neu, dann WP-Tabellen
     'gym_req', 'gym_pfl', 'gym_t2','gym_t3','gym_t4','gym_t5','gym_t6',
     // M.Ed. HR: Übergang, Pflicht, WP
@@ -1770,6 +1770,21 @@ function buildModuleList() {
     if (ib === -1) return -1;
     return ia - ib;
   });
+
+  // Override groupLabels with context-specific names for ba30
+  if (selectedSG === 'ba30') {
+    groups.forEach(g => {
+      if (g.key === 'pfl')   g.label = '30 KP · Neue Pflichtmodule (Tabelle 1)';
+      if (g.key === '30wp')  g.label = '30 KP · Wahlpflichtmodule (Tabelle 2, 6 KP)';
+      if (g.key === 'alt')   g.label = '30 KP · Alte Module (vor WS 2026/27)';
+    });
+  } else if (selectedSG === 'ba60') {
+    groups.forEach(g => {
+      if (g.key === 'pfl')   g.label = '60 KP · Neue Pflichtmodule (Tabellen 3+4)';
+      if (g.key === '30wp')  g.label = '60 KP · Wahlpflichtmodule Tab. 2 (30 KP) / Tab. 6 (60 KP)';
+      if (g.key === 'alt')   g.label = '60 KP · Alte Module (vor WS 2026/27)';
+    });
+  }
 
   for (const grp of groups) {
     if (!grp.mods.length) continue;
