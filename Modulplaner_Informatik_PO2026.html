@@ -462,7 +462,7 @@ body {
       <span style="background:var(--uol-orange-lt); color:var(--uol-orange); border:1px solid #F5C87A; border-radius:4px; padding:3px 10px; font-size:12px; font-weight:700;">⚠ Beta-Version</span>
       <span style="font-size:12px; color:var(--uol-gray-50);">Dieses Tool befindet sich in der Entwicklung. Alle Angaben ohne Gewähr — bitte im Zweifelsfall immer beim Prüfungsamt oder der Fachstudienberatung nachfragen.</span>
     </div>
-    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 10.06.2026, 06:12 Uhr (MESZ)</div>
+    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 19.06.2026, 09:22 Uhr (MESZ)</div>
   </div>
 
   <!-- STEP INDICATOR -->
@@ -670,9 +670,6 @@ const ALL_MODULES = [
   { id:'inf701',     name:'Didaktik der Informatik II',                             kp:6, tag:'ok',  group:'gym_pfl', visible:['gym'], groupLabel:'M.Ed. Gymnasium · Pflicht Tabelle 1 (18 KP)' },
   { id:'inf704',     name:'Didaktik der Informatik III',                            kp:3, tag:'ok',  group:'gym_pfl', visible:['gym'], groupLabel:'M.Ed. Gymnasium · Pflicht Tabelle 1 (18 KP)' },
   { id:'inf712',     name:'Aktuelle Themen aus dem Gebiet Didaktik der Informatik I',              kp:3, tag:'ok',  group:'gym_pfl', visible:['gym'], groupLabel:'M.Ed. Gymnasium · Pflicht Tabelle 1 (18 KP)' },
-  { id:'gym_inf401', name:'Grundlagen der Theoretischen Informatik', kp:6, tag:'neu', group:'gym_req', visible:['gym'], groupLabel:'M.Ed. Gymnasium · Übergangsmodule' },
-  { id:'gym_inf007', name:'Datenbanken I',     kp:6, tag:'ok',  group:'gym_req', visible:['gym'], groupLabel:'M.Ed. Gymnasium · Übergangsmodule' },
-  { id:'gym_inf859', name:'Informatik im Kontext',      kp:6, tag:'neu', group:'gym_req', visible:['gym'], groupLabel:'M.Ed. Gymnasium · Übergangsmodule' },
   { id:'gym_inf851', name:'Informatik und Gesellschaft',              kp:6, tag:'ok',  group:'gym_t2', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 2: Informatik, Mensch & Gesellschaft' },
   { id:'gym_wir806', name:'Informationstechnologierecht',             kp:6, tag:'ok',  group:'gym_t2', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 2: Informatik, Mensch & Gesellschaft' },
   { id:'gym_inf600', name:'Wirtschaftsinformatik I',                  kp:6, tag:'ok',  group:'gym_t2', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 2: Informatik, Mensch & Gesellschaft' },
@@ -680,6 +677,7 @@ const ALL_MODULES = [
   { id:'gym_inf529', name:'Big Data in der Medizin',                  kp:6, tag:'ok',  group:'gym_t2', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 2: Informatik, Mensch & Gesellschaft' },
   { id:'gym_inf017', name:'Interaktive Systeme',                      kp:6, tag:'ok',  group:'gym_t2', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 2: Informatik, Mensch & Gesellschaft' },
   { id:'gym_inf006', name:'Softwaretechnik II',                       kp:6, tag:'ok',  group:'gym_t3', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 3: Praktische Informatik' },
+  { id:'gym_inf050', name:'Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit (auf Antrag, § 2 Abs. 3 — nur falls nicht im BA)', kp:6, tag:'neu', group:'gym_t3', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 3: Praktische Informatik' },
   { id:'gym_inf008', name:'Informationssysteme II',                   kp:6, tag:'ok',  group:'gym_t3', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 3: Praktische Informatik' },
   { id:'gym_inf009', name:'Praktikum Datenbanken',                    kp:6, tag:'ok',  group:'gym_t3', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 3: Praktische Informatik' },
   { id:'gym_inf010', name:'Rechnernetze',                             kp:6, tag:'ok',  group:'gym_t3', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 3: Praktische Informatik' },
@@ -692,6 +690,7 @@ const ALL_MODULES = [
   { id:'gym_inf040', name:'Introduction to Data Science',             kp:6, tag:'ok',  group:'gym_t3', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 3: Praktische Informatik' },
   { id:'gym_inf803', name:'Spezielle Themen der Informatik I',        kp:6, tag:'ok',  group:'gym_t3', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 3: Praktische Informatik' },
   { id:'gym_inf201', name:'Technische Informatik',                    kp:6, tag:'ok',  group:'gym_t4', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 4: Technische Informatik' },
+  { id:'gym_inf859', name:'Informatik im Kontext (auf Antrag, § 2 Abs. 2 — nur falls weder inf859 noch pb085 im BA)', kp:6, tag:'neu', group:'gym_t4', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 4: Technische Informatik' },
   { id:'gym_inf202', name:'Praktikum Technische Informatik',          kp:6, tag:'ok',  group:'gym_t4', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 4: Technische Informatik' },
   { id:'inf203',     name:'Embedded Systems I',                       kp:6, tag:'ok',  group:'gym_t4', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 4: Technische Informatik' },
   { id:'inf204',     name:'Embedded Systems II',                      kp:6, tag:'ok',  group:'gym_t4', visible:['gym'], groupLabel:'M.Ed. Gymnasium · WP Tab. 4: Technische Informatik' },
@@ -715,10 +714,6 @@ const ALL_MODULES = [
   // M.Ed. HAUPT- & REALSCHULE — alle Gruppen nur sichtbar für 'hr'
   // ════════════════════════════════════════════════════════════════
   { id:'hr_inf701',  name:'Didaktik der Informatik II',               kp:6, tag:'ok',  group:'hr_pfl', visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · Pflicht Tabelle 1 (6 KP)' },
-  { id:'hr_inf050',  name:'Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit',     kp:6, tag:'neu', group:'hr_req', visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · Übergangsmodule' },
-  { id:'hr_inf007',  name:'Datenbanken I',                  kp:6, tag:'ok',  group:'hr_req', visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · Übergangsmodule' },
-  { id:'hr_inf859',  name:'Informatik im Kontext',          kp:6, tag:'neu', group:'hr_req', visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · Übergangsmodule' },
-  { id:'hr_inf401',  name:'Grundlagen der Theoretischen Informatik',   kp:6, tag:'neu', group:'hr_req', visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · Übergangsmodule' },
   { id:'hr_inf005',  name:'Softwaretechnik I',                        kp:6, tag:'alt', group:'hr_t2',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 2: Praktische Informatik' },
   { id:'hr_inf009',  name:'Praktikum Datenbanken',                    kp:6, tag:'ok',  group:'hr_t2',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 2: Praktische Informatik' },
   { id:'hr_inf010',  name:'Rechnernetze',                             kp:6, tag:'ok',  group:'hr_t2',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 2: Praktische Informatik' },
@@ -729,11 +724,15 @@ const ALL_MODULES = [
   { id:'hr_inf018',  name:'Medienverarbeitung',                       kp:6, tag:'ok',  group:'hr_t2',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 2: Praktische Informatik' },
   { id:'hr_inf040',  name:'Introduction to Data Science',             kp:6, tag:'ok',  group:'hr_t2',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 2: Praktische Informatik' },
   { id:'hr_inf804',  name:'Spezielle Themen der Informatik II',       kp:6, tag:'ok',  group:'hr_t2',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 2: Praktische Informatik' },
+  { id:'hr_inf050',  name:'Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit (auf Antrag, § 2 Abs. 1 — nur falls nicht im BA)', kp:6, tag:'neu', group:'hr_t2', visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 2: Praktische Informatik' },
+  { id:'hr_inf007',  name:'Datenbanken I (auf Antrag, § 2 Abs. 1 — nur falls nicht im BA)', kp:6, tag:'ok', group:'hr_t2', visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 2: Praktische Informatik' },
   { id:'hr_inf201',  name:'Technische Informatik',                    kp:6, tag:'ok',  group:'hr_t3',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 3: Technische Informatik' },
   { id:'hr_inf202',  name:'Praktikum Technische Informatik',          kp:6, tag:'ok',  group:'hr_t3',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 3: Technische Informatik' },
   { id:'hr_inf207',  name:'Grundlagen der Elektrotechnik',            kp:6, tag:'ok',  group:'hr_t3',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 3: Technische Informatik' },
+  { id:'hr_inf859',  name:'Informatik im Kontext (auf Antrag, § 2 Abs. 2 — nur falls weder inf859 noch pb085 im BA)', kp:6, tag:'neu', group:'hr_t3', visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 3: Technische Informatik' },
   { id:'hr_inf420',  name:'Introduction to IT-Security',              kp:6, tag:'ok',  group:'hr_t4',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 4: Theoretische Informatik' },
   { id:'hr_inf462',  name:'Cryptography',                       kp:6, tag:'neu', group:'hr_t4',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 4: Theoretische Informatik' },
+  { id:'hr_inf401',  name:'Grundlagen der Theoretischen Informatik (auf Antrag, § 2 Abs. 4 — nur falls nicht im BA)', kp:6, tag:'neu', group:'hr_t4', visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 4: Theoretische Informatik' },
   { id:'hr_inf518',  name:'Grundlagen der Energieinformatik',         kp:6, tag:'ok',  group:'hr_t5',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 5: Angewandte Informatik' },
   { id:'hr_inf528',  name:'Einführung in die Medizinische Informatik',kp:6, tag:'ok',  group:'hr_t5',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 5: Angewandte Informatik' },
   { id:'hr_inf529',  name:'Big Data in der Medizin',                  kp:6, tag:'ok',  group:'hr_t5',  visible:['hr'], groupLabel:'M.Ed. Haupt-/Realschule · WP Tab. 5: Angewandte Informatik' },
@@ -746,16 +745,14 @@ const ALL_MODULES = [
   // ════════════════════════════════════════════════════════════════
   // M.Ed. WIRTSCHAFTSPÄDAGOGIK — alle Gruppen nur sichtbar für 'wipaed'
   // ════════════════════════════════════════════════════════════════
-  { id:'wp_inf701',  name:'Didaktik der Informatik II',               kp:6, tag:'ok',  group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (33 KP)' },
-  { id:'wp_inf005',  name:'Softwaretechnik I',                        kp:6, tag:'neu', group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (33 KP)' },
-  { id:'wp_inf007',  name:'Datenbanken I',      kp:6, tag:'ok',  group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (33 KP)' },
-  { id:'wp_inf704',  name:'Didaktik der Informatik III',        kp:3, tag:'ok',  group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (33 KP)' },
-  { id:'wp_mat950',  name:'Mathematik für Informatik (Diskrete Strukturen)', kp:6, tag:'neu', group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (33 KP)' },
-  { id:'wp_inf401',  name:'Grundlagen der Theoretischen Informatik', kp:6, tag:'neu', group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (33 KP)' },
-  { id:'wp_inf712',  name:'Aktuelle Themen aus dem Gebiet Didaktik der Informatik I', kp:3, tag:'ok', group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (33 KP)' },
-  { id:'wp_inf600',  name:'Wirtschaftsinformatik I', kp:6, tag:'ok',  group:'wipaed_req', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Übergangsmodule' },
-  { id:'wp_inf050',  name:'Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit', kp:6, tag:'neu', group:'wipaed_req', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Übergangsmodule' },
-  { id:'wp_inf859',  name:'Informatik im Kontext',     kp:6, tag:'neu', group:'wipaed_req', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Übergangsmodule' },
+  { id:'wp_inf701',  name:'Didaktik der Informatik II',               kp:6, tag:'ok',  group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (30 KP)' },
+  { id:'wp_inf005',  name:'Softwaretechnik I',                        kp:6, tag:'neu', group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (30 KP)' },
+  { id:'wp_inf007',  name:'Datenbanken I',      kp:6, tag:'ok',  group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (30 KP)' },
+  { id:'wp_inf704',  name:'Didaktik der Informatik III',        kp:3, tag:'ok',  group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (30 KP)' },
+  { id:'wp_mat950',  name:'Mathematik für Informatik (Diskrete Strukturen)', kp:6, tag:'neu', group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (30 KP)' },
+  { id:'wp_inf401',  name:'Grundlagen der Theoretischen Informatik', kp:6, tag:'neu', group:'wipaed_pfl', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Pflicht Tabelle 1 (30 KP)' },
+  { id:'wp_inf600',  name:'Wirtschaftsinformatik I (Ersatz für mat950, § 2 Abs. 2)', kp:6, tag:'ok',  group:'wipaed_req', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Übergangsmodule (auf Antrag)' },
+  { id:'wp_inf050',  name:'Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit (Pflichtersatz für inf401, § 2 Abs. 1)', kp:6, tag:'neu', group:'wipaed_req', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · Übergangsmodule (auf Antrag)' },
   { id:'wp_inf851',  name:'Informatik und Gesellschaft',              kp:6, tag:'ok',  group:'wipaed_t2', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 2: Informatik, Mensch & Gesellschaft' },
   { id:'wp_wir806',  name:'Informationstechnologierecht',             kp:6, tag:'ok',  group:'wipaed_t2', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 2: Informatik, Mensch & Gesellschaft' },
   { id:'wp2_inf600', name:'Wirtschaftsinformatik I',                  kp:6, tag:'ok',  group:'wipaed_t2', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 2: Informatik, Mensch & Gesellschaft' },
@@ -772,6 +769,7 @@ const ALL_MODULES = [
   { id:'wp_inf803',  name:'Spezielle Themen der Informatik I',        kp:6, tag:'ok',  group:'wipaed_t3', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 3: Praktische Vertiefung' },
   { id:'wp_inf804',  name:'Spezielle Themen der Informatik II',       kp:6, tag:'ok',  group:'wipaed_t3', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 3: Praktische Vertiefung' },
   { id:'wp_inf518',  name:'Grundlagen der Energieinformatik',         kp:6, tag:'ok',  group:'wipaed_t3', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 3: Praktische Vertiefung' },
+  { id:'wp_inf859',  name:'Informatik im Kontext (auf Antrag, § 2 Abs. 4 — nur falls weder inf859 noch pb085 im BA)', kp:6, tag:'neu', group:'wipaed_t3', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 3: Praktische Vertiefung' },
   { id:'wp_inf010',  name:'Rechnernetze',                             kp:6, tag:'ok',  group:'wipaed_t4', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 4: Akzentsetzung' },
   { id:'wp_inf012',  name:'Betriebssysteme I',                        kp:6, tag:'ok',  group:'wipaed_t4', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 4: Akzentsetzung' },
   { id:'wp_inf015',  name:'Ausgewählte Kapitel verteilter Betriebssysteme', kp:6, tag:'ok', group:'wipaed_t4', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 4: Akzentsetzung' },
@@ -788,6 +786,7 @@ const ALL_MODULES = [
   { id:'wp_inf608',  name:'eBusiness',                                kp:6, tag:'ok',  group:'wipaed_t4', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 4: Akzentsetzung' },
   { id:'inf653',     name:'ERP-Technologie',                          kp:6, tag:'ok',  group:'wipaed_t4', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 4: Akzentsetzung' },
   { id:'inf654',     name:'Mobile Commerce',                          kp:6, tag:'ok',  group:'wipaed_t4', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 4: Akzentsetzung' },
+  { id:'wp_t4_inf050', name:'Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit (auf Antrag, § 2 Abs. 5 — nur falls nicht im BA)', kp:6, tag:'neu', group:'wipaed_t4', visible:['wipaed'], groupLabel:'M.Ed. Wirtschaftspädagogik · WP Tab. 4: Akzentsetzung' },
 ];
 
 // Mapping: which visibility keys apply to each SG
@@ -864,21 +863,23 @@ const REQUIREMENTS = {
         icon: '⚙️',
         modules: [
           {
-            id: 'b30_wp', label: '6 KP Wahlpflicht: Techn. oder Theor. Informatik',  kp: 6,
-            satisfied: (m) => m.has('inf200') || m.has('inf201') || m.has('inf203') || m.has('inf400') || m.has('inf401') || m.has('inf034') || m.has('inf036') || m.has('inf715') || m.has('inf859') || m.has('inf800') || m.has('inf803') || m.has('inf804') || m.has('inf016') || m.has('inf009') || m.has('inf018') || m.has('inf004'),
+            id: 'b30_wp', label: '6 KP Wahlpflicht (Tab. 2): Technische/Theoretische Informatik & neue Module',  kp: 6,
+            satisfied: (m) => ['inf200','inf859','inf034','inf036','inf715',
+                               'inf201','inf203','inf204','inf205','inf207','inf208','inf209','inf210','inf400','inf401',
+                               'inf800','inf803','inf804','inf016','inf009','inf018','inf004'].some(id => m.has(id)),
             note: (m) => {
-              const hits = [];
-              if (m.has('inf859')) hits.push('inf859 Informatik im Kontext (neu, 6 KP)');
-              if (m.has('inf715')) hits.push('inf715 Physical Computing (neu, 3 KP)');
-              if (m.has('inf034')) hits.push('inf034 Programmierung und Algorithmik II (3 KP)');
-              if (m.has('inf036')) hits.push('inf036 Programmierung und Modellierung II (3 KP)');
-              if (m.has('inf200')) hits.push('inf200 Techn. Informatik (alt, 6 KP)');
-              if (m.has('inf400')) hits.push('inf400 Theor. Inf.: Logik (6 KP)');
-              if (m.has('inf401')) hits.push('inf401 Theor. Inf.: Grundlagen (6 KP)');
-              if (hits.length > 0) return '✓ Geeignete Wahlpflichtmodule vorhanden: ' + hits.join(', ');
-              return null;
+              const neu = [];
+              if (m.has('inf859')) neu.push('inf859 Informatik im Kontext (6 KP)');
+              if (m.has('inf715')) neu.push('inf715 Physical Computing (3 KP)');
+              if (m.has('inf034')) neu.push('inf034 Programmierung und Algorithmik II (3 KP)');
+              if (m.has('inf036')) neu.push('inf036 Programmierung und Modellierung II (3 KP)');
+              const alt = ['inf200','inf201','inf203','inf204','inf205','inf207','inf208','inf209','inf210','inf400','inf401'].filter(id => m.has(id));
+              let txt = '';
+              if (neu.length) txt += '✓ Neue Wahlpflichtmodule: ' + neu.join(', ') + '. ';
+              if (alt.length) txt += '⚠ § 2.1.3 / 2.2.1(2): Bereits absolvierte alte Module (' + alt.join(', ') + ') können auf Antrag alternativ als Wahlpflicht Tab. 2 verbucht werden (Höchstgrenze 6 KP bleibt unberührt).';
+              return txt || null;
             },
-            missing: 'Mindestens 6 KP aus Tab. 2 (Techn. Inf.) oder Tab. 3 (Theor. Inf.) oder den neuen Modulen (inf859, inf715, inf034, inf036)'
+            missing: 'Mindestens 6 KP aus Tab. 2 (neue Module: inf859, inf715, inf034, inf036). § 2.1.3 / 2.2.1(2): alternativ auch alte Module inf201, inf203, inf204, inf205, inf207, inf208, inf209, inf210, inf400 oder inf401 auf Antrag (max. 6 KP).'
           },
           {
             id: 'b30_pb085', label: 'Hinweis: pb085 Soft Skills gesperrt', kp: 0,
@@ -975,14 +976,15 @@ const REQUIREMENTS = {
         icon: '🔧',
         modules: [
           {
-            id: 'b60_401', label: 'inf401 Theor. Informatik (NEU als Aufbau-Pflicht)', kp: 6,
-            satisfied: (m) => m.has('inf401'),
+            id: 'b60_401', label: 'inf401 Grundlagen der Theoretischen Informatik (Aufbau-Pflicht)', kp: 6,
+            satisfied: (m) => m.has('inf401') || m.has('inf005'),
             note: (m) => {
-              if (m.has('inf401')) return '✓ inf401 — direkt erfüllt (war evtl. Wahlpflicht)';
-              if (m.has('inf005')) return '⚠ inf005 (Softwaretechnik I, alt) kann auf Antrag statt inf401 verbucht werden (Übergang bis SoSe 2029) — inf005 muss dann im M.Ed. Gym nachgeholt werden';
+              if (m.has('inf401')) return '✓ inf401 — direkt erfüllt.';
+              if (m.has('inf005') && !m.has('inf007')) return '⚠ § 2.1.5 / 2.2.1(5): inf005 Softwaretechnik I (alt) kann auf Antrag statt inf401 als Pflichtmodul verbucht werden, sofern inf401 nicht bereits anderweitig verbucht. Folge: inf401 muss ggf. im M.Ed. Gym nachgeholt werden.';
+              if (m.has('inf005') && m.has('inf007')) return '⚠ inf005 kann als Ersatz für inf401 ODER inf007 dienen — aber nur für eines von beiden (Modul nur einmal verrechenbar). Bitte Prüfungsamt kontaktieren.';
               return null;
             },
-            missing: 'inf401 (6 KP) — NEU als Pflicht im Aufbau | Übergang: inf005 als Ersatz auf Antrag'
+            missing: 'inf401 Grundlagen der Theoretischen Informatik (6 KP) — Aufbau-Pflicht. § 2.1.5: inf005 (alt) kann auf Antrag als Ersatz verbucht werden (dann inf401 ggf. im M.Ed. Gym nachholen).'
           },
           {
             id: 'b60_050', label: 'inf050 Grundlagen Betriebssysteme, Rechnernetze und IT-Sicherheit (neu Aufbau)', kp: 6,
@@ -996,10 +998,14 @@ const REQUIREMENTS = {
             missing: 'inf050 (6 KP) — NEU als Aufbau-Pflicht | Übergang: inf010 oder inf200 auf Antrag'
           },
           {
-            id: 'b60_007', label: 'inf007 Datenbanken I (umbenannt)', kp: 6,
-            satisfied: (m) => m.has('inf007'),
-            note: (m) => m.has('inf007') ? '✓ inf007 — erfüllt (früher: Informationssysteme I)' : null,
-            missing: 'inf007 Datenbanken I — noch zu belegen (früher: Informationssysteme I)'
+            id: 'b60_007', label: 'inf007 Datenbanken I (Aufbau-Pflicht)', kp: 6,
+            satisfied: (m) => m.has('inf007') || (m.has('inf005') && !m.has('inf401')),
+            note: (m) => {
+              if (m.has('inf007')) return '✓ inf007 Datenbanken I — erfüllt (früher: Informationssysteme I).';
+              if (m.has('inf005') && !m.has('inf401')) return '⚠ § 2.1.5 / 2.2.1(6): inf005 Softwaretechnik I (alt) kann auf Antrag statt inf007 als Pflichtmodul verbucht werden, sofern inf007 nicht bereits anderweitig verbucht. Folge: inf007 muss ggf. im M.Ed. nachgeholt werden.';
+              return null;
+            },
+            missing: 'inf007 Datenbanken I (6 KP) — Aufbau-Pflicht (früher: Informationssysteme I). § 2.1.5: inf005 (alt) kann auf Antrag als Ersatz verbucht werden (dann inf007 ggf. im Master nachholen).'
           },
         ]
       },
@@ -1304,20 +1310,25 @@ const REQUIREMENTS = {
           },
           {
             id: 'mg_005', label: 'Softwaretechnik I (Pflicht im M.Ed. Gym, 6 KP)', kp: 6,
-            satisfied: (m) => m.has('inf005') || m.has('gym_inf005_ba') || m.has('gym_inf005_ma'),
+            satisfied: (m) => {
+              if (m.has('inf005') || m.has('gym_inf005_ba') || m.has('gym_inf005_ma')) return true;
+              // § 1 Abs. 1: inf005 im BA → Ersatz durch inf401 oder inf007 (sofern nicht ebenfalls im BA)
+              // Hier gilt: erfüllt, sobald inf005 (auch BA) belegt ist — Ersatzlogik greift über Note
+              return false;
+            },
             note: (m) => {
               const has005ba = m.has('inf005') || m.has('gym_inf005_ba');
               const has005ma = m.has('gym_inf005_ma');
-              const has401 = m.has('inf401') || m.has('gym_inf401');
-              const has007 = m.has('inf007') || m.has('gym_inf007');
+              const has401 = m.has('inf401');
+              const has007 = m.has('inf007');
               if (has005ma) return '✓ Softwaretechnik I wird im Master neu belegt.';
-              if (has005ba && !has401 && !has007) return '⚠ Softwaretechnik I bereits im Bachelor absolviert — trotzdem als Master-Pflicht verbucht, sofern weder inf401 noch inf007 ebenfalls schon im Bachelor sind.';
-              if (has005ba && has401 && !has007) return '⚠ Softwaretechnik I und Grundlagen der Theoretischen Informatik bereits im BA: Auf Antrag kann Grundlagen der Theoretischen Informatik als Ersatz-Pflicht verbucht werden.';
-              if (has005ba && has007 && !has401) return '⚠ Softwaretechnik I und Datenbanken I bereits im BA: Auf Antrag kann Datenbanken I als Ersatz-Pflicht verbucht werden.';
-              if (has005ba && has401 && has007) return '⚠ Softwaretechnik I, Grundlagen der Theoretischen Informatik und Datenbanken I alle bereits im BA: Pflichtbereich sinkt auf 12 KP, Wahlpflicht Tab. 3–6 steigt auf 12 KP.';
+              if (has005ba && has401 && has007) return '⚠ § 1 Abs. 1: Softwaretechnik I, Grundlagen der Theoretischen Informatik UND Datenbanken I wurden alle bereits im Bachelor absolviert. Eine Verbuchung im Master ist ausgeschlossen — der Pflichtbereich verringert sich auf 12 KP. Zum Ausgleich sind in Tab. 3–6 insgesamt 12 KP (statt 6 KP) zu studieren.';
+              if (has005ba && has401 && !has007) return '⚠ § 1 Abs. 1: Softwaretechnik I und Grundlagen der Theoretischen Informatik bereits im BA. Auf Antrag tritt Datenbanken I (inf007) als Ersatz-Pflichtmodul an die Stelle von inf005 (da inf401 nicht erneut verbucht werden kann).';
+              if (has005ba && has007 && !has401) return '⚠ § 1 Abs. 1: Softwaretechnik I und Datenbanken I bereits im BA. Auf Antrag tritt Grundlagen der Theoretischen Informatik (inf401) als Ersatz-Pflichtmodul an die Stelle von inf005 (da inf007 nicht erneut verbucht werden kann).';
+              if (has005ba && !has401 && !has007) return '⚠ § 1 Abs. 1: Softwaretechnik I bereits im Bachelor absolviert. Auf Antrag tritt inf401 ODER inf007 als Ersatz-Pflichtmodul an die Stelle (je nachdem, welches noch nicht im Bachelor absolviert wurde).';
               return null;
             },
-            missing: 'Softwaretechnik I: Bitte angeben ob bereits im Bachelor absolviert oder erst im Master zu belegen — beide Varianten in der Modulliste verfügbar.'
+            missing: 'Softwaretechnik I (Pflicht, 6 KP): Bitte angeben ob bereits im Bachelor absolviert oder erst im Master zu belegen — beide Varianten in der Modulliste verfügbar. § 1 Abs. 1: Falls inf005 im BA, tritt inf401 oder inf007 als Ersatz an die Stelle; sind alle drei im BA, sinkt die Pflicht auf 12 KP (dafür 12 KP in Tab. 3–6).'
           },
         ]
       },
@@ -1341,18 +1352,26 @@ const REQUIREMENTS = {
         icon: '⚙️',
         modules: [
           {
-            id: 'mg_wp36', label: '6 KP aus Tab. 3 (Prakt.), 4 (Techn.), 5 (Theor.) oder 6 (Angew.)', kp: 6,
+            id: 'mg_wp36', label: 'Wahlpflicht Tab. 3–6 (6 KP — oder 12 KP bei § 1 Abs. 1)', kp: 6,
             satisfied: (m) => ['inf006','inf008','inf009','inf010','inf012','inf015','inf016','inf017','inf018','inf020','inf040','inf803',
                                'inf201','inf202','inf203','inf204','inf205','inf207','inf208','inf209','inf210',
                                'inf401','inf420','inf462',
-                               'inf518','inf528','inf529','inf530','inf600','inf601','inf608'].some(id => m.has(id)),
+                               'inf518','inf528','inf529','inf530','inf600','inf601','inf608',
+                               'inf050','inf859'].some(id => m.has(id)),
             note: (m) => {
+              const allThreeInBA = m.has('inf005') && m.has('inf007') && m.has('inf401');
               const hits = ['inf006','inf008','inf009','inf010','inf012','inf015','inf016','inf018','inf020','inf040','inf803',
                             'inf201','inf202','inf203','inf204','inf205','inf207','inf208','inf209','inf210',
-                            'inf401','inf420','inf462','inf518','inf528','inf529','inf530','inf600','inf601','inf608'].filter(id => m.has(id));
-              return hits.length ? '✓ Mögliche Wahlmodule vorhanden: ' + hits.slice(0,4).join(', ') + (hits.length > 4 ? ' …' : '') : null;
+                            'inf420','inf462','inf518','inf528','inf529','inf530','inf600','inf601','inf608'].filter(id => m.has(id));
+              let txt = hits.length ? '✓ Mögliche Wahlmodule vorhanden: ' + hits.slice(0,4).join(', ') + (hits.length > 4 ? ' …' : '') : '';
+              const extras = [];
+              if (m.has('inf050')) extras.push('§ 2 Abs. 3: inf050 als Tab. 3-Wahlpflicht (falls nicht im BA)');
+              if (m.has('inf859') || m.has('pb085')) extras.push('§ 2 Abs. 2: inf859 als Tab. 4-Wahlpflicht (falls weder inf859 noch pb085 im BA)');
+              if (extras.length) txt += (txt ? ' ' : '✓ ') + extras.join('; ') + '.';
+              if (allThreeInBA) txt += (txt ? ' ' : '') + '⚠ § 1 Abs. 1: Da inf005, inf007 UND inf401 bereits im Bachelor absolviert wurden, entfallen diese als Master-Pflicht (Pflicht 12 KP). Zum Ausgleich sind hier in Tab. 3–6 insgesamt 12 KP (statt 6 KP) zu studieren.';
+              return txt || null;
             },
-            missing: 'Noch kein Wahlmodul aus Tab. 3–6 — z.B. inf201, inf420, inf462, inf530, inf608 u.v.m.'
+            missing: 'Noch kein Wahlmodul aus Tab. 3–6 — z.B. inf201, inf420, inf462, inf530, inf608. Optionen auf Antrag: § 2 Abs. 3 inf050 (Tab. 3, falls nicht im BA) — § 2 Abs. 2 inf859 (Tab. 4, falls weder inf859 noch pb085 im BA). § 1 Abs. 1: bei inf005+inf007+inf401 im BA hier 12 KP statt 6 KP.'
           },
         ]
       }
@@ -1466,19 +1485,25 @@ const REQUIREMENTS = {
         modules: [
           {
             id: 'hr_wp', label: '6 KP aus Tab. 2 (Prakt. Inf.), 3 (Techn.), 4 (Theor.), 5 (Angew.) oder 6 (Inf./Ges.)', kp: 6,
-            satisfied: (m) => ['inf005','inf009','inf010','inf012','inf015','inf016','inf018','inf040','inf804',
+            satisfied: (m) => ['inf005','inf009','inf010','inf012','inf014','inf015','inf016','inf018','inf040','inf804',
                                'inf201','inf202','inf207',
-                               'inf420','inf462',
+                               'inf420','inf462','inf401',
                                'inf518','inf528','inf529','inf530','inf600','inf608',
-                               'inf851','wir806'].some(id => m.has(id)),
+                               'inf851','wir806',
+                               'inf007','inf050','inf859','pb085'].some(id => m.has(id)),
             note: (m) => {
-              const hits = ['inf005','inf009','inf010','inf012','inf015','inf016','inf018','inf040','inf804',
+              const hits = ['inf005','inf009','inf010','inf012','inf014','inf015','inf016','inf018','inf040','inf804',
                             'inf201','inf202','inf207','inf420','inf462',
                             'inf518','inf528','inf529','inf530','inf600','inf608','inf851','wir806'].filter(id => m.has(id));
-              if (hits.length) return '✓ Mögliche Wahlmodule vorhanden: ' + hits.slice(0,4).join(', ') + (hits.length > 4 ? ' …' : '');
-              return null;
+              const extras = [];
+              if ((m.has('inf050')||m.has('inf007')) ) extras.push('§ 2 Abs. 1: inf050 oder inf007 als Tab. 2-Wahlpflicht (falls nicht im BA)');
+              if (m.has('inf859')||m.has('pb085')) extras.push('§ 2 Abs. 2: inf859 als Tab. 3-Wahlpflicht (falls weder inf859 noch pb085 im BA)');
+              if (m.has('inf401')) extras.push('§ 2 Abs. 4: inf401 als Tab. 4-Wahlpflicht (falls nicht im BA)');
+              let txt = hits.length ? '✓ Mögliche Wahlmodule vorhanden: ' + hits.slice(0,4).join(', ') + (hits.length > 4 ? ' …' : '') : '';
+              if (extras.length) txt += (txt ? ' ' : '✓ ') + extras.join('; ') + '.';
+              return txt || null;
             },
-            missing: 'Noch kein Wahlpflichtmodul aus Tab. 2–6 — z.B. inf005, inf201, inf420, inf462, inf851 u.v.m.'
+            missing: 'Noch kein Wahlpflichtmodul aus Tab. 2–6. Optionale Zusatzmodule (auf Antrag, Überführungsbestimmungen): § 2 Abs. 1 inf050 oder inf007 (Tab. 2, falls nicht im BA) — § 2 Abs. 2 inf859 (Tab. 3, falls weder inf859 noch pb085 im BA) — § 2 Abs. 4 inf401 (Tab. 4, falls nicht im BA).'
           },
         ]
       }
@@ -1542,7 +1567,7 @@ const REQUIREMENTS = {
         ]
       },
       {
-        title: 'Master WiPäd — Pflichtbereich (33 KP, Tabelle 1)',
+        title: 'Master WiPäd — Pflichtbereich (30 KP, Tabelle 1)',
         icon: '🎓',
         modules: [
           {
@@ -1558,42 +1583,52 @@ const REQUIREMENTS = {
             missing: 'inf005 Softwaretechnik I — Pflichtmodul im M.Ed. WiPäd (6 KP), noch zu belegen'
           },
           {
-            id: 'mw_007', label: 'inf007 Informationssysteme / Datenbanken I', kp: 6,
+            id: 'mw_007', label: 'inf007 Datenbanken I', kp: 6,
             satisfied: (m) => m.has('inf007') || m.has('wp_inf007'),
-            note: (m) => (m.has('inf007') || m.has('wp_inf007')) ? '✓ inf007 — erfüllt' : null,
-            missing: 'inf007 — Pflicht (6 KP)'
+            note: (m) => (m.has('inf007') || m.has('wp_inf007')) ? '✓ inf007 Datenbanken I — erfüllt' : null,
+            missing: 'inf007 Datenbanken I — Pflicht (6 KP)'
           },
           {
-            id: 'mw_704', label: 'inf704 Didaktik der Informatik III (NEU)', kp: 3,
+            id: 'mw_704', label: 'inf704 Didaktik der Informatik III', kp: 3,
             satisfied: (m) => m.has('inf704'),
             note: (m) => m.has('inf704') ? '✓ inf704 — erfüllt' : null,
-            missing: 'inf704 — NEU als Pflicht im M.Ed. WiPäd (3 KP)'
+            missing: 'inf704 Didaktik der Informatik III — Pflicht (3 KP)'
           },
           {
-            id: 'mw_mat', label: 'mat950 Mathematik für Informatik / Diskrete Strukturen (NEU)', kp: 6,
-            satisfied: (m) => m.has('mat950') || m.has('wp_mat950'),
+            id: 'mw_mat', label: 'mat950 Mathematik für Informatik (Diskrete Strukturen)', kp: 6,
+            satisfied: (m) => m.has('mat950') || m.has('wp_mat950') || m.has('inf600') || m.has('wp_inf600') || m.has('wp2_inf600'),
             note: (m) => {
-              if (m.has('mat950') || m.has('wp_mat950')) return '✓ mat950 — erfüllt';
-              if (m.has('inf600') || m.has('wp_inf600')) return '⚠ Übergang: inf600 Wirtschaftsinformatik I kann auf Antrag statt mat950 als Pflicht verbucht werden (inf600 dann nicht mehr in Tab. 2 wählbar)';
+              if (m.has('mat950') || m.has('wp_mat950')) return '✓ mat950 Mathematik für Informatik — direkt belegt.';
+              if (m.has('inf600') || m.has('wp_inf600') || m.has('wp2_inf600')) return '⚠ § 2 Abs. 2: Auf Antrag tritt inf600 Wirtschaftsinformatik an die Stelle von mat950 als Pflichtmodul. inf600 ist dann als Wahloption in Tab. 2 ausgeschlossen.';
               return null;
             },
-            missing: 'mat950 — NEU als Pflicht im M.Ed. WiPäd (6 KP) | Übergang: inf600 auf Antrag'
+            missing: 'mat950 Mathematik für Informatik (Diskrete Strukturen) — Pflicht (6 KP). Übergang (§ 2 Abs. 2): auf Antrag tritt inf600 Wirtschaftsinformatik an die Stelle (dann nicht mehr als Tab. 2-Wahloption).'
           },
           {
-            id: 'mw_401', label: 'inf401 Grundlagen der Theoretischen Informatik (NEU)', kp: 6,
-            satisfied: (m) => m.has('inf401') || m.has('wp_inf401'),
+            id: 'mw_401', label: 'inf401 Grundlagen der Theoretischen Informatik', kp: 6,
+            satisfied: (m) => {
+              if (m.has('inf401') || m.has('wp_inf401')) return true;
+              // § 2 Abs. 1: inf401 im BA + inf010/inf050 im BA → Modul entfällt, Pflicht sinkt auf 27 KP
+              const inf401_im_ba = m.has('inf401');
+              const inf010_050_im_ba = m.has('inf010') || m.has('inf050');
+              if (inf401_im_ba && inf010_050_im_ba) return true; // entfällt → gilt als erfüllt (Pflicht 27 KP)
+              // § 2 Abs. 3: Ersatz durch Modul aus Tab. 3 (Praktische Vertiefung)
+              const tab3 = ['inf009','wp_inf009','inf014','wp_inf014','inf018','wp_inf018','inf021','wp_inf021',
+                            'inf202','wp_inf202','inf800','wp_inf800','inf808','wp_inf808','inf803','wp_inf803',
+                            'inf804','wp_inf804','inf518','wp_inf518'];
+              if (tab3.some(id => m.has(id))) return true;
+              return false;
+            },
             note: (m) => {
-              if (m.has('inf401') || m.has('wp_inf401')) return '✓ inf401 — erfüllt';
-              if (m.has('inf050') || m.has('inf010') || m.has('wp_inf050')) return '⚠ Übergang: falls inf401 bereits im BA + kein inf010/inf050 im BA → inf050 tritt als Pflichtmodul an die Stelle; sind inf401 UND inf010/inf050 im BA: Pflicht sinkt auf 27 KP, Tab.4 auf 12 KP erhöht';
+              const has401 = m.has('inf401') || m.has('wp_inf401');
+              const inf010_050 = m.has('inf010') || m.has('inf050') || m.has('wp_inf050');
+              if (has401 && !inf010_050) return '✓ inf401 Grundlagen der Theoretischen Informatik — direkt belegt.';
+              if (has401 && inf010_050) return '⚠ § 2 Abs. 1: inf401 UND inf010/inf050 wurden bereits im Bachelor absolviert. Eine Verbuchung im Master ist ausgeschlossen — der Pflichtbereich verringert sich auf 27 KP. Zum Ausgleich sind in Tab. 4 Wahlpflichtmodule im Umfang von 12 KP (statt 6 KP) zu studieren.';
+              const tab3 = ['inf009','wp_inf009','inf014','wp_inf014','inf018','wp_inf018','inf021','wp_inf021','inf202','wp_inf202','inf800','wp_inf800','inf808','wp_inf808','inf803','wp_inf803','inf804','wp_inf804','inf518','wp_inf518'];
+              if (!has401 && tab3.some(id => m.has(id))) return '⚠ § 2 Abs. 3: Anstelle von inf401 tritt auf Antrag ein Modul aus Tab. 3 als Pflichtmodul. Das ersatzweise verbuchte Modul ist dann als Wahloption in Tab. 3 ausgeschlossen.';
               return null;
             },
-            missing: 'inf401 Grundlagen der Theoretischen Informatik fehlt noch. Überführungen (bis SoSe 2028): inf050 tritt ersatzweise an Stelle von inf401 (wenn inf401 bereits im BA und weder inf010/inf050 im BA) — oder: ein Modul aus Wahlpflicht Tab. 3 kann ersatzweise als Pflicht verbucht werden (dann nicht mehr als Wahloption Tab.3). Antrag beim Prüfungsamt erforderlich.'
-          },
-          {
-            id: 'mw_712', label: 'inf712 Aktuelle Themen aus dem Gebiet Didaktik der Informatik I', kp: 3,
-            satisfied: (m) => m.has('inf712'),
-            note: (m) => m.has('inf712') ? '✓ inf712 — erfüllt' : null,
-            missing: 'inf712 — Pflicht (3 KP)'
+            missing: 'inf401 Grundlagen der Theoretischen Informatik — Pflicht (6 KP). Sonderregelungen: § 2 Abs. 1 (inf401 + inf010/inf050 bereits im BA → entfällt, Pflicht 27 KP, dafür 12 KP in Tab. 4) — § 2 Abs. 3 (Ersatz auf Antrag durch ein Modul aus Tab. 3, dann dort als Wahloption ausgeschlossen). Antrag beim Prüfungsamt.'
           },
         ]
       },
@@ -1602,32 +1637,67 @@ const REQUIREMENTS = {
         icon: '⚙️',
         modules: [
           {
-            id: 'mw_wp2', label: '6 KP: inf851, wir806, inf600, inf528, inf529, inf017', kp: 6,
-            satisfied: (m) => m.has('inf851') || m.has('wir806') || m.has('inf600') || m.has('inf528') || m.has('inf529') || m.has('inf017'),
+            id: 'mw_wp2', label: '6 KP aus Tab. 2: inf851, wir806, inf600, inf528, inf529, inf017', kp: 6,
+            satisfied: (m) => {
+              // inf600 zählt hier nur, wenn es NICHT bereits als mat950-Ersatz verbucht wird
+              const inf600AlsPflicht = (m.has('inf600') || m.has('wp_inf600') || m.has('wp2_inf600')) && !m.has('mat950') && !m.has('wp_mat950');
+              const tab2 = ['inf851','wir806','inf528','inf529','inf017'];
+              if (tab2.some(id => m.has(id))) return true;
+              if ((m.has('inf600')||m.has('wp_inf600')||m.has('wp2_inf600')) && !inf600AlsPflicht) return true;
+              return false;
+            },
             note: (m) => {
-              const hits = ['inf851','wir806','inf600','inf528','inf529','inf017'].filter(id => m.has(id));
-              return hits.length ? '✓ Vorhanden: ' + hits.join(', ') : null;
+              const inf600AlsPflicht = (m.has('inf600') || m.has('wp_inf600') || m.has('wp2_inf600')) && !m.has('mat950') && !m.has('wp_mat950');
+              const hits = ['inf851','wir806','inf528','inf529','inf017'].filter(id => m.has(id));
+              if (inf600AlsPflicht && hits.length === 0) return '⚠ inf600 wird als Pflichtersatz für mat950 verbucht (§ 2 Abs. 2) und ist daher hier in Tab. 2 ausgeschlossen. Bitte ein anderes Modul aus Tab. 2 wählen.';
+              if (hits.length) return '✓ Vorhanden: ' + hits.join(', ');
+              if (m.has('inf600')||m.has('wp_inf600')||m.has('wp2_inf600')) return '✓ inf600 Wirtschaftsinformatik (als Tab. 2-Wahlpflicht).';
+              return null;
             },
             missing: 'Noch kein Modul aus Tab. 2 — inf851, wir806, inf600, inf528, inf529, inf017'
           },
         ]
       },
       {
-        title: 'Master WiPäd — Wahlpflicht Tab. 3 oder Tab. 4 (6 KP)',
+        title: 'Master WiPäd — Wahlpflicht Tab. 3 (6 KP): Praktische Vertiefung',
         icon: '⚙️',
         modules: [
           {
-            id: 'mw_wp34', label: '6 KP aus Tab. 3 (Prakt. Vertiefung) oder Tab. 4 (Akzentsetzung)', kp: 6,
-            satisfied: (m) => ['inf009','inf014','inf018','inf021','inf202','inf800','inf808','inf803','inf804','inf518',
-                               'inf010','inf012','inf015','inf016','inf040','inf200','inf201','inf400','inf401','inf420','inf462',
-                               'inf530','inf604','inf608','inf653','inf654'].some(id => m.has(id)),
+            id: 'mw_wp3', label: '6 KP aus Tab. 3 (Praktische Vertiefung)', kp: 6,
+            satisfied: (m) => ['inf009','wp_inf009','inf014','wp_inf014','inf018','wp_inf018','inf021','wp_inf021',
+                               'inf202','wp_inf202','inf800','wp_inf800','inf808','wp_inf808','inf803','wp_inf803',
+                               'inf804','wp_inf804','inf518','wp_inf518','inf859','wp_inf859','pb085'].some(id => m.has(id)),
             note: (m) => {
-              const hits = ['inf009','inf014','inf018','inf021','inf202','inf800','inf808','inf803','inf804','inf518',
-                            'inf010','inf012','inf015','inf016','inf040','inf200','inf201','inf400','inf420','inf462',
-                            'inf530','inf604','inf608','inf653','inf654'].filter(id => m.has(id));
+              const hits = ['inf009','inf014','inf018','inf021','inf202','inf800','inf808','inf803','inf804','inf518'].filter(id => m.has(id));
+              if (m.has('inf859') || m.has('wp_inf859') || m.has('pb085')) {
+                const base = hits.length ? '✓ Vorhanden: ' + hits.join(', ') + '. ' : '';
+                return base + '⚠ § 2 Abs. 4: inf859 Informatik im Kontext kann auf Antrag als Tab. 3-Wahlpflicht absolviert werden, sofern weder inf859 noch pb085 bereits im Bachelor absolviert wurde.';
+              }
               return hits.length ? '✓ Mögliche Wahlmodule: ' + hits.slice(0,4).join(', ') + (hits.length > 4 ? ' …' : '') : null;
             },
-            missing: 'Noch kein Modul aus Tab. 3 oder Tab. 4 — z.B. inf009, inf018, inf202, inf530, inf608 u.v.m.'
+            missing: 'Noch kein Modul aus Tab. 3 — z.B. inf009, inf014, inf018, inf021, inf202, inf800, inf808, inf803, inf804, inf518. § 2 Abs. 4: auf Antrag auch inf859 (sofern weder inf859 noch pb085 im BA).'
+          },
+        ]
+      },
+      {
+        title: 'Master WiPäd — Wahlpflicht Tab. 4: Akzentsetzung',
+        icon: '⚙️',
+        modules: [
+          {
+            id: 'mw_wp4', label: 'Wahlpflicht Tab. 4 (6 KP — oder 12 KP bei § 2 Abs. 1)', kp: 6,
+            satisfied: (m) => ['inf010','wp_inf010','inf012','wp_inf012','inf015','wp_inf015','inf016','wp_inf016',
+                               'inf040','wp_inf040','inf200','wp_inf200','inf201','wp_inf201','inf400','wp_inf400',
+                               'wp_inf401b','inf420','wp_inf420','inf462','wp_inf462','inf530','wp_inf530',
+                               'inf604','inf608','wp_inf608','inf653','inf654','inf050'].some(id => m.has(id)),
+            note: (m) => {
+              const reduced = m.has('inf401') && (m.has('inf010') || m.has('inf050'));
+              const hits = ['inf010','inf012','inf015','inf016','inf040','inf200','inf201','inf400','inf420','inf462','inf530','inf604','inf608','inf653','inf654'].filter(id => m.has(id));
+              let txt = hits.length ? '✓ Mögliche Wahlmodule: ' + hits.slice(0,4).join(', ') + (hits.length > 4 ? ' …' : '') : '';
+              if (reduced) txt += (txt ? ' ' : '') + '⚠ § 2 Abs. 1: Da inf401 + inf010/inf050 bereits im BA absolviert wurden, sind hier 12 KP (statt 6 KP) zu studieren.';
+              if (m.has('inf050') && !m.has('inf401')) txt += (txt ? ' ' : '') + '⚠ § 2 Abs. 5: inf050 Grundlagen Betriebssysteme kann auf Antrag als Tab. 4-Wahlpflicht absolviert werden, sofern nicht bereits im Bachelor absolviert.';
+              return txt || null;
+            },
+            missing: 'Noch kein Modul aus Tab. 4 — z.B. inf010, inf012, inf040, inf200, inf201, inf530, inf604, inf608, inf653, inf654. § 2 Abs. 5: auf Antrag auch inf050 (sofern nicht im BA). § 2 Abs. 1: bei inf401+inf010/inf050 im BA hier 12 KP statt 6 KP.'
           },
         ]
       }
@@ -1826,6 +1896,18 @@ function buildModuleList() {
     hint.innerHTML = `<span>💡</span><span><strong>Hinweis inf034 + inf036:</strong> Da du beide Module (3+3 KP) absolviert hast, können sie <em>in Kombination</em> auf Antrag anstelle von inf050 (30- und 60-KP-Variante) oder inf859 (60-KP-Variante) als Pflichtmodul verbucht werden — sofern das jeweilige Zielmodul noch nicht anderweitig verbucht ist. Die Module sind dann nicht mehr als Wahlpflicht wählbar.</span>`;
     container.appendChild(hint);
   }
+
+  // ── KP-Summe der ausgewählten Module ─────────────────────────────────────
+  let kpSum = 0;
+  const checkedMods = ALL_MODULES.filter(mod => checkedModules.has(mod.id));
+  checkedMods.forEach(mod => { kpSum += mod.kp; });
+  const sumBox = document.createElement('div');
+  sumBox.style.cssText = 'position:sticky;bottom:0;margin-top:18px;background:var(--uol-blue);color:white;border-radius:var(--radius);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 -2px 8px rgba(0,0,91,0.15);z-index:10;';
+  sumBox.innerHTML = `
+    <span style="font-size:14px;font-weight:600;">📊 Summe der ausgewählten Module</span>
+    <span style="font-size:18px;font-weight:700;">${kpSum} KP <span style="font-size:13px;font-weight:400;opacity:0.8;">(${checkedMods.length} Module)</span></span>
+  `;
+  container.appendChild(sumBox);
 }
 
 function toggleModule(id) {
@@ -1949,7 +2031,7 @@ function buildResults() {
   const m = new Set(checkedModules);
   for (const id of checkedModules) {
     // Strip known prefixes: gym_, hr_, wp_, wp2_
-    const base = id.replace(/^(gym_|hr_|wp_|wp2_)/, '').replace(/b$/, '');
+    const base = id.replace(/^(gym_|hr_|wp_t4_|wp_|wp2_)/, '').replace(/b$/, '');
     if (base !== id) m.add(base);
     // Strip prefix + trailing b (e.g. gym_inf401b → inf401)
     const base2 = id.replace(/^(gym_|hr_|wp_|wp2_)inf/, 'inf').replace(/b$/, '');
@@ -1990,23 +2072,100 @@ function buildResults() {
     ? sg.sections.filter(sec => !isBachelorSection(sec))
     : sg.sections;
 
-  // Count satisfied
+  // ── CONTEXT TRACKING: jedes Tauschmodul nur einmal verwendbar ──────────
+  // Wir bauen eine "Belegungskarte": welches Modul ist für welche Anforderung verbraucht.
+  // Reihenfolge: Pflichtanforderungen zuerst (sie haben Vorrang vor Wahlpflicht).
+  const usedModules = new Set(); // Module die schon für eine Anforderung verrechnet wurden
+  const reqConflict = new Set(); // req.id-Einträge, die in Konflikt stehen → "Zur Beratung"
+
+  // Tauschmodule mit Exklusivcharakter (können nur einmal verrechnet werden)
+  // Prüfe für jede Anforderung: ist das Tauschmodul schon verwendet?
+  // Wir definieren welche IDs "exklusiv" sind — also nur einmal zählbar
+  const EXCLUSIVE_SWAP_IDS = ['inf034','inf036','inf010','inf200','inf200b','inf005',
+                               'pb085','inf803','inf803_st','inf030','inf031'];
+
+  function checkAndClaim(reqId, swapIds) {
+    // swapIds: Array der Tausch-IDs die für reqId benötigt werden
+    const alreadyUsed = swapIds.filter(id => EXCLUSIVE_SWAP_IDS.includes(id) && usedModules.has(id));
+    if (alreadyUsed.length > 0) {
+      reqConflict.add(reqId);
+      return false; // Tauschmodul schon verbraucht → Konflikt
+    }
+    // Claim the swap modules
+    swapIds.filter(id => EXCLUSIVE_SWAP_IDS.includes(id)).forEach(id => usedModules.add(id));
+    return true;
+  }
+
+  // Gehe alle Anforderungen durch und prüfe Konflikte
+  // Nur relevant wenn alternative Erfüllungswege genutzt werden (nicht direkt belegt)
+  sectionsToCount.forEach(sec => {
+    sec.modules.forEach(req => {
+      if (!req.satisfied(m)) return; // nicht erfüllt → kein Claim nötig
+      const note = req.note ? req.note(m) : null;
+      if (!note || !note.startsWith('⚠')) return; // direkt erfüllt → kein Tausch → ok
+      // Ermittle welche Tauschmodule für diese Anforderung verantwortlich sind
+      const swaps = [];
+      if (m.has('inf010') && !m.has('inf050')) swaps.push('inf010'); // inf010 → inf050
+      if ((m.has('inf200')||m.has('inf200b')) && (!m.has('inf859')||!m.has('inf050'))) { swaps.push('inf200'); swaps.push('inf200b'); }
+      if (m.has('inf034') && m.has('inf036') && (!m.has('inf050')||!m.has('inf859'))) { swaps.push('inf034'); swaps.push('inf036'); }
+      if (m.has('inf030') && !m.has('inf033')) { swaps.push('inf030'); }
+      if (m.has('inf031') && !m.has('inf035')) { swaps.push('inf031'); }
+      if (m.has('inf005') && !m.has('inf401') && !m.has('inf007')) swaps.push('inf005');
+      if (m.has('pb085')) swaps.push('pb085');
+      if (m.has('inf803') || m.has('inf803_st')) { swaps.push('inf803'); swaps.push('inf803_st'); }
+      if (swaps.length > 0) checkAndClaim(req.id, swaps);
+    });
+  });
+
+  // ── KP-Berechnung ────────────────────────────────────────────────────────
+  // Berechne verrechenbare KP aus den erfüllten Anforderungen
+  let kpVerrechnet = 0;
+  let kpFehlend = 0;
+  sectionsToCount.forEach(sec => {
+    sec.modules.forEach(req => {
+      if (req.kp === 0) return; // Hinweis-Einträge ohne KP überspringen
+      if (req.satisfied(m) && !reqConflict.has(req.id)) {
+        kpVerrechnet += req.kp;
+      } else if (!req.satisfied(m)) {
+        kpFehlend += req.kp;
+      }
+    });
+  });
+
+  // Tatsächlich belegte KP (Summe der angekreuzten Module)
+  let kpBelegt = 0;
+  ALL_MODULES.filter(mod => checkedModules.has(mod.id)).forEach(mod => { kpBelegt += mod.kp; });
+  // inf030/inf031 sind 9 KP, werden aber in 6+3 aufgeteilt — KP bleibt gleich, daher kein Sonderfall
+  // Plausibilität: verrechnete KP dürfen die belegten KP nicht übersteigen
+  const kpPlausibel = kpVerrechnet <= kpBelegt;
+
+
+
+  // Count satisfied (conflicts count as not fully satisfied)
   let totalReqs = 0, satisfiedReqs = 0;
   sectionsToCount.forEach(sec => sec.modules.forEach(req => {
-    totalReqs++; if (req.satisfied(m)) satisfiedReqs++;
+    if (req.kp === 0) return; // skip info-only entries
+    totalReqs++;
+    if (req.satisfied(m) && !reqConflict.has(req.id)) satisfiedReqs++;
   }));
   const pct = totalReqs === 0 ? 100 : Math.round((satisfiedReqs / totalReqs) * 100);
-
-  // HERO
   const hero = document.createElement('div');
   hero.className = 'result-hero' + (pct >= 85 ? ' hero-ok' : '');
   const headline = pct === 100 ? 'Alle Anforderungen erfüllt!'
     : pct >= 70 ? `Guter Fortschritt — ${pct} % erfüllt`
     : pct >= 40 ? `Solider Start — ${pct} % erfüllt`
     : `${100-pct} % noch offen — hier ist dein Plan`;
+  const kpLine = kpFehlend > 0
+    ? `${kpVerrechnet} KP verrechenbar · ${kpFehlend} KP noch offen`
+    : `${kpVerrechnet} KP verrechenbar`;
+  const kpWarn = !kpPlausibel
+    ? `<div style="font-size:12px;margin-top:6px;background:rgba(255,255,255,0.2);border-radius:4px;padding:6px 10px;position:relative;z-index:1;">⚠ Hinweis: Es werden mehr KP verrechnet (${kpVerrechnet}) als tatsächlich belegt wurden (${kpBelegt} KP). Module können nur einmal eingetauscht werden — bitte Studienberatung kontaktieren.</div>`
+    : '';
   hero.innerHTML = `
     <div class="result-headline">${headline}</div>
     <p>${sg.label} · ${satisfiedReqs} von ${totalReqs} Anforderungsblöcken erfüllt</p>
+    <div style="font-size:13px;opacity:0.9;margin-top:4px;position:relative;z-index:1;">📊 ${kpLine} · ${kpBelegt} KP belegt</div>
+    ${kpWarn}
     <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
     <div class="progress-label">${satisfiedReqs}/${totalReqs} · ${pct} %</div>
   `;
@@ -2055,22 +2214,23 @@ function buildResults() {
 
     sec.modules.forEach(req => {
       const done = req.satisfied(m);
+      const isConflict = reqConflict.has(req.id); // Tauschmodul schon verbraucht
       const note = req.note ? req.note(m) : null;
       const isAnrechnung = note && note.startsWith('⚠');
-      // Check if any of the relevant module IDs are surplus
-      const reqIsSurplus = surplusIds.has(req.id);
+      const reqIsSurplus = surplusIds.has(req.id) || isConflict;
 
       const row = document.createElement('div');
       row.className = 'mod-status-row' + (reqIsSurplus ? ' surplus-row' : '');
-      // dot-anr (orange/gelb) wenn: erfüllt via Anrechnung, ODER nicht erfüllt aber Übergang möglich
       const hasAnrechnungsweg = req.missing && req.missing.includes('Übergang');
       let dotClass = done
-        ? (isAnrechnung ? 'dot-anr' : 'dot-ok')
+        ? (isConflict ? 'dot-surplus' : isAnrechnung ? 'dot-anr' : 'dot-ok')
         : (hasAnrechnungsweg ? 'dot-anr' : 'dot-miss');
-      if (reqIsSurplus) dotClass = 'dot-surplus';
+      if (reqIsSurplus && !isConflict) dotClass = 'dot-surplus';
 
       let noteHtml = '';
-      if (reqIsSurplus) {
+      if (isConflict) {
+        noteHtml = `<div class="mod-status-note surplus-note">🟣 Zur Beratung — das für diesen Tausch benötigte Modul wurde bereits für eine andere Anforderung verwendet. Bitte Prüfungsamt oder Studienberatung kontaktieren, um die beste Verrechnung zu klären.</div>`;
+      } else if (reqIsSurplus) {
         const surplusInfo = surplusList.find(s => s.id === req.id);
         noteHtml = `<div class="mod-status-note surplus-note">🟣 Zur Beratung — ${surplusInfo ? surplusInfo.reason : 'Bitte Studienberatung kontaktieren.'}</div>`;
       } else if (note) {
