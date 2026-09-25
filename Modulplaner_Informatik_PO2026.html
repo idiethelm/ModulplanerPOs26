@@ -498,7 +498,7 @@ code.mod-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size
       <span style="background:var(--uol-orange-lt); color:var(--uol-orange); border:1px solid #F5C87A; border-radius:4px; padding:3px 10px; font-size:12px; font-weight:700;">⚠ Beta-Version</span>
       <span style="font-size:12px; color:var(--uol-gray-50);">Dieses Tool befindet sich in der Entwicklung. Alle Angaben ohne Gewähr — bitte im Zweifelsfall immer beim Prüfungsamt oder der Fachstudienberatung nachfragen.</span>
     </div>
-    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 25.09.2026, 13:23 Uhr (MESZ)</div>
+    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 25.09.2026, 13:37 Uhr (MESZ)</div>
   </div>
 
   <!-- STEP INDICATOR -->
@@ -1858,7 +1858,10 @@ function buildAntragMail(prog, items) {
   const mat = antragState.matnr.trim(), name = antragState.name.trim(), start = (antragState.start[prog] || '').trim();
   const chosen = items.filter(a => !antragState.off[a.key]);
   const subject = `Antrag auf Verbuchung nach Überführungs-/Übergangsbestimmungen – ${p.short}${dritt ? ' (Drittfach/Erweiterungsprüfung)' : ''}, Mat.-Nr. ${mat || miss('Matrikelnummer')}`;
-  let b = 'Sehr geehrte Damen und Herren,\n\nhiermit beantrage ich die Verbuchung folgender Module gemäß den Überführungs- und Übergangsbestimmungen:\n\n';
+  // Anzahl der umzubuchenden Module (Kombinationen wie inf034 + inf036 zählen als zwei)
+  const nMods = chosen.reduce((n, a) => n + Math.max(1, (a.from.match(/\b(inf|mat|pb|wir)\d{3}\b/g) || []).length), 0);
+  const was = nMods === 1 ? 'des folgenden Moduls' : 'folgender Module';
+  let b = `Sehr geehrte Damen und Herren,\n\nhiermit beantrage ich die Verbuchung ${was} gemäß den Überführungs- und Übergangsbestimmungen:\n\n`;
   b += `Studiengang/Fach: ${p.name}${prog === 'fb' ? ` (${kpVariante()}-KP-Variante)` : ''}\n`;
   if (dritt) b += 'Art des Studiums: Drittfach / Erweiterungsprüfung\n';
   b += `Studienbeginn: ${start || miss('Semester')}\n\n`;
