@@ -390,6 +390,8 @@ body {
   letter-spacing: 0.02em;
 }
 .claude-credit a { color: var(--uol-gray-30); text-decoration: none; }
+.claude-credit.impressum { color: var(--uol-gray-70); line-height: 1.6; max-width: 760px; margin: 20px auto 0; padding: 0 16px; }
+.claude-credit.impressum a { color: var(--uol-blue); text-decoration: underline; }
 .claude-credit a:hover { color: var(--uol-gray-50); text-decoration: underline; }
 
 /* ===== PRINT STYLES ===== */
@@ -498,7 +500,7 @@ code.mod-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size
       <span style="background:var(--uol-orange-lt); color:var(--uol-orange); border:1px solid #F5C87A; border-radius:4px; padding:3px 10px; font-size:12px; font-weight:700;">⚠ Beta-Version</span>
       <span style="font-size:12px; color:var(--uol-gray-50);">Dieses Tool befindet sich in der Entwicklung. Alle Angaben ohne Gewähr — bitte im Zweifelsfall immer beim Prüfungsamt oder der Fachstudienberatung nachfragen.</span>
     </div>
-    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 25.09.2026, 13:37 Uhr (MESZ)</div>
+    <div style="margin-top:8px; font-size:11px; color:var(--uol-gray-30); font-family:monospace;">Version vom: 25.09.2026, 13:40 Uhr (MESZ)</div>
   </div>
 
   <!-- STEP INDICATOR -->
@@ -605,8 +607,8 @@ code.mod-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size
     <!-- Visible only when printing -->
     <div class="print-footer" style="display:none">
       Fakultät II · Informatik, Wirtschafts- und Rechtswissenschaften · Carl von Ossietzky Universität Oldenburg ·
-      Prüfungsordnungen WS 2026/27 · Stand: Mai 2026 · Kein Ersatz für eine individuelle Rechtsberatung. ·
-      Entwickelt mit Claude (Anthropic).
+      Prüfungsordnungen WS 2026/27 · Stand: nichtamtliche Lesefassungen Juli 2026 · Kein Ersatz für eine individuelle Rechtsberatung. ·
+      Erstellt von Ira Diethelm (Fachstudienberatung Informatik 2FB und M.Ed.) mit Unterstützung von Claude (Anthropic).
     </div>
 
     <div class="btn-row">
@@ -629,11 +631,12 @@ code.mod-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size
   <!-- FOOTER -->
   <div class="uol-footer">
     <span>Fakultät II · Informatik, Wirtschafts- und Rechtswissenschaften · Carl von Ossietzky Universität Oldenburg</span>
-    <span>Prüfungsordnungen WS 2026/27 · Stand: Mai 2026 · <em>Kein Ersatz für Rechtsberatung</em></span>
+    <span>Prüfungsordnungen WS 2026/27 · Stand: nichtamtliche Lesefassungen Juli 2026 · <em>Kein Ersatz für Rechtsberatung</em></span>
   </div>
 
-  <div class="claude-credit">
-    Entwickelt mit <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a> (Anthropic) · Keine Gewähr für Vollständigkeit oder Richtigkeit
+  <div class="claude-credit impressum">
+    <strong>Impressum:</strong> Erstellt von Ira Diethelm, Fachstudienberatung Informatik für den Zwei-Fächer-Bachelor und den Master of Education, Carl von Ossietzky Universität Oldenburg — mit Unterstützung von <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a> (Anthropic).<br>
+    Keine Gewähr für Vollständigkeit oder Richtigkeit. Verbindlich sind allein die Prüfungsordnungen in den Amtlichen Mitteilungen.
   </div>
 
 </div><!-- /wrapper -->
